@@ -3,6 +3,7 @@ using Bootstrap.Flow;
 using Bootstrap.Installers;
 using Bootstrap.Scenes;
 using Bootstrap.UI;
+using Cards;
 using Core.Scenes;
 using Infrastructure.Photon;
 using UnityEngine;
@@ -13,8 +14,9 @@ namespace Bootstrap.LifetimeScopes
 {
     public sealed class RootLifetimeScope : LifetimeScope
     {
-        [SerializeField] private GamePrefabCatalog prefabCatalog;
-        [SerializeField] private UiPrefabCatalog uiPrefabCatalog;
+        [SerializeField] private GamePrefabCatalog _prefabCatalog;
+        [SerializeField] private CardCatalog _cardcatalog;
+        [SerializeField] private UiPrefabCatalog _uiPrefabCatalog;
 
         protected override void Awake()
         {
@@ -24,24 +26,8 @@ namespace Bootstrap.LifetimeScopes
 
         protected override void Configure(IContainerBuilder builder)
         {
-            if (prefabCatalog == null)
-            {
-                Debug.LogError("[CubeClash] RootLifetimeScope is missing GamePrefabCatalog.");
-            }
-            else
-            {
-                builder.RegisterInstance(prefabCatalog);
-            }
-
-            if (uiPrefabCatalog == null)
-            {
-                Debug.LogError("[CubeClash] RootLifetimeScope is missing UiPrefabCatalog.");
-            }
-            else
-            {
-                builder.RegisterInstance(uiPrefabCatalog);
-            }
-
+            builder.RegisterInstance(_prefabCatalog);
+            builder.RegisterInstance(_uiPrefabCatalog);
             builder.Register<SceneLoaderService>(Lifetime.Singleton)
                 .As<ISceneLoaderService>();
 
