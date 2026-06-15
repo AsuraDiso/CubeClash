@@ -34,11 +34,8 @@ namespace Bootstrap.UI.Controllers
 
         public void Dispose()
         {
-            if (_matchmakingService != null)
-            {
-                _matchmakingService.StateChanged -= OnMatchmakingStateChanged;
-                _matchmakingService.StatusMessageChanged -= OnStatusMessageChanged;
-            }
+            _matchmakingService.StateChanged -= OnMatchmakingStateChanged;
+            _matchmakingService.StatusMessageChanged -= OnStatusMessageChanged;
 
             if (_view != null)
             {

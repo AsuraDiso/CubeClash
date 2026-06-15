@@ -1,3 +1,4 @@
+using Bootstrap.UI;
 using Bootstrap.UI.Views;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Bootstrap.UI
     public sealed class UiPrefabCatalog : ScriptableObject
     {
         [SerializeField] private MainMenuView _mainMenuViewPrefab;
+        [SerializeField] private RectTransform[] _mainMenuScreenPrefabs;
         [SerializeField] private MatchmakingOverlayView _matchmakingOverlayViewPrefab;
         [SerializeField] private BattleView _battleViewPrefab;
 
@@ -15,5 +17,16 @@ namespace Bootstrap.UI
         public MatchmakingOverlayView MatchmakingOverlayViewPrefab => _matchmakingOverlayViewPrefab;
 
         public BattleView BattleViewPrefab => _battleViewPrefab;
+
+        public RectTransform GetMainMenuScreenPrefab(MainMenuTab tab)
+        {
+            var index = (int)tab;
+            if (index < 0 || index >= _mainMenuScreenPrefabs.Length)
+            {
+                return null;
+            }
+
+            return _mainMenuScreenPrefabs[index];
+        }
     }
 }

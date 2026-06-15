@@ -37,13 +37,7 @@ namespace Infrastructure.Photon.Battle
                 return;
             }
 
-            var prefab = _prefabCatalog != null ? _prefabCatalog.BattleSessionPrefab : null;
-            if (prefab == null)
-            {
-                Debug.LogError(
-                    "[CubeClash] Battle session prefab is not assigned in GamePrefabCatalog.");
-                return;
-            }
+            var prefab = _prefabCatalog.BattleSessionPrefab;
 
             runner.Spawn(prefab);
         }

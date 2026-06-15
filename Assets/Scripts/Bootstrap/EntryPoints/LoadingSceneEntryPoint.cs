@@ -1,1 +1,37 @@
-using System;using Core.Loading;using Core.Scenes;using Cysharp.Threading.Tasks;using UnityEngine;using VContainer.Unity;namespace Bootstrap.EntryPoints{    public sealed class LoadingSceneEntryPoint : IStartable    {        private readonly ILoadingDataPreparer _dataPreparer;        private readonly ISceneLoaderService _sceneLoaderService;        public LoadingSceneEntryPoint(            ILoadingDataPreparer dataPreparer,            ISceneLoaderService sceneLoaderService)        {            _dataPreparer = dataPreparer;            _sceneLoaderService = sceneLoaderService;        }        public void Start() => RunAsync().Forget();        private async UniTask RunAsync()        {            try            {                await _dataPreparer.PrepareAsync();                await _sceneLoaderService.LoadSceneAsync(GameSceneId.MainMenu);            }            catch (Exception exception)            {                Debug.LogException(exception);            }        }    }}
+using System;
+using Core.Loading;
+using Core.Scenes;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
+using VContainer.Unity;
+
+namespace Bootstrap.EntryPoints
+{
+    public sealed class LoadingSceneEntryPoint : IStartable
+    {
+        private readonly ILoadingDataPreparer _dataPreparer;
+        private readonly ISceneLoaderService _sceneLoaderService;
+
+        public LoadingSceneEntryPoint(
+            ILoadingDataPreparer dataPreparer,
+            ISceneLoaderService sceneLoaderService)
+        {
+            _dataPreparer = dataPreparer;
+            _sceneLoaderService = sceneLoaderService;
+        }
+
+        public void Start() => RunAsync().Forget();
+        private async UniTask RunAsync()
+        {
+            try
+            {
+                await _dataPreparer.PrepareAsync();
+                await _sceneLoaderService.LoadSceneAsync(GameSceneId.MainMenu);
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
+            }
+        }
+    }
+}

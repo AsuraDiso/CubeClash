@@ -59,10 +59,7 @@ namespace Bootstrap.UI.Controllers
 
             UnbindGateway();
 
-            if (_controllerRegistry != null)
-            {
-                _controllerRegistry.GatewayAvailable -= OnGatewayAvailable;
-            }
+            _controllerRegistry.GatewayAvailable -= OnGatewayAvailable;
         }
 
         private void OnGatewayAvailable(IBattleAttackGateway gateway)

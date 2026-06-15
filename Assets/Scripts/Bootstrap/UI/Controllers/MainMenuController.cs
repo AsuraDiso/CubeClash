@@ -1,10 +1,6 @@
 using System;
-using System.Threading;
 using Bootstrap.UI;
 using Bootstrap.UI.Views;
-using Core.Matchmaking;
-using Cysharp.Threading.Tasks;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace Bootstrap.UI.Controllers
@@ -12,15 +8,14 @@ namespace Bootstrap.UI.Controllers
     public sealed class MainMenuController : IStartable, IDisposable
     {
         private readonly IUiViewFactory _viewFactory;
-        private readonly IMatchmakingService _matchmakingService;
+        private readonly HomeController _homeController;
 
         private MainMenuView _view;
-        private CancellationTokenSource _matchmakingCts;
 
-        public MainMenuController(IUiViewFactory viewFactory, IMatchmakingService matchmakingService)
+        public MainMenuController(IUiViewFactory viewFactory, HomeController homeController)
         {
             _viewFactory = viewFactory;
-            _matchmakingService = matchmakingService;
+            _homeController = homeController;
         }
 
         public void Start()
@@ -31,44 +26,17 @@ namespace Bootstrap.UI.Controllers
                 return;
             }
 
-            _view.PlayClicked += OnPlay;
+            var homeView = _viewFactory.PopulateMainMenuScreens(_view);
+            _homeController.Bind(homeView);
         }
 
         public void Dispose()
         {
-            if (_view != null)
-            {
-                _view.PlayClicked -= OnPlay;
-                _viewFactory.Destroy(_view);
-                _view = null;
-            }
+            _homeController.Bind(null);
 
-            _matchmakingCts?.Cancel();
-            _matchmakingCts?.Dispose();
-            _matchmakingCts = null;
-        }
-
-        private void OnPlay()
-        {
-            _matchmakingCts?.Cancel();
-            _matchmakingCts?.Dispose();
-            _matchmakingCts = new CancellationTokenSource();
-            StartMatchAsync(_matchmakingCts.Token).Forget();
-        }
-
-        private async UniTask StartMatchAsync(CancellationToken cancellationToken)
-        {
-            try
-            {
-                await _matchmakingService.StartQuickMatchAsync(cancellationToken);
-            }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (Exception exception)
-            {
-                Debug.LogException(exception);
-            }
+            if (_view == null) return;
+            _viewFactory.Destroy(_view);
+            _view = null;
         }
     }
 }
