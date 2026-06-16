@@ -47,7 +47,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Bootstrap\Editor\GameProjectSetup.cs" />
+    <Compile Include="Assets\Editor\FixDeckPrefab.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -549,6 +549,9 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.collections@5b6ebd78ccc0\Unity.Collections.Tests\System.Runtime.CompilerServices.Unsafe\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll</HintPath>
     </Reference>
@@ -1026,8 +1029,14 @@
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="UniTask.TextMeshPro">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UniTask.TextMeshPro.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UniTask.DOTween">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UniTask.DOTween.dll</HintPath>
     </Reference>
     <Reference Include="Unity.SurfaceCache.Runtime">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.SurfaceCache.Runtime.dll</HintPath>
@@ -1083,6 +1092,9 @@
     <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="UniTask.Linq">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UniTask.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.RenderPipelines.Core.Runtime.Shared">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
     </Reference>
@@ -1091,6 +1103,9 @@
     </Reference>
     <Reference Include="Unity.Collections.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Collections.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UniTask.Addressables">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UniTask.Addressables.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
@@ -1106,6 +1121,9 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UniTask">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UniTask.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

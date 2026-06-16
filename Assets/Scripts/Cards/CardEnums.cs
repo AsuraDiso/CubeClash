@@ -1,10 +1,5 @@
 namespace Cards
 {
-    public enum CardFootprint
-    {
-        OneByOne = 1,
-        OneByTwo = 2,
-    }
     public enum CardLayout
     {
         Horizontal,

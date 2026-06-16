@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cards.CardDefinition
   <DisplayName>k__BackingField: TestCard
   <Rarity>k__BackingField: 0
-  <Footprint>k__BackingField: 1
+  <Footprint>k__BackingField:
+    _columns: 1
+    _rows: 1
   <Layout>k__BackingField: 0
-  <DiceSlotCount>k__BackingField: 1
-  _diceSlots:
+  DiceSlots:
   - Requirements:
-    - Kind: 1
-      _maxExclusive: 0
+    - <Kind>k__BackingField: 0
+      <Value>k__BackingField: 3
   <ValueFormula>k__BackingField: 0

@@ -7,7 +7,7 @@ namespace Bootstrap.UI
     {
         MainMenuView CreateMainMenuView();
 
-        HomeView PopulateMainMenuScreens(MainMenuView mainMenuView);
+        MainMenuScreenViews PopulateMainMenuScreens(MainMenuView mainMenuView);
 
         MatchmakingOverlayView CreateMatchmakingOverlayView();
 
@@ -16,4 +16,3 @@ namespace Bootstrap.UI
         void Destroy(Component view);
     }
 }
-

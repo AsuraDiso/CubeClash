@@ -21,12 +21,12 @@ namespace Cards
     [Serializable]
     public sealed class DiceRequirementEntry
     {
-        public DiceRequirementKind Kind;
-        [SerializeField] int _maxExclusive;
+        [field: SerializeField] public DiceRequirementKind Kind {get; private set; }
+        [field: SerializeField] public int Value { get; private set; }
 
         public bool IsMet(int value, DiceAssignmentContext ctx, int slotIndex) => Kind switch
         {
-            DiceRequirementKind.LessThan => value < _maxExclusive,
+            DiceRequirementKind.LessThan => value < Value,
             DiceRequirementKind.Even => value % 2 == 0,
             DiceRequirementKind.DistinctFromOtherSlots => ctx.Values.Take(slotIndex).All(v => v != value),
             _ => false,

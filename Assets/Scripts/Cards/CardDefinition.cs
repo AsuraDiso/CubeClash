@@ -9,11 +9,10 @@ namespace Cards
         [field: SerializeField] public string DisplayName { get; private set; }
         [field: SerializeField] public CardRarity Rarity { get; private set; }
 
-        [field: SerializeField] public CardFootprint Footprint { get; private set; }
+        [field: SerializeField] public CardFootprintSize Footprint { get; private set; } = CardFootprintSize.OneByOne;
         [field: SerializeField] public CardLayout Layout { get; private set; }
 
-        [field: SerializeField] public int DiceSlotCount { get; private set; }
-        [SerializeField] private List<DiceSlotDefinition> _diceSlots;
+        [field: SerializeField] public List<DiceSlotDefinition> DiceSlots;
 
         [field: SerializeField] public ValueFormula ValueFormula { get; private set; }
 

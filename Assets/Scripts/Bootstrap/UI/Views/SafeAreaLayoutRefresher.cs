@@ -46,11 +46,7 @@ namespace Bootstrap.UI.Views
 
         private void Refresh()
         {
-            if (_rectTransform == null)
-            {
-                _rectTransform = GetComponent<RectTransform>();
-            }
-
+            _rectTransform ??= GetComponent<RectTransform>();
             if (_rectTransform == null)
             {
                 return;

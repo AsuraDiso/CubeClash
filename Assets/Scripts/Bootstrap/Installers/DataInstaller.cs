@@ -11,6 +11,9 @@ namespace Bootstrap.Installers
         {
             builder.Register<MockGameDatabase>(Lifetime.Singleton)
                 .As<IGameDatabase>();
+            
+            builder.Register<InMemoryDeckService>(Lifetime.Singleton)
+                .As<IDeckService>();
         }
     }
 }

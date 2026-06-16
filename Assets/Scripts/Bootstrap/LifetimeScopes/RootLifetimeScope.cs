@@ -7,6 +7,7 @@ using Cards;
 using Core.Scenes;
 using Infrastructure.Photon;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -15,7 +16,8 @@ namespace Bootstrap.LifetimeScopes
     public sealed class RootLifetimeScope : LifetimeScope
     {
         [SerializeField] private GamePrefabCatalog _prefabCatalog;
-        [SerializeField] private CardCatalog _cardcatalog;
+        [FormerlySerializedAs("_cardcatalog")]
+        [SerializeField] private CardCatalog _cardCatalog;
         [SerializeField] private UiPrefabCatalog _uiPrefabCatalog;
 
         protected override void Awake()
@@ -28,17 +30,15 @@ namespace Bootstrap.LifetimeScopes
         {
             builder.RegisterInstance(_prefabCatalog);
             builder.RegisterInstance(_uiPrefabCatalog);
+            builder.RegisterInstance(_cardCatalog);
             builder.Register<SceneLoaderService>(Lifetime.Singleton)
                 .As<ISceneLoaderService>();
 
-            new DataInstaller().Install(builder);
-            new MultiplayerInstaller().Install(builder);
+            builder.InstallData();
+            builder.InstallMultiplayer();
 
-            builder.UseEntryPoints(entryPoints =>
-            {
-                entryPoints.Add<GameBootstrapEntryPoint>();
-                entryPoints.Add<MatchFlowCoordinator>();
-            });
+            builder.RegisterEntryPoint<GameBootstrapEntryPoint>();
+            builder.RegisterEntryPoint<MatchFlowCoordinator>();
         }
     }
 }

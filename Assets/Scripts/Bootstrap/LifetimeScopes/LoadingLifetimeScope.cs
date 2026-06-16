@@ -1,7 +1,4 @@
-using Bootstrap.EntryPoints;
-using Bootstrap.Loading;
-using Bootstrap.UI;
-using Core.Loading;
+using Bootstrap.Installers;
 using VContainer;
 using VContainer.Unity;
 
@@ -11,14 +8,7 @@ namespace Bootstrap.LifetimeScopes
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<UiViewFactory>(Lifetime.Scoped).As<IUiViewFactory>();
-            builder.Register<GameDatabaseLoadingDataPreparer>(Lifetime.Scoped)
-                .As<ILoadingDataPreparer>();
-
-            builder.UseEntryPoints(entryPoints =>
-            {
-                entryPoints.Add<LoadingSceneEntryPoint>();
-            });
+            new LoadingInstaller().Install(builder);
         }
     }
 }

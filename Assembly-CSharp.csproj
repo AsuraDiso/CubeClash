@@ -47,6 +47,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\CardGridView.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Data\Mock\MockGameDatabase.cs" />
     <Compile Include="Assets\Scripts\Core\Battle\IBattleAttackGateway.cs" />
     <Compile Include="Assets\Scripts\Core\Scenes\ISceneLoaderService.cs" />
@@ -63,31 +64,35 @@
     <Compile Include="Assets\Scripts\Infrastructure\Photon\Battle\BattleNetworkController.cs" />
     <Compile Include="Assets\Scripts\Core\Matchmaking\MatchmakingConstants.cs" />
     <Compile Include="Assets\Scripts\Core\Battle\IBattleControllerRegistry.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\Registrations\MultiplayerRegistrationExtensions.cs" />
     <Compile Include="Assets\Scripts\Core\Matchmaking\IMatchmakingService.cs" />
     <Compile Include="Assets\Scripts\Core\Loading\ILoadingDataPreparer.cs" />
     <Compile Include="Assets\Scripts\Cards\CardCatalog.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\MainMenuLifetimeScope.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\Loading\GameDatabaseLoadingDataPreparer.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionNetworkRunnerFactory.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DiceSlotView.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\LoadingLifetimeScope.cs" />
     <Compile Include="Assets\Scripts\Core\Matchmaking\MatchmakingState.cs" />
+    <Compile Include="Assets\Scripts\Core\Data\IDeckService.cs" />
     <Compile Include="Assets\Scripts\Core\Scenes\GameSceneId.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\MainMenuTab.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionSessionBridge.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\MainMenuScreenTransition.cs" />
     <Compile Include="Assets\Scripts\Cards\DiceAssignmentContext.cs" />
+    <Compile Include="Assets\Scripts\Cards\CardGridPlacement.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\MainMenuController.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\Installers\LoadingInstaller.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionMatchmakingService.cs" />
     <Compile Include="Assets\Scripts\Core\Data\PlayerProfile.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\Flow\MatchFlowCoordinator.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\Installers\DataInstaller.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\BattleLifetimeScope.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\Registrations\DataRegistrationExtensions.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\UiPrefabCatalog.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\SettingsView.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\CardView.cs" />
     <Compile Include="Assets\Scripts\Core\Networking\NetworkSessionRequest.cs" />
     <Compile Include="Assets\Scripts\Core\Scenes\SceneLoadMode.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\Installers\MultiplayerInstaller.cs" />
     <Compile Include="Assets\Scripts\Core\Networking\NetworkSessionState.cs" />
     <Compile Include="Assets\Scripts\Core\Data\IGameDatabase.cs" />
     <Compile Include="Assets\Scripts\Core\Networking\NetworkSessionException.cs" />
@@ -96,18 +101,27 @@
     <Compile Include="Assets\Scripts\Core\Networking\INetworkSession.cs" />
     <Compile Include="Assets\Scripts\Core\Battle\BattleConstants.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\MatchmakingOverlayView.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\UI\MainMenuScreenViews.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\IFusionRunnerAccessor.cs" />
+    <Compile Include="Assets\Scripts\Cards\DeckLayout.cs" />
     <Compile Include="Assets\Scripts\Cards\CardEnums.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\Installers\ContainerBuilderExtensions.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\MainMenuView.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DeckDropZone.cs" />
     <Compile Include="Assets\Scripts\Cards\CardDefinition.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\BattleController.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\ResponsiveGridLayout.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionBattleSceneLoader.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\EntryPoints\LoadingSceneEntryPoint.cs" />
+    <Compile Include="Assets\Scripts\Cards\CardFootprintSize.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\Battle\FusionBattleControllerRegistry.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\Installers\BattleInstaller.cs" />
     <Compile Include="Assets\Scripts\Cards\CardEffectDefinition.cs" />
+    <Compile Include="Assets\Scripts\Core\Data\InMemoryDeckService.cs" />
     <Compile Include="Assets\CrystalFramework\Utility\SafeArea.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\MatchmakingOverlayController.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\Installers\MainMenuInstaller.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DeckView.cs" />
     <Compile Include="Assets\Scripts\Core\Networking\NetworkGameMode.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\HomeController.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\RootLifetimeScope.cs" />
@@ -601,6 +615,9 @@
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.collections@5b6ebd78ccc0\Unity.Collections.Tests\System.Runtime.CompilerServices.Unsafe\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>

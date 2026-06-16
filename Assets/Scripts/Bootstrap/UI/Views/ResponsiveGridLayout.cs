@@ -89,11 +89,7 @@ namespace Bootstrap.UI.Views
 
         public void Refresh()
         {
-            if (_grid == null)
-            {
-                _grid = GetComponent<GridLayoutGroup>();
-            }
-
+            _grid ??= GetComponent<GridLayoutGroup>();
             if (_grid == null)
             {
                 return;
