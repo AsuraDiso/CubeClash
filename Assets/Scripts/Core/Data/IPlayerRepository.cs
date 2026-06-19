@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 
@@ -9,6 +10,10 @@ namespace Core.Data
 
         public PlayerProfile Profile { get; }
 
+        public event Action ProfileUpdated;
+
         public UniTask LoadAsync(CancellationToken cancellationToken = default);
+
+        public UniTask UpdateDisplayNameAsync(string displayName, CancellationToken cancellationToken = default);
     }
 }

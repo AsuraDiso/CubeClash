@@ -17,7 +17,7 @@ namespace Bootstrap.UI
 
         public MainMenuView CreateMainMenuView() => _objectResolver.Instantiate(_catalog.MainMenuViewPrefab);
 
-        public (HomeView Home, DeckView Deck) PopulateMainMenuScreens(MainMenuView mainMenuView)
+        public (HomeView Home, DeckView Deck, SettingsView Settings) PopulateMainMenuScreens(MainMenuView mainMenuView)
         {
             var screensRoot = mainMenuView.ScreensRoot;
             ClearChildren(screensRoot);
@@ -26,6 +26,7 @@ namespace Bootstrap.UI
             var screens = new RectTransform[screenCount];
             HomeView homeView = null;
             DeckView deckView = null;
+            SettingsView settingsView = null;
 
             for (var tab = MainMenuTab.Events; tab <= MainMenuTab.Settings; tab++)
             {
@@ -42,10 +43,14 @@ namespace Bootstrap.UI
                 {
                     deckView = screen.GetComponent<DeckView>();
                 }
+                else if (tab == MainMenuTab.Settings)
+                {
+                    settingsView = screen.GetComponent<SettingsView>();
+                }
             }
 
             mainMenuView.InitializeScreens(screens);
-            return (homeView, deckView);
+            return (homeView, deckView, settingsView);
         }
 
         public MatchmakingOverlayView CreateMatchmakingOverlayView() =>

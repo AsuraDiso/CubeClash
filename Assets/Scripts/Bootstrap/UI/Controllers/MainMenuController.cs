@@ -11,29 +11,34 @@ namespace Bootstrap.UI.Controllers
         private readonly HomeController _homeController;
         private readonly CardController _cardController;
 
+        private readonly SettingsController _settingsController;
+
         private MainMenuView _view;
 
         public MainMenuController(
             IUiViewFactory viewFactory,
             HomeController homeController,
-            CardController cardController)
+            CardController cardController,
+            SettingsController settingsController)
         {
             _viewFactory = viewFactory;
             _homeController = homeController;
             _cardController = cardController;
+            _settingsController = settingsController;
         }
 
         public void Start()
         {
             _view = _viewFactory.CreateMainMenuView();
-            var (homeView, deckView) = _viewFactory.PopulateMainMenuScreens(_view);
+            var (homeView, deckView, settingsView) = _viewFactory.PopulateMainMenuScreens(_view);
             _homeController.Bind(homeView);
             _cardController.Bind(deckView);
+            _settingsController.Bind(settingsView);
         }
 
         public void Dispose()
         {
-            _cardController.Bind(null);
+            _settingsController.Bind(null);
             _homeController.Bind(null);
 
             if (_view == null)

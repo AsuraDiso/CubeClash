@@ -16,6 +16,7 @@ namespace Bootstrap.LifetimeScopes
             builder.RegisterEntryPoint<SceneMusicStarter>();
             builder.Register<HomeController>(Lifetime.Scoped);
             builder.Register<CardController>(Lifetime.Scoped);
+            builder.Register<SettingsController>(Lifetime.Scoped);
             builder.RegisterEntryPoint<MainMenuController>();
             builder.RegisterEntryPoint<MatchmakingOverlayController>();
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using Core.Data;
 using Core.Firebase;
@@ -36,6 +37,8 @@ namespace Infrastructure.Data.Firestore
             }
         }
 
+        public event Action ProfileUpdated;
+
         public async UniTask LoadAsync(CancellationToken cancellationToken = default)
         {
             if (IsLoaded)
@@ -54,6 +57,40 @@ namespace Infrastructure.Data.Firestore
             _profile = PlayerProfile.CreateBattleDefault(userId, displayName);
             IsLoaded = true;
             Debug.Log($"Player loaded: {_profile.DisplayName}");
+        }
+
+        public async UniTask UpdateDisplayNameAsync(string displayName, CancellationToken cancellationToken = default)
+        {
+            EnsureLoaded();
+
+            var trimmed = displayName?.Trim();
+            if (string.IsNullOrEmpty(trimmed))
+            {
+                trimmed = DefaultDisplayName;
+            }
+
+            if (trimmed == _profile.DisplayName)
+            {
+                return;
+            }
+
+            await _firebaseAppService.EnsureInitializedAsync(cancellationToken);
+
+            var userRef = FirebaseFirestore.DefaultInstance
+                .Collection(UsersCollection)
+                .Document(_userIdProvider.UserId);
+
+            await userRef
+                .UpdateAsync(new Dictionary<string, object>
+                {
+                    { nameof(FirestoreUserDocument.DisplayName), trimmed },
+                    { nameof(FirestoreUserDocument.UpdatedBy), "player" }
+                })
+                .AsUniTask()
+                .AttachExternalCancellation(cancellationToken);
+
+            _profile = PlayerProfile.CreateBattleDefault(_profile.PlayerId, trimmed);
+            ProfileUpdated?.Invoke();
         }
 
         private static async UniTask<FirestoreUserDocument> LoadOrCreateUserDocumentAsync(

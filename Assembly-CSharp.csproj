@@ -50,6 +50,7 @@
     <Compile Include="Assets\Scripts\Core\Battle\IBattleLoadoutProvider.cs" />
     <Compile Include="Assets\Scripts\Core\Data\DeckService.cs" />
     <Compile Include="Assets\Scripts\Core\Data\DeckState.cs" />
+    <Compile Include="Assets\Scripts\Core\Settings\IGameSettingsService.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\CardGridView.cs" />
     <Compile Include="Assets\Scripts\Core\Battle\IBattleAttackGateway.cs" />
     <Compile Include="Assets\Scripts\Core\Scenes\ISceneLoaderService.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Assets\Scripts\Bootstrap\Audio\SceneMusicStarter.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionNetworkRunnerFactory.cs" />
     <Compile Include="Assets\Scripts\Core\Data\DeckBattleLoadoutProvider.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\Settings\GameSettingsService.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DiceSlotView.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Data\Firestore\FirestorePlayerRepository.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\LoadingLifetimeScope.cs" />
@@ -109,7 +111,9 @@
     <Compile Include="Assets\Scripts\Core\Scenes\SceneLoadMode.cs" />
     <Compile Include="Assets\Scripts\Core\Firebase\IFirebaseAppService.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Data\LocalUserIdProvider.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\SettingsController.cs" />
     <Compile Include="Assets\Scripts\Core\Networking\NetworkSessionState.cs" />
+    <Compile Include="Assets\Scripts\Core\Settings\IHapticsService.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Data\Firestore\FirestoreUserDocument.cs" />
     <Compile Include="Assets\Scripts\Core\Data\DeckPersistenceData.cs" />
     <Compile Include="Assets\Scripts\Core\Networking\NetworkSessionException.cs" />
@@ -131,6 +135,7 @@
     <Compile Include="Assets\Scripts\Core\Data\DeckCardRecord.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\MainMenuView.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DeckDropZone.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\Settings\HapticsService.cs" />
     <Compile Include="Assets\Scripts\Cards\CardDefinition.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\BattleController.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\ResponsiveGridLayout.cs" />
@@ -143,6 +148,7 @@
     <Compile Include="Assets\CrystalFramework\Utility\SafeArea.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\MatchmakingOverlayController.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DeckView.cs" />
+    <Compile Include="Assets\Scripts\Core\Settings\LegalLinks.cs" />
     <Compile Include="Assets\Scripts\Core\Networking\NetworkGameMode.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\HomeController.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\RootLifetimeScope.cs" />

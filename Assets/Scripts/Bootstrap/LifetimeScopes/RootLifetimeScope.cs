@@ -1,4 +1,6 @@
 using Bootstrap.Audio;
+using Bootstrap.Settings;
+using Core.Settings;
 using Bootstrap.EntryPoints;
 using Bootstrap.Flow;
 using Bootstrap.Scenes;
@@ -45,6 +47,10 @@ namespace Bootstrap.LifetimeScopes
             builder.RegisterInstance(_audioCatalog).As<IAudioCatalog>();
             builder.Register<AudioService>(Lifetime.Singleton)
                 .As<IAudioService>();
+            builder.Register<GameSettingsService>(Lifetime.Singleton)
+                .As<IGameSettingsService>();
+            builder.Register<HapticsService>(Lifetime.Singleton)
+                .As<IHapticsService>();
             builder.Register<SceneLoaderService>(Lifetime.Singleton)
                 .As<ISceneLoaderService>();
 
