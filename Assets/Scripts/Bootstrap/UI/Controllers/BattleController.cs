@@ -18,10 +18,7 @@ namespace Bootstrap.UI.Controllers
         private IBattleAttackGateway _gateway;
         private bool _isGameOver;
 
-        public BattleController(
-            IUiViewFactory viewFactory,
-            IBattleControllerRegistry controllerRegistry,
-            INetworkSession networkSession)
+        public BattleController(IUiViewFactory viewFactory, IBattleControllerRegistry controllerRegistry, INetworkSession networkSession)
         {
             _viewFactory = viewFactory;
             _controllerRegistry = controllerRegistry;
@@ -31,13 +28,10 @@ namespace Bootstrap.UI.Controllers
         public void Start()
         {
             _view = _viewFactory.CreateBattleView();
-            _view.AttackClicked += OnAttack;
             _controllerRegistry.GatewayAvailable += OnGatewayAvailable;
 
             if (_controllerRegistry.Current != null)
-            {
                 BindGateway(_controllerRegistry.Current);
-            }
 
             _view.SetStatusText($"Connected! Players: {_networkSession.PlayerCount}");
             RefreshAttackButton();
@@ -47,7 +41,6 @@ namespace Bootstrap.UI.Controllers
         {
             if (_view != null)
             {
-                _view.AttackClicked -= OnAttack;
                 _viewFactory.Destroy(_view);
                 _view = null;
             }
@@ -62,9 +55,7 @@ namespace Bootstrap.UI.Controllers
         {
             ViewBinding.Switch(ref _gateway, gateway, SubscribeGateway, UnsubscribeGateway);
             if (_gateway == null)
-            {
                 return;
-            }
 
             RefreshProfiles();
             OnTurnChanged();
@@ -94,7 +85,13 @@ namespace Bootstrap.UI.Controllers
         {
             if (_gateway != null && !_isGameOver)
             {
-                _view.SetTurnText(_gateway.IsMyTurn ? "Your Turn" : "Opponent's Turn");
+                var turnLabel = _gateway.IsMyTurn ? "Your Turn" : "Opponent's Turn";
+                if (_gateway.TurnDice1 > 0)
+                {
+                    turnLabel += $" · Dice: {_gateway.TurnDice1}, {_gateway.TurnDice2}";
+                }
+
+                _view.SetTurnText(turnLabel);
             }
 
             RefreshAttackButton();
@@ -123,18 +120,6 @@ namespace Bootstrap.UI.Controllers
             RefreshAttackButton();
         }
 
-        private void OnAttack()
-        {
-            if (_gateway == null)
-            {
-                Debug.LogWarning("Battle gateway not ready.");
-                return;
-            }
-
-            _gateway.SendAttack();
-        }
-
-        private void RefreshAttackButton() =>
-            _view?.SetAttackEnabled(_gateway != null && _gateway.IsMyTurn && !_isGameOver);
+        private void RefreshAttackButton() => _view?.SetAttackEnabled(_gateway is { IsMyTurn: true } && !_isGameOver);
     }
 }

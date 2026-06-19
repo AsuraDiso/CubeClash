@@ -6,6 +6,8 @@ namespace Core.Battle
     public interface IBattleAttackGateway
     {
         bool IsMyTurn { get; }
+        int TurnDice1 { get; }
+        int TurnDice2 { get; }
         PlayerProfile LocalProfile { get; }
         PlayerProfile OpponentProfile { get; }
 

@@ -7,12 +7,15 @@ using Core.Networking;
 using Fusion;
 using Infrastructure.Photon;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Infrastructure.Photon.Battle
 {
     public sealed class BattleNetworkController : NetworkBehaviour, IBattleAttackGateway
     {
         [Networked] public int CurrentTurnPlayerId { get; private set; }
+        [Networked] public int TurnDice1 { get; private set; }
+        [Networked] public int TurnDice2 { get; private set; }
         [Networked] public int Player1NetworkId { get; private set; }
         [Networked] public int Player2NetworkId { get; private set; }
         [Networked] public NetworkPlayerProfile Player1Profile { get; private set; }
@@ -107,6 +110,7 @@ namespace Infrastructure.Photon.Battle
             Player1NetworkId = players[0].PlayerId;
             Player2NetworkId = players[1].PlayerId;
             CurrentTurnPlayerId = Player1NetworkId;
+            RollTurnDice();
             Player1Profile = NetworkPlayerProfile.From(ResolveProfile(players[0]));
             Player2Profile = NetworkPlayerProfile.From(ResolveProfile(players[1]));
         }
@@ -184,7 +188,14 @@ namespace Infrastructure.Photon.Battle
             if (player1.Hp > 0 && player2.Hp > 0)
             {
                 CurrentTurnPlayerId = attacker.PlayerId == Player1NetworkId ? Player2NetworkId : Player1NetworkId;
+                RollTurnDice();
             }
+        }
+
+        private void RollTurnDice()
+        {
+            TurnDice1 = Random.Range(BattleConstants.DiceMin, BattleConstants.DiceMax + 1);
+            TurnDice2 = Random.Range(BattleConstants.DiceMin, BattleConstants.DiceMax + 1);
         }
 
         private void ApplyDamageToOpponent(PlayerRef attacker, int damage)
