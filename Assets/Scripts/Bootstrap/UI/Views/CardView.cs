@@ -45,6 +45,11 @@ namespace Bootstrap.UI.Views
             gameObject.name = definition.DisplayName;
             _titleLabel.text = definition.DisplayName;
 
+            for (var i = _diceSlotsGrid.childCount - 1; i >= 0; i--)
+            {
+                Destroy(_diceSlotsGrid.GetChild(i).gameObject);
+            }
+
             foreach (var def in definition.DiceSlots)
             foreach (var requirement in def.Requirements)
             {

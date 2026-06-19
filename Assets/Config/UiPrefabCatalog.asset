@@ -19,7 +19,5 @@ MonoBehaviour:
   - {fileID: 8268311665700252395, guid: ff87b2f721fd82f488026a2428bd207e, type: 3}
   - {fileID: 3258375315169562711, guid: 87319a1d1bcf7b64daeb9a26f759a302, type: 3}
   - {fileID: 8133839723175906121, guid: 924a32535a7eb9c4db781f0b14c1871f, type: 3}
-  _homeScreenPrefab: {fileID: 2826879472478229631, guid: ff87b2f721fd82f488026a2428bd207e, type: 3}
-  _deckScreenPrefab: {fileID: 2915311541293797839, guid: 25128a43fedc761438f85e5936c11557, type: 3}
   _matchmakingOverlayViewPrefab: {fileID: 356006660603142929, guid: e16d579b47ab8124ca01b9e9110137ea, type: 3}
   _battleViewPrefab: {fileID: 1880401162969986473, guid: 24b76888d67906d4988158ce118e1fc3, type: 3}

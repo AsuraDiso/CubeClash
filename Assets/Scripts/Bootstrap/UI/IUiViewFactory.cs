@@ -7,7 +7,7 @@ namespace Bootstrap.UI
     {
         MainMenuView CreateMainMenuView();
 
-        MainMenuScreenViews PopulateMainMenuScreens(MainMenuView mainMenuView);
+        (HomeView Home, DeckView Deck) PopulateMainMenuScreens(MainMenuView mainMenuView);
 
         MatchmakingOverlayView CreateMatchmakingOverlayView();
 

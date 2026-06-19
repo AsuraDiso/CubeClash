@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Bootstrap.UI.Views
 {
@@ -13,9 +12,7 @@ namespace Bootstrap.UI.Views
         [SerializeField] private CardGridView _inventoryGrid;
         [SerializeField] private DeckDropZone _dropZone;
         [SerializeField] private Canvas _dragCanvas;
-        [SerializeField] private List<Button> _deckButtons = new();
-        [SerializeField] private Color _selectedTabColor = Color.green;
-        [SerializeField] private Color _normalTabColor = Color.white;
+        [SerializeField] private TabGroup _deckTabs;
 
         public event Action<int> OnDeckSelected;
         public event Action<CardView, PointerEventData> OnCardDropped;
@@ -25,16 +22,12 @@ namespace Bootstrap.UI.Views
 
         private void Awake()
         {
-            if (_dragCanvas != null)
-            {
-                _cardGrid?.SetDragCanvas(_dragCanvas);
-                _inventoryGrid?.SetDragCanvas(_dragCanvas);
-            }
+            _cardGrid?.SetDragCanvas(_dragCanvas);
+            _inventoryGrid?.SetDragCanvas(_dragCanvas);
 
-            for (int i = 0; i < _deckButtons.Count; i++)
+            if (_deckTabs != null)
             {
-                int index = i;
-                _deckButtons[i].onClick.AddListener(() => OnDeckSelected?.Invoke(index));
+                _deckTabs.SelectionChanged += index => OnDeckSelected?.Invoke(index);
             }
 
             if (_dropZone != null)
@@ -42,32 +35,19 @@ namespace Bootstrap.UI.Views
                 _dropZone.OnCardDropped += (card, data) => OnCardDropped?.Invoke(card, data);
             }
 
-            if (_cardGrid != null)
-            {
-                _cardGrid.CardDragEnded += (card, data) => OnCardDragEnded?.Invoke(card, data);
-            }
-
-            if (_inventoryGrid != null)
-            {
-                _inventoryGrid.CardDragEnded += (card, data) => OnCardDragEnded?.Invoke(card, data);
-            }
+            WireDragEnded(_cardGrid);
+            WireDragEnded(_inventoryGrid);
         }
 
-        private void OnDestroy()
+        private void WireDragEnded(CardGridView grid)
         {
-            foreach (var button in _deckButtons)
+            if (grid != null)
             {
-                button.onClick.RemoveAllListeners();
+                grid.CardDragEnded += (card, data) => OnCardDragEnded?.Invoke(card, data);
             }
         }
 
-        public void SetActiveDeckCards(IReadOnlyList<PlacedCard> placedCards)
-        {
-            if (_cardGrid != null)
-            {
-                _cardGrid.SetCards(placedCards);
-            }
-        }
+        public void SetActiveDeckCards(IReadOnlyList<PlacedCard> placedCards) => _cardGrid?.SetCards(placedCards);
 
         public bool TryGetActiveGridOrigin(Vector2 screenPoint, Camera eventCamera, out Vector2Int origin)
         {
@@ -80,22 +60,8 @@ namespace Bootstrap.UI.Views
 
         public bool ConsumeDeckDrop() => _dropZone != null && _dropZone.ConsumeDrop();
 
-        public void SetInventoryCards(IReadOnlyList<PlacedCard> inventoryCards)
-        {
-            if (_inventoryGrid != null)
-            {
-                _inventoryGrid.SetCards(inventoryCards);
-            }
-        }
+        public void SetInventoryCards(IReadOnlyList<PlacedCard> inventoryCards) => _inventoryGrid?.SetCards(inventoryCards);
 
-        public void SetActiveDeckIndex(int index)
-        {
-            for (int i = 0; i < _deckButtons.Count; i++)
-            {
-                var colors = _deckButtons[i].colors;
-                colors.normalColor = i == index ? _selectedTabColor : _normalTabColor;
-                _deckButtons[i].colors = colors;
-            }
-        }
+        public void SetActiveDeckIndex(int index) => _deckTabs?.Select(index);
     }
 }

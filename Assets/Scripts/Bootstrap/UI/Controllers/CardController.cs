@@ -1,6 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using Bootstrap.Common;
 using Bootstrap.UI.Views;
 using Cards;
 using Core.Data;
@@ -24,13 +23,7 @@ namespace Bootstrap.UI.Controllers
 
         public void Bind(DeckView view)
         {
-            if (_view != null)
-            {
-                _view.OnDeckSelected -= SelectDeck;
-                _view.OnCardDropped -= HandleCardDropped;
-                _view.OnCardDragEnded -= HandleCardDragEnded;
-            }
-
+            UnbindView();
             _view = view;
 
             if (_view == null)
@@ -41,22 +34,22 @@ namespace Bootstrap.UI.Controllers
             _view.OnDeckSelected += SelectDeck;
             _view.OnCardDropped += HandleCardDropped;
             _view.OnCardDragEnded += HandleCardDragEnded;
-
             SelectDeck(0);
         }
 
         public void Dispose()
         {
-            if (_view != null)
-            {
-                _view.OnDeckSelected -= SelectDeck;
-                _view.OnCardDropped -= HandleCardDropped;
-                _view.OnCardDragEnded -= HandleCardDragEnded;
-            }
-
+            UnbindView();
             _deckService.OnDeckChanged -= HandleDeckChanged;
-            _view = null;
         }
+
+        private void UnbindView() =>
+            ViewBinding.Unbind(ref _view, view =>
+            {
+                view.OnDeckSelected -= SelectDeck;
+                view.OnCardDropped -= HandleCardDropped;
+                view.OnCardDragEnded -= HandleCardDragEnded;
+            });
 
         private void HandleCardDragEnded(CardView cardView, UnityEngine.EventSystems.PointerEventData eventData)
         {
@@ -95,72 +88,32 @@ namespace Bootstrap.UI.Controllers
 
         private void HandleDeckChanged(int index)
         {
-            if (_view == null || index != _currentDeckIndex)
+            if (index == _currentDeckIndex)
             {
-                return;
+                Refresh();
             }
-
-            RefreshDeck();
-            RefreshInventory();
         }
 
         private void SelectDeck(int index)
         {
             _currentDeckIndex = index;
-            if (_view == null)
-            {
-                return;
-            }
-
-            _view.SetActiveDeckIndex(index);
-            RefreshDeck();
-            RefreshInventory();
+            _view?.SetActiveDeckIndex(index);
+            Refresh();
         }
 
-        private void RefreshDeck()
+        private void Refresh()
         {
             if (_view == null)
             {
                 return;
             }
 
-            _view.SetActiveDeckCards(_deckService.GetDeck(_currentDeckIndex));
-        }
-
-        private void RefreshInventory()
-        {
-            if (_view == null)
-            {
-                return;
-            }
-
-            var deckCatalogIndices = new HashSet<int>(
-                _deckService.GetDeck(_currentDeckIndex)
-                    .Where(placed => placed.CatalogIndex >= 0)
-                    .Select(placed => placed.CatalogIndex));
-
-            var availableCards = new List<CardDefinition>();
-            var availableCatalogIndices = new List<int>();
-
-            for (var i = 0; i < _cardCatalog.Cards.Count; i++)
-            {
-                var card = _cardCatalog.Cards[i];
-                if (card == null || deckCatalogIndices.Contains(i))
-                {
-                    continue;
-                }
-
-                availableCards.Add(card);
-                availableCatalogIndices.Add(i);
-            }
-
-            var inventoryCards = CardGridPacker.AutoPack(
-                availableCards,
+            var deck = _deckService.GetDeck(_currentDeckIndex);
+            _view.SetActiveDeckCards(deck);
+            _view.SetInventoryCards(_cardCatalog.PackInventoryNotInDeck(
+                deck,
                 _view.InventoryColumns,
-                DeckLayout.InventoryRows,
-                availableCatalogIndices);
-
-            _view.SetInventoryCards(inventoryCards);
+                DeckLayout.InventoryRows));
         }
     }
 }

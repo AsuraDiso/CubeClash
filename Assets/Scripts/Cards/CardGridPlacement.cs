@@ -47,7 +47,7 @@ namespace Cards
 
                 if (!TryFindSlot(occupied, columns, rows, card.Footprint, out var origin))
                 {
-                    Debug.LogWarning($"[CubeClash] No grid slot for card '{card.DisplayName}' ({card.Footprint}).");
+                    Debug.LogWarning($"No grid slot for card '{card.DisplayName}' ({card.Footprint}).");
                     continue;
                 }
 
@@ -58,22 +58,46 @@ namespace Cards
             return result;
         }
 
+        public static bool FitsWithinGrid(
+            Vector2Int origin,
+            CardFootprintSize footprint,
+            int columns,
+            int rows)
+        {
+            return origin.x >= 0 && origin.y >= 0
+                   && origin.x + footprint.Columns <= columns
+                   && origin.y + footprint.Rows <= rows;
+        }
+
+        public static bool[,] BuildOccupiedGrid(
+            IReadOnlyList<PlacedCard> placed,
+            int columns,
+            int rows)
+        {
+            var occupied = new bool[columns, rows];
+            foreach (var card in placed)
+            {
+                Occupy(occupied, card.Origin, card.Definition.Footprint);
+            }
+
+            return occupied;
+        }
+
         public static bool CanPlace(
             bool[,] occupied,
             Vector2Int origin,
             CardFootprintSize footprint)
         {
-            var columns = occupied.GetLength(0);
-            var rows = occupied.GetLength(1);
+            if (!FitsWithinGrid(origin, footprint, occupied.GetLength(0), occupied.GetLength(1)))
+            {
+                return false;
+            }
 
             for (var column = 0; column < footprint.Columns; column++)
             {
                 for (var row = 0; row < footprint.Rows; row++)
                 {
-                    var x = origin.x + column;
-                    var y = origin.y + row;
-
-                    if (x < 0 || y < 0 || x >= columns || y >= rows || occupied[x, y])
+                    if (occupied[origin.x + column, origin.y + row])
                     {
                         return false;
                     }

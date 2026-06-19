@@ -12,6 +12,8 @@ namespace Bootstrap.UI.Views
         [SerializeField] private TMP_Text _localHpText;
         [SerializeField] private TMP_Text _opponentHpText;
         [SerializeField] private TMP_Text _turnText;
+        [SerializeField] private TMP_Text _playerName;
+        [SerializeField] private TMP_Text _enemyName;
 
         public event Action AttackClicked;
 
@@ -21,5 +23,7 @@ namespace Bootstrap.UI.Views
         public void SetOpponentHp(int hp) => _opponentHpText.text = $"Enemy HP: {hp}";
         public void SetTurnText(string text) => _turnText.text = text;
         public void SetAttackEnabled(bool enabled) => _attackButton.interactable = enabled;
+        public void SetOpponentName(string name) => _enemyName.text = name;
+        public void SetPlayerName(string name) => _playerName.text = name;
     }
 }

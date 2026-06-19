@@ -1,9 +1,9 @@
 using System;
 using System.Threading;
+using Bootstrap.Common;
 using Bootstrap.UI.Views;
 using Core.Matchmaking;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Bootstrap.UI.Controllers
 {
@@ -19,29 +19,12 @@ namespace Bootstrap.UI.Controllers
             _matchmakingService = matchmakingService;
         }
 
-        public void Bind(HomeView view)
-        {
-            if (_view != null)
-            {
-                _view.PlayClicked -= OnPlay;
-            }
-
-            _view = view;
-
-            if (_view != null)
-            {
-                _view.PlayClicked += OnPlay;
-            }
-        }
+        public void Bind(HomeView view) =>
+            ViewBinding.Rebind(ref _view, view, v => v.PlayClicked += OnPlay, v => v.PlayClicked -= OnPlay);
 
         public void Dispose()
         {
-            if (_view != null)
-            {
-                _view.PlayClicked -= OnPlay;
-                _view = null;
-            }
-
+            ViewBinding.Unbind(ref _view, v => v.PlayClicked -= OnPlay);
             _matchmakingCts?.Cancel();
             _matchmakingCts?.Dispose();
             _matchmakingCts = null;
@@ -52,22 +35,10 @@ namespace Bootstrap.UI.Controllers
             _matchmakingCts?.Cancel();
             _matchmakingCts?.Dispose();
             _matchmakingCts = new CancellationTokenSource();
-            StartMatchAsync(_matchmakingCts.Token).Forget();
+            FireAndForget.Run(StartMatchAsync, _matchmakingCts.Token);
         }
 
-        private async UniTask StartMatchAsync(CancellationToken cancellationToken)
-        {
-            try
-            {
-                await _matchmakingService.StartQuickMatchAsync(cancellationToken);
-            }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (Exception exception)
-            {
-                Debug.LogException(exception);
-            }
-        }
+        private UniTask StartMatchAsync(CancellationToken cancellationToken) =>
+            _matchmakingService.StartQuickMatchAsync(cancellationToken);
     }
 }

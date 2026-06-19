@@ -1,4 +1,5 @@
 using Bootstrap.Installers;
+using Bootstrap.UI.Controllers;
 using VContainer;
 using VContainer.Unity;
 
@@ -8,7 +9,8 @@ namespace Bootstrap.LifetimeScopes
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            new BattleInstaller().Install(builder);
+            builder.RegisterUi();
+            builder.RegisterEntryPoint<BattleController>();
         }
     }
 }

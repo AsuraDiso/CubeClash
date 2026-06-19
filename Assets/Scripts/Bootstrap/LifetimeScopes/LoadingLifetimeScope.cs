@@ -1,3 +1,4 @@
+using Bootstrap.EntryPoints;
 using Bootstrap.Installers;
 using VContainer;
 using VContainer.Unity;
@@ -8,7 +9,8 @@ namespace Bootstrap.LifetimeScopes
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            new LoadingInstaller().Install(builder);
+            builder.RegisterUi();
+            builder.RegisterEntryPoint<LoadingSceneEntryPoint>();
         }
     }
 }

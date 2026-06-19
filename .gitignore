@@ -74,6 +74,22 @@ crashlytics-build.properties
 **/[Aa]ssets/[Ss]treamingAssets/aa.meta
 **/[Aa]ssets/[Ss]treamingAssets/aa/*
 
+# Unity Android/IL2CPP build cache
+.utmp/
+
+# Firebase SDK + generated stuff
+**/[Aa]ssets/Firebase/
+**/[Aa]ssets/GeneratedLocalRepo/
+**/[Aa]ssets/Editor Default Resources/Firebase/
+**/[Aa]ssets/Plugins/iOS/Firebase/
+**/[Aa]ssets/Plugins/tvOS/Firebase/
+**/[Aa]ssets/Plugins/Android/FirebaseApp.androidlib/
+
+# Firebase config (keys inside)
+**/[Aa]ssets/google-services.json
+**/[Aa]ssets/GoogleService-Info.plist
+**/[Aa]ssets/StreamingAssets/google-services-desktop.json
+
 # .gitignore (minimum dla .NET)
 bin/
 obj/

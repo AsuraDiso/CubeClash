@@ -22,7 +22,6 @@ namespace Bootstrap.UI.Views
         private void OnEnable()
         {
             _mainMenuView.TabChanged += OnTabChanged;
-            // Initialize to current state without animation
             UpdateState(_mainMenuView.CurrentTab, instant: true);
         }
 
@@ -40,10 +39,8 @@ namespace Bootstrap.UI.Views
         {
             bool isSelected = (activeTab == _tabType);
 
-            // Change texture (Sprite)
             _backgroundImage.sprite = isSelected ? _selectedSprite : _normalSprite;
 
-            // Fade Text
             _textCanvasGroup.DOKill();
             float targetAlpha = isSelected ? 1f : 0f;
 

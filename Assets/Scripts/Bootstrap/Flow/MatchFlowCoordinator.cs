@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Bootstrap.Common;
 using Core.Battle;
 using Core.Matchmaking;
 using Core.Scenes;
@@ -25,20 +26,11 @@ namespace Bootstrap.Flow
             _battleSessionSpawner = battleSessionSpawner;
         }
 
-        public void Start()
-        {
-            _matchmakingService.MatchReady += OnMatchReady;
-        }
+        public void Start() => _matchmakingService.MatchReady += OnMatchReady;
 
-        public void Dispose()
-        {
-            _matchmakingService.MatchReady -= OnMatchReady;
-        }
+        public void Dispose() => _matchmakingService.MatchReady -= OnMatchReady;
 
-        private void OnMatchReady()
-        {
-            EnterBattleAsync().Forget();
-        }
+        private void OnMatchReady() => FireAndForget.Run(EnterBattleAsync);
 
         private async UniTask EnterBattleAsync()
         {
@@ -51,10 +43,6 @@ namespace Bootstrap.Flow
             {
                 await _battleSceneLoader.LoadBattleSceneAsync();
                 _battleSessionSpawner.Start();
-            }
-            catch (Exception exception)
-            {
-                UnityEngine.Debug.LogException(exception);
             }
             finally
             {

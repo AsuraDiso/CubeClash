@@ -1,11 +1,19 @@
 using Bootstrap.EntryPoints;
 using Bootstrap.Flow;
-using Bootstrap.Installers;
 using Bootstrap.Scenes;
 using Bootstrap.UI;
 using Cards;
+using Core.Battle;
+using Core.Data;
+using Core.Firebase;
+using Core.Matchmaking;
+using Core.Networking;
 using Core.Scenes;
+using Infrastructure.Data;
+using Infrastructure.Data.Firestore;
+using Infrastructure.Firebase;
 using Infrastructure.Photon;
+using Infrastructure.Photon.Battle;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -34,8 +42,27 @@ namespace Bootstrap.LifetimeScopes
             builder.Register<SceneLoaderService>(Lifetime.Singleton)
                 .As<ISceneLoaderService>();
 
-            builder.InstallData();
-            builder.InstallMultiplayer();
+            builder.Register<FirebaseAppService>(Lifetime.Singleton)
+                .As<IFirebaseAppService>();
+            builder.Register<LocalUserIdProvider>(Lifetime.Singleton)
+                .As<IUserIdProvider>();
+            builder.Register<FirestorePlayerRepository>(Lifetime.Singleton)
+                .As<IPlayerRepository>();
+            builder.Register<InMemoryDeckService>(Lifetime.Singleton)
+                .As<IDeckService>();
+
+            builder.Register<FusionNetworkRunnerFactory>(Lifetime.Singleton);
+            builder.Register<FusionBattleControllerRegistry>(Lifetime.Singleton)
+                .As<IBattleControllerRegistry>();
+            builder.Register<FusionNetworkSessionService>(Lifetime.Singleton)
+                .As<INetworkSession>()
+                .As<IFusionRunnerAccessor>();
+            builder.Register<FusionMatchmakingService>(Lifetime.Singleton)
+                .As<IMatchmakingService>();
+            builder.Register<FusionBattleSceneLoader>(Lifetime.Singleton)
+                .As<IBattleSceneLoader>();
+            builder.Register<FusionBattleSessionSpawner>(Lifetime.Singleton)
+                .As<IBattleSessionSpawner>();
 
             builder.RegisterEntryPoint<GameBootstrapEntryPoint>();
             builder.RegisterEntryPoint<MatchFlowCoordinator>();

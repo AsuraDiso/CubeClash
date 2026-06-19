@@ -1,15 +1,16 @@
 using System;
+using Core.Data;
 
 namespace Core.Battle
 {
     public interface IBattleAttackGateway
     {
         bool IsMyTurn { get; }
-        int LocalPlayerHp { get; }
-        int OpponentHp { get; }
+        PlayerProfile LocalProfile { get; }
+        PlayerProfile OpponentProfile { get; }
 
         event Action TurnChanged;
-        event Action<int, int> HealthUpdated;
+        event Action ProfilesUpdated;
         event Action<bool> GameOver;
         event Action<int, string> AttackReceived;
 

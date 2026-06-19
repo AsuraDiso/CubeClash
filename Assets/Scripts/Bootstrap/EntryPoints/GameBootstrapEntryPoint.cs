@@ -1,3 +1,4 @@
+using Bootstrap.Common;
 using Core.Scenes;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -16,8 +17,8 @@ namespace Bootstrap.EntryPoints
 
         public void Start()
         {
-            Debug.Log("[CubeClash] Bootstrap complete. Loading initial scene.");
-            _sceneLoaderService.LoadSceneAsync(GameSceneId.Loading).Forget();
+            Debug.Log("Bootstrap done.");
+            FireAndForget.Run(() => _sceneLoaderService.LoadSceneAsync(GameSceneId.Loading));
         }
     }
 }

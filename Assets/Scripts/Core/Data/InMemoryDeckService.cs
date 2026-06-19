@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Cards;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace Core.Data
 {
     public sealed class InMemoryDeckService : IDeckService
     {
-        private readonly Dictionary<int, List<PlacedCard>> _decks = new();
+        private readonly List<PlacedCard>[] _decks;
 
         public int MaxDecks { get; } = DeckLayout.MaxDecks;
 
@@ -16,108 +15,102 @@ namespace Core.Data
 
         public InMemoryDeckService()
         {
-            for (int i = 0; i < MaxDecks; i++)
+            _decks = new List<PlacedCard>[MaxDecks];
+            for (var i = 0; i < MaxDecks; i++)
             {
                 _decks[i] = new List<PlacedCard>();
             }
         }
 
-        public IReadOnlyList<PlacedCard> GetDeck(int deckIndex)
-        {
-            if (_decks.TryGetValue(deckIndex, out var deck))
-            {
-                return deck;
-            }
-
-            return Array.Empty<PlacedCard>();
-        }
+        public IReadOnlyList<PlacedCard> GetDeck(int deckIndex) =>
+            IsValidIndex(deckIndex) ? _decks[deckIndex] : Array.Empty<PlacedCard>();
 
         public bool TryPlaceCard(int deckIndex, CardDefinition card, Vector2Int origin, int catalogIndex)
         {
-            if (!_decks.TryGetValue(deckIndex, out var deck))
+            if (!TryGetDeck(deckIndex, out var deck)
+                || !CardGridPacker.FitsWithinGrid(origin, card.Footprint, DeckLayout.Columns, DeckLayout.Rows))
             {
                 return false;
             }
 
-            if (origin.x < 0 || origin.y < 0
-                || origin.x + card.Footprint.Columns > DeckLayout.Columns
-                || origin.y + card.Footprint.Rows > DeckLayout.Rows)
-            {
-                return false;
-            }
+            PlacedCard? restore = RemoveByCatalogIndex(deck, catalogIndex);
 
-            PlacedCard previousPlacement = default;
-            var hadPrevious = false;
-
-            if (catalogIndex >= 0)
-            {
-                var existingIndex = deck.FindIndex(placed => placed.CatalogIndex == catalogIndex);
-                if (existingIndex >= 0)
-                {
-                    previousPlacement = deck[existingIndex];
-                    hadPrevious = true;
-                    deck.RemoveAt(existingIndex);
-                }
-            }
-
-            var occupied = GetOccupiedGrid(deck);
-
+            var occupied = CardGridPacker.BuildOccupiedGrid(deck, DeckLayout.Columns, DeckLayout.Rows);
             if (!CardGridPacker.CanPlace(occupied, origin, card.Footprint))
             {
-                if (hadPrevious)
+                if (restore.HasValue)
                 {
-                    deck.Add(previousPlacement);
+                    deck.Add(restore.Value);
                 }
 
                 return false;
             }
 
             deck.Add(new PlacedCard(card, origin, catalogIndex));
-            OnDeckChanged?.Invoke(deckIndex);
+            NotifyChanged(deckIndex);
             return true;
         }
 
         public bool TryRemoveCard(int deckIndex, int catalogIndex)
         {
-            if (!_decks.TryGetValue(deckIndex, out var deck))
+            if (!TryGetDeck(deckIndex, out var deck) || catalogIndex < 0)
             {
                 return false;
             }
 
-            if (catalogIndex < 0)
+            if (deck.RemoveAll(placed => placed.CatalogIndex == catalogIndex) == 0)
             {
                 return false;
             }
 
-            if (deck.RemoveAll(placed => placed.CatalogIndex == catalogIndex) > 0)
-            {
-                OnDeckChanged?.Invoke(deckIndex);
-                return true;
-            }
-
-            return false;
+            NotifyChanged(deckIndex);
+            return true;
         }
 
         public void ClearDeck(int deckIndex)
         {
-            if (!_decks.TryGetValue(deckIndex, out var deck) || deck.Count == 0)
+            if (!TryGetDeck(deckIndex, out var deck) || deck.Count == 0)
             {
                 return;
             }
 
             deck.Clear();
-            OnDeckChanged?.Invoke(deckIndex);
+            NotifyChanged(deckIndex);
         }
 
-        private static bool[,] GetOccupiedGrid(List<PlacedCard> deck)
+        private bool IsValidIndex(int deckIndex) =>
+            deckIndex >= 0 && deckIndex < MaxDecks;
+
+        private bool TryGetDeck(int deckIndex, out List<PlacedCard> deck)
         {
-            var occupied = new bool[DeckLayout.Columns, DeckLayout.Rows];
-            foreach (var placed in deck)
+            if (IsValidIndex(deckIndex))
             {
-                CardGridPacker.Occupy(occupied, placed.Origin, placed.Definition.Footprint);
+                deck = _decks[deckIndex];
+                return true;
             }
 
-            return occupied;
+            deck = null;
+            return false;
         }
+
+        private static PlacedCard? RemoveByCatalogIndex(List<PlacedCard> deck, int catalogIndex)
+        {
+            if (catalogIndex < 0)
+            {
+                return null;
+            }
+
+            var existingIndex = deck.FindIndex(placed => placed.CatalogIndex == catalogIndex);
+            if (existingIndex < 0)
+            {
+                return null;
+            }
+
+            var removed = deck[existingIndex];
+            deck.RemoveAt(existingIndex);
+            return removed;
+        }
+
+        private void NotifyChanged(int deckIndex) => OnDeckChanged?.Invoke(deckIndex);
     }
 }

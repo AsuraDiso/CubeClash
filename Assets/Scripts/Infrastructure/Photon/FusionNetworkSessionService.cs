@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Core.Battle;
+using Core.Data;
 using Core.Networking;
 using Cysharp.Threading.Tasks;
 using Fusion;
@@ -47,6 +49,12 @@ namespace Infrastructure.Photon
                 _runner = _runnerFactory.CreateRunner();
                 _runner.AddCallbacks(this);
 
+                var bridge = _runner.GetComponent<FusionSessionBridge>();
+                if (bridge != null)
+                {
+                    bridge.LocalProfile = PlayerProfile.CreateBattleDefault(request.PlayerId, request.DisplayName);
+                }
+
                 var sceneInfo = new NetworkSceneInfo();
                 if (request.InitialScene.HasValue)
                 {
@@ -63,7 +71,8 @@ namespace Infrastructure.Photon
                     SessionName = request.SessionName,
                     Scene = sceneInfo,
                     SceneManager = _runner.GetComponent<INetworkSceneManager>(),
-                    ObjectProvider = _runner.GetComponent<INetworkObjectProvider>()
+                    ObjectProvider = _runner.GetComponent<INetworkObjectProvider>(),
+                    ConnectionToken = ProfileConnectionToken.Encode(request.PlayerId, request.DisplayName)
                 });
 
                 cancellationToken.ThrowIfCancellationRequested();
@@ -117,74 +126,65 @@ namespace Infrastructure.Photon
             SetState(NetworkSessionState.Disconnected);
         }
 
-        public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
-        {
-            NotifyPlayerCountChanged();
-        }
+        public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) => NotifyPlayerCountChanged();
 
-        public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
-        {
-            NotifyPlayerCountChanged();
-        }
+        public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) => NotifyPlayerCountChanged();
 
         public void Dispose()
         {
-            if (_runner == null)
+            var runner = DetachRunner();
+            if (runner == null)
             {
                 return;
             }
-
-            var runner = _runner;
-            _runner = null;
-            runner.RemoveCallbacks(this);
 
             if (runner.IsRunning)
             {
                 _ = runner.Shutdown();
             }
 
-            if (runner != null)
-            {
-                UnityEngine.Object.Destroy(runner.gameObject);
-            }
+            UnityEngine.Object.Destroy(runner.gameObject);
         }
 
         private async UniTask CleanupRunnerAsync()
         {
-            if (_runner == null)
+            var runner = DetachRunner();
+            if (runner == null)
             {
                 return;
             }
-
-            var runner = _runner;
-            _runner = null;
-            runner.RemoveCallbacks(this);
 
             if (runner.IsRunning)
             {
                 await runner.Shutdown();
             }
 
-            if (runner != null)
-            {
-                UnityEngine.Object.Destroy(runner.gameObject);
-            }
+            UnityEngine.Object.Destroy(runner.gameObject);
         }
 
-        private void NotifyPlayerCountChanged()
+        private NetworkRunner DetachRunner()
         {
-            PlayerCountChanged?.Invoke(PlayerCount);
+            if (_runner == null)
+            {
+                return null;
+            }
+
+            var runner = _runner;
+            _runner = null;
+            runner.RemoveCallbacks(this);
+            return runner;
         }
+
+        private void NotifyPlayerCountChanged() => PlayerCountChanged?.Invoke(PlayerCount);
 
         private void SetState(NetworkSessionState newState)
         {
-            if (State == newState)
+            if (State != newState)
             {
-                return;
+                State = newState;
             }
-
-            State = newState;
         }
+
         void INetworkRunnerCallbacks.OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
         void INetworkRunnerCallbacks.OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
         public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress) { }

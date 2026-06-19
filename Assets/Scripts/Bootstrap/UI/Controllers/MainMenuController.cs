@@ -13,7 +13,10 @@ namespace Bootstrap.UI.Controllers
 
         private MainMenuView _view;
 
-        public MainMenuController(IUiViewFactory viewFactory, HomeController homeController, CardController cardController)
+        public MainMenuController(
+            IUiViewFactory viewFactory,
+            HomeController homeController,
+            CardController cardController)
         {
             _viewFactory = viewFactory;
             _homeController = homeController;
@@ -23,11 +26,9 @@ namespace Bootstrap.UI.Controllers
         public void Start()
         {
             _view = _viewFactory.CreateMainMenuView();
-
-            var screens = _viewFactory.PopulateMainMenuScreens(_view);
-
-            _homeController.Bind(screens.HomeView);
-            _cardController.Bind(screens.DeckView);
+            var (homeView, deckView) = _viewFactory.PopulateMainMenuScreens(_view);
+            _homeController.Bind(homeView);
+            _cardController.Bind(deckView);
         }
 
         public void Dispose()
@@ -35,7 +36,10 @@ namespace Bootstrap.UI.Controllers
             _cardController.Bind(null);
             _homeController.Bind(null);
 
-            if (_view == null) return;
+            if (_view == null)
+            {
+                return;
+            }
 
             _viewFactory.Destroy(_view);
             _view = null;

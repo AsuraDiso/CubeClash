@@ -18,6 +18,7 @@ namespace Bootstrap.UI.Controllers
             _viewFactory = viewFactory;
             _matchmakingService = matchmakingService;
         }
+
         public void Start()
         {
             _view = _viewFactory.CreateMatchmakingOverlayView();
@@ -25,6 +26,7 @@ namespace Bootstrap.UI.Controllers
             _matchmakingService.StatusMessageChanged += OnStatusMessageChanged;
             ApplyState(_matchmakingService.State, _matchmakingService.StatusMessage);
         }
+
         public void Dispose()
         {
             _matchmakingService.StateChanged -= OnMatchmakingStateChanged;
@@ -32,25 +34,22 @@ namespace Bootstrap.UI.Controllers
             _viewFactory.Destroy(_view);
             _view = null;
         }
-        private void OnMatchmakingStateChanged(MatchmakingState state) => ApplyState(state, _matchmakingService.StatusMessage);
+
+        private void OnMatchmakingStateChanged(MatchmakingState state) =>
+            ApplyState(state, _matchmakingService.StatusMessage);
 
         private void OnStatusMessageChanged(string statusMessage) => _view.SetStatusText(statusMessage);
 
         private void ApplyState(MatchmakingState state, string statusMessage)
         {
-            switch (state)
+            var visible = state is MatchmakingState.Connecting
+                or MatchmakingState.WaitingForOpponent
+                or MatchmakingState.InMatch;
+
+            _view.SetVisible(visible);
+            if (visible)
             {
-                case MatchmakingState.Connecting:
-
-                case MatchmakingState.WaitingForOpponent:
-
-                case MatchmakingState.InMatch:
-                    _view.SetVisible(true);
-                    _view.SetStatusText(statusMessage);
-                    break;
-                default:
-                    _view.SetVisible(false);
-                    break;
+                _view.SetStatusText(statusMessage);
             }
         }
     }

@@ -15,7 +15,5 @@ namespace Cards
         [field: SerializeField] public List<DiceSlotDefinition> DiceSlots;
 
         [field: SerializeField] public ValueFormula ValueFormula { get; private set; }
-
-        [SerializeReference] private List<CardEffectDefinition> _effects;
     }
 }

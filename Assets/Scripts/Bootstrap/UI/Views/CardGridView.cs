@@ -92,7 +92,6 @@ namespace Bootstrap.UI.Views
             }
             catch (OperationCanceledException)
             {
-                // Expected when refresh is restarted or object is disabled.
             }
             finally
             {
@@ -162,7 +161,7 @@ namespace Bootstrap.UI.Views
                         if (cellGo != null)
                         {
                             LayoutCard(cellGo, new Vector2Int(c, r), new CardFootprintSize(1, 1), cellSize);
-                            cellGo.SetAsFirstSibling(); // Ensure backgrounds render behind cards
+                            cellGo.SetAsFirstSibling();
                         }
                         cellIdx++;
                     }
@@ -234,16 +233,9 @@ namespace Bootstrap.UI.Views
             var cellSize = ComputeCellSize();
             if (cellSize.x <= 0f || cellSize.y <= 0f) return false;
 
-            // _container pivot is expected to be top-left (0, 1) or we need to calculate based on its rect.
-            // Assuming localPoint is relative to the rect's pivot. Let's make it relative to top-left.
             var rect = _container.rect;
-            var pivot = _container.pivot;
-            var topLeftX = rect.xMin + rect.width * pivot.x;
-            var topLeftY = rect.yMax - rect.height * (1f - pivot.y);
-
-            // Re-center from top-left (0,0) down to right
-            float xFromLeft = localPoint.x - rect.xMin;
-            float yFromTop = rect.yMax - localPoint.y;
+            var xFromLeft = localPoint.x - rect.xMin;
+            var yFromTop = rect.yMax - localPoint.y;
 
             int col = Mathf.FloorToInt(xFromLeft / (cellSize.x + _spacing.x));
             int row = Mathf.FloorToInt(yFromTop / (cellSize.y + _spacing.y));

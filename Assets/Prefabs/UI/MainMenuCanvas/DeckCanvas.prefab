@@ -6640,6 +6640,7 @@ GameObject:
   - component: {fileID: 58740940458057955}
   - component: {fileID: 1535410914920529819}
   - component: {fileID: 6900996241035163506}
+  - component: {fileID: 8123456789012345678}
   - component: {fileID: 2915311541293797839}
   m_Layer: 5
   m_Name: DeckCanvas
@@ -6709,6 +6710,27 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8123456789012345678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6283004473115881972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e8f9a0b1c2d3e4f5a6789012345678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bootstrap.UI.Views.TabGroup
+  _tabs:
+  - {fileID: 4705789258570571509}
+  - {fileID: 6145885250793272273}
+  - {fileID: 1863527766523092584}
+  - {fileID: 2646261811949809187}
+  - {fileID: 8649870077844666487}
+  - {fileID: 6452138081990467818}
+  _selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &2915311541293797839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6725,13 +6747,7 @@ MonoBehaviour:
   _inventoryGrid: {fileID: 4684020915658222693}
   _dropZone: {fileID: 7530747022055786662}
   _dragCanvas: {fileID: 1535410914920529819}
-  _deckButtons:
-  - {fileID: 4705789258570571509}
-  - {fileID: 6145885250793272273}
-  - {fileID: 1863527766523092584}
-  - {fileID: 2646261811949809187}
-  - {fileID: 8649870077844666487}
-  - {fileID: 6452138081990467818}
+  _deckTabs: {fileID: 8123456789012345678}
 --- !u!1 &6294143476750079602
 GameObject:
   m_ObjectHideFlags: 0

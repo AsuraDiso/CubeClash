@@ -6,7 +6,7 @@ namespace Cards
     {
         public IReadOnlyList<int> Values { get; }
 
-        public DiceAssignmentContext( IReadOnlyList<int> values)
+        public DiceAssignmentContext(IReadOnlyList<int> values)
         {
             Values = values;
         }

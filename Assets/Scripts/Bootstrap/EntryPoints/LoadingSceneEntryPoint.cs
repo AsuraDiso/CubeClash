@@ -1,37 +1,31 @@
-using System;
-using Core.Loading;
+using System.Threading;
+using Bootstrap.Common;
+using Core.Data;
 using Core.Scenes;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace Bootstrap.EntryPoints
 {
     public sealed class LoadingSceneEntryPoint : IStartable
     {
-        private readonly ILoadingDataPreparer _dataPreparer;
+        private readonly IPlayerRepository _playerRepository;
         private readonly ISceneLoaderService _sceneLoaderService;
 
         public LoadingSceneEntryPoint(
-            ILoadingDataPreparer dataPreparer,
+            IPlayerRepository playerRepository,
             ISceneLoaderService sceneLoaderService)
         {
-            _dataPreparer = dataPreparer;
+            _playerRepository = playerRepository;
             _sceneLoaderService = sceneLoaderService;
         }
 
-        public void Start() => RunAsync().Forget();
+        public void Start() => FireAndForget.Run(RunAsync);
+
         private async UniTask RunAsync()
         {
-            try
-            {
-                await _dataPreparer.PrepareAsync();
-                await _sceneLoaderService.LoadSceneAsync(GameSceneId.MainMenu);
-            }
-            catch (Exception exception)
-            {
-                Debug.LogException(exception);
-            }
+            await _playerRepository.LoadAsync();
+            await _sceneLoaderService.LoadSceneAsync(GameSceneId.MainMenu);
         }
     }
 }
