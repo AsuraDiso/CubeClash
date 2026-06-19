@@ -21,7 +21,7 @@ namespace Cards
     [Serializable]
     public sealed class DiceRequirementEntry
     {
-        [field: SerializeField] public DiceRequirementKind Kind {get; private set; }
+        [field: SerializeField] public DiceRequirementKind Kind { get; private set; }
         [field: SerializeField] public int Value { get; private set; }
 
         public bool IsMet(int value, DiceAssignmentContext ctx, int slotIndex) => Kind switch

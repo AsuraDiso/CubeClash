@@ -4,6 +4,6 @@ namespace Infrastructure.Photon
 {
     public interface IFusionRunnerAccessor
     {
-        NetworkRunner ActiveRunner { get; }
+        public NetworkRunner ActiveRunner { get; }
     }
 }

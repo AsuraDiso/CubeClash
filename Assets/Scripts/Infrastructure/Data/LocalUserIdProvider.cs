@@ -6,7 +6,7 @@ namespace Infrastructure.Data
 {
     public sealed class LocalUserIdProvider : IUserIdProvider
     {
-        const string PrefsKey = "cubeclash.userId";
+        private const string PrefsKey = "cubeclash.userId";
 
         public string UserId { get; }
 

@@ -5,8 +5,8 @@ namespace Core.Firebase
 {
     public interface IFirebaseAppService
     {
-        bool IsInitialized { get; }
+        public bool IsInitialized { get; }
 
-        UniTask EnsureInitializedAsync(CancellationToken cancellationToken = default);
+        public UniTask EnsureInitializedAsync(CancellationToken cancellationToken = default);
     }
 }

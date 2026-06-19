@@ -4,12 +4,12 @@ namespace Core.Battle
 {
     public interface IBattleControllerRegistry
     {
-        IBattleAttackGateway Current { get; }
+        public IBattleAttackGateway Current { get; }
 
-        event Action<IBattleAttackGateway> GatewayAvailable;
+        public event Action<IBattleAttackGateway> GatewayAvailable;
 
-        void Register(IBattleAttackGateway gateway);
+        public void Register(IBattleAttackGateway gateway);
 
-        void Unregister(IBattleAttackGateway gateway);
+        public void Unregister(IBattleAttackGateway gateway);
     }
 }

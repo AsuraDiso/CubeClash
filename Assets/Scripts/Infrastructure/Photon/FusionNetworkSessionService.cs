@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Cards;
 using Core.Battle;
 using Core.Data;
 using Core.Networking;
@@ -19,12 +20,22 @@ namespace Infrastructure.Photon
             IDisposable
     {
         private readonly FusionNetworkRunnerFactory _runnerFactory;
+        private readonly IBattleControllerRegistry _battleControllerRegistry;
+        private readonly IBattleLoadoutProvider _battleLoadout;
+        private readonly CardCatalog _cardCatalog;
 
         private NetworkRunner _runner;
 
-        public FusionNetworkSessionService(FusionNetworkRunnerFactory runnerFactory)
+        public FusionNetworkSessionService(
+            FusionNetworkRunnerFactory runnerFactory,
+            IBattleControllerRegistry battleControllerRegistry,
+            IBattleLoadoutProvider battleLoadout,
+            CardCatalog cardCatalog)
         {
             _runnerFactory = runnerFactory;
+            _battleControllerRegistry = battleControllerRegistry;
+            _battleLoadout = battleLoadout;
+            _cardCatalog = cardCatalog;
         }
 
         public NetworkSessionState State { get; private set; } = NetworkSessionState.Disconnected;
@@ -46,14 +57,15 @@ namespace Infrastructure.Photon
 
             try
             {
-                _runner = _runnerFactory.CreateRunner();
-                _runner.AddCallbacks(this);
+                var payload = new BattleSessionPayload(
+                    PlayerProfile.CreateBattleDefault(request.PlayerId, request.DisplayName),
+                    _battleLoadout.SelectedDeck,
+                    _cardCatalog);
 
-                var bridge = _runner.GetComponent<FusionSessionBridge>();
-                if (bridge != null)
-                {
-                    bridge.LocalProfile = PlayerProfile.CreateBattleDefault(request.PlayerId, request.DisplayName);
-                }
+                _runner = _runnerFactory.CreateRunner();
+                _runner.GetComponent<FusionSessionBridge>()
+                    ?.Initialize(_battleControllerRegistry, payload);
+                _runner.AddCallbacks(this);
 
                 var sceneInfo = new NetworkSceneInfo();
                 if (request.InitialScene.HasValue)
@@ -195,22 +207,26 @@ namespace Infrastructure.Photon
         void INetworkRunnerCallbacks.OnConnectRequest(
             NetworkRunner runner,
             NetworkRunnerCallbackArgs.ConnectRequest request,
-            byte[] token) { }
+            byte[] token)
+        { }
         void INetworkRunnerCallbacks.OnConnectFailed(
             NetworkRunner runner,
             NetAddress remoteAddress,
-            NetConnectFailedReason reason) { }
+            NetConnectFailedReason reason)
+        { }
         void INetworkRunnerCallbacks.OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
         void INetworkRunnerCallbacks.OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList) { }
         void INetworkRunnerCallbacks.OnCustomAuthenticationResponse(
             NetworkRunner runner,
-            Dictionary<string, object> data) { }
+            Dictionary<string, object> data)
+        { }
         void INetworkRunnerCallbacks.OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) { }
         void INetworkRunnerCallbacks.OnReliableDataReceived(
             NetworkRunner runner,
             PlayerRef player,
             ReliableKey key,
-            ArraySegment<byte> data) { }
+            ArraySegment<byte> data)
+        { }
         void INetworkRunnerCallbacks.OnSceneLoadStart(NetworkRunner runner) { }
         void INetworkRunnerCallbacks.OnSceneLoadDone(NetworkRunner runner) { }
     }

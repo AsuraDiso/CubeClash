@@ -5,8 +5,8 @@ namespace Bootstrap.Audio
 {
     public sealed class SceneMusicStarter : IStartable
     {
-        readonly IAudioService _audioService;
-        readonly SceneMusicBinding _binding;
+        private readonly IAudioService _audioService;
+        private readonly SceneMusicBinding _binding;
 
         public SceneMusicStarter(IAudioService audioService, SceneMusicBinding binding)
         {

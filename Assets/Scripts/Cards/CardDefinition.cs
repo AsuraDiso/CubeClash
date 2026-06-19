@@ -12,7 +12,7 @@ namespace Cards
         [field: SerializeField] public CardFootprintSize Footprint { get; private set; } = CardFootprintSize.OneByOne;
         [field: SerializeField] public CardLayout Layout { get; private set; }
 
-        [field: SerializeField] public List<DiceSlotDefinition> DiceSlots;
+        [field: SerializeField] public List<DiceSlotDefinition> DiceSlots { get; private set; } = new();
 
         [field: SerializeField] public ValueFormula ValueFormula { get; private set; }
     }

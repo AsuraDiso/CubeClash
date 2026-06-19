@@ -2,6 +2,6 @@ namespace Core.Data
 {
     public interface IUserIdProvider
     {
-        string UserId { get; }
+        public string UserId { get; }
     }
 }

@@ -5,10 +5,10 @@ namespace Core.Data
 {
     public interface IPlayerRepository
     {
-        bool IsLoaded { get; }
+        public bool IsLoaded { get; }
 
-        PlayerProfile Profile { get; }
+        public PlayerProfile Profile { get; }
 
-        UniTask LoadAsync(CancellationToken cancellationToken = default);
+        public UniTask LoadAsync(CancellationToken cancellationToken = default);
     }
 }

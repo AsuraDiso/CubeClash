@@ -5,14 +5,14 @@ namespace Bootstrap.UI
 {
     public interface IUiViewFactory
     {
-        MainMenuView CreateMainMenuView();
+        public MainMenuView CreateMainMenuView();
 
-        (HomeView Home, DeckView Deck) PopulateMainMenuScreens(MainMenuView mainMenuView);
+        public (HomeView Home, DeckView Deck) PopulateMainMenuScreens(MainMenuView mainMenuView);
 
-        MatchmakingOverlayView CreateMatchmakingOverlayView();
+        public MatchmakingOverlayView CreateMatchmakingOverlayView();
 
-        BattleView CreateBattleView();
+        public BattleView CreateBattleView();
 
-        void Destroy(Component view);
+        public void Destroy(Component view);
     }
 }

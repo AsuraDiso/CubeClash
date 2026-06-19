@@ -2,7 +2,6 @@ using Bootstrap.UI.Views;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
-
 namespace Bootstrap.UI
 {
     public sealed class UiViewFactory : IUiViewFactory

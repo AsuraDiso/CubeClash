@@ -54,8 +54,12 @@ namespace Bootstrap.LifetimeScopes
                 .As<IUserIdProvider>();
             builder.Register<FirestorePlayerRepository>(Lifetime.Singleton)
                 .As<IPlayerRepository>();
-            builder.Register<InMemoryDeckService>(Lifetime.Singleton)
+            builder.Register<FirestoreDeckRepository>(Lifetime.Singleton)
+                .As<IDeckRepository>();
+            builder.Register<DeckService>(Lifetime.Singleton)
                 .As<IDeckService>();
+            builder.Register<DeckBattleLoadoutProvider>(Lifetime.Singleton)
+                .As<IBattleLoadoutProvider>();
 
             builder.Register<FusionNetworkRunnerFactory>(Lifetime.Singleton);
             builder.Register<FusionBattleControllerRegistry>(Lifetime.Singleton)

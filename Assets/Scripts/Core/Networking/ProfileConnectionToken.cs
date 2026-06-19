@@ -1,6 +1,4 @@
-using System;
-using System.Text;
-using Core.Data;
+using System.Text;using Core.Data;
 
 namespace Core.Networking
 {

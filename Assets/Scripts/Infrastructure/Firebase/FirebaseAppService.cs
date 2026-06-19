@@ -9,7 +9,7 @@ namespace Infrastructure.Firebase
 {
     public sealed class FirebaseAppService : IFirebaseAppService
     {
-        UniTask? _initializationTask;
+        private UniTask? _initializationTask;
 
         public bool IsInitialized { get; private set; }
 
@@ -24,7 +24,7 @@ namespace Infrastructure.Firebase
                 .AttachExternalCancellation(cancellationToken);
         }
 
-        async UniTask InitializeInternalAsync(CancellationToken cancellationToken)
+        private async UniTask InitializeInternalAsync(CancellationToken cancellationToken)
         {
             var status = await FirebaseApp
                 .CheckAndFixDependenciesAsync()

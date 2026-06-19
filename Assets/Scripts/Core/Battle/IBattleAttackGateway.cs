@@ -1,21 +1,26 @@
 using System;
+using System.Collections.Generic;
+using Cards;
 using Core.Data;
 
 namespace Core.Battle
 {
     public interface IBattleAttackGateway
     {
-        bool IsMyTurn { get; }
-        int TurnDice1 { get; }
-        int TurnDice2 { get; }
-        PlayerProfile LocalProfile { get; }
-        PlayerProfile OpponentProfile { get; }
+        public bool IsMyTurn { get; }
+        public int TurnDice1 { get; }
+        public int TurnDice2 { get; }
+        public PlayerProfile LocalProfile { get; }
+        public PlayerProfile OpponentProfile { get; }
+        public IReadOnlyList<PlacedCard> LocalDeck { get; }
+        public IReadOnlyList<PlacedCard> OpponentDeck { get; }
 
-        event Action TurnChanged;
-        event Action ProfilesUpdated;
-        event Action<bool> GameOver;
-        event Action<int, string> AttackReceived;
+        public event Action TurnChanged;
+        public event Action ProfilesUpdated;
+        public event Action DecksUpdated;
+        public event Action<bool> GameOver;
+        public event Action<int, string> AttackReceived;
 
-        void SendAttack();
+        public void SendAttack();
     }
 }

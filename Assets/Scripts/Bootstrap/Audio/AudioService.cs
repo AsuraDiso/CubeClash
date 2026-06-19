@@ -5,14 +5,14 @@ namespace Bootstrap.Audio
 {
     public sealed class AudioService : IAudioService
     {
-        readonly IAudioCatalog _catalog;
-        readonly AudioSource _musicSource;
-        readonly AudioSource _sfxSource;
+        private readonly IAudioCatalog _catalog;
+        private readonly AudioSource _musicSource;
+        private readonly AudioSource _sfxSource;
 
-        float _musicVolume = 1f;
-        float _sfxVolume = 1f;
-        bool _musicMuted;
-        bool _sfxMuted;
+        private float _musicVolume = 1f;
+        private float _sfxVolume = 1f;
+        private bool _musicMuted;
+        private bool _sfxMuted;
 
         public AudioService(IAudioCatalog catalog)
         {
@@ -100,9 +100,9 @@ namespace Bootstrap.Audio
             _sfxSource.PlayOneShot(clip, EffectiveSfxVolume);
         }
 
-        float EffectiveSfxVolume => _sfxMuted ? 0f : _sfxVolume;
+        private float EffectiveSfxVolume => _sfxMuted ? 0f : _sfxVolume;
 
-        static AudioSource CreateSource(GameObject host, bool loop)
+        private static AudioSource CreateSource(GameObject host, bool loop)
         {
             var source = host.AddComponent<AudioSource>();
             source.loop = loop;
@@ -110,7 +110,7 @@ namespace Bootstrap.Audio
             return source;
         }
 
-        void ApplyMusicSettings()
+        private void ApplyMusicSettings()
         {
             _musicSource.mute = _musicMuted;
             _musicSource.volume = _musicVolume;

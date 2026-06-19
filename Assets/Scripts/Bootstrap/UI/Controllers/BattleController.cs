@@ -18,7 +18,10 @@ namespace Bootstrap.UI.Controllers
         private IBattleAttackGateway _gateway;
         private bool _isGameOver;
 
-        public BattleController(IUiViewFactory viewFactory, IBattleControllerRegistry controllerRegistry, INetworkSession networkSession)
+        public BattleController(
+            IUiViewFactory viewFactory,
+            IBattleControllerRegistry controllerRegistry,
+            INetworkSession networkSession)
         {
             _viewFactory = viewFactory;
             _controllerRegistry = controllerRegistry;
@@ -28,6 +31,7 @@ namespace Bootstrap.UI.Controllers
         public void Start()
         {
             _view = _viewFactory.CreateBattleView();
+            _view.CardDiceAssignmentsChanged += OnCardDiceAssignmentsChanged;
             _controllerRegistry.GatewayAvailable += OnGatewayAvailable;
 
             if (_controllerRegistry.Current != null)
@@ -41,6 +45,7 @@ namespace Bootstrap.UI.Controllers
         {
             if (_view != null)
             {
+                _view.CardDiceAssignmentsChanged -= OnCardDiceAssignmentsChanged;
                 _viewFactory.Destroy(_view);
                 _view = null;
             }
@@ -58,6 +63,7 @@ namespace Bootstrap.UI.Controllers
                 return;
 
             RefreshProfiles();
+            RefreshDecks();
             OnTurnChanged();
         }
 
@@ -71,6 +77,7 @@ namespace Bootstrap.UI.Controllers
         {
             gateway.TurnChanged += OnTurnChanged;
             gateway.ProfilesUpdated += OnProfilesUpdated;
+            gateway.DecksUpdated += OnDecksUpdated;
             gateway.GameOver += OnGameOver;
         }
 
@@ -78,26 +85,48 @@ namespace Bootstrap.UI.Controllers
         {
             gateway.TurnChanged -= OnTurnChanged;
             gateway.ProfilesUpdated -= OnProfilesUpdated;
+            gateway.DecksUpdated -= OnDecksUpdated;
             gateway.GameOver -= OnGameOver;
         }
 
         private void OnTurnChanged()
         {
-            if (_gateway != null && !_isGameOver)
-            {
-                var turnLabel = _gateway.IsMyTurn ? "Your Turn" : "Opponent's Turn";
-                if (_gateway.TurnDice1 > 0)
-                {
-                    turnLabel += $" · Dice: {_gateway.TurnDice1}, {_gateway.TurnDice2}";
-                }
-
-                _view.SetTurnText(turnLabel);
-            }
-
+            RefreshTurnDice();
             RefreshAttackButton();
         }
 
+        private void RefreshTurnDice()
+        {
+            if (_view == null || _gateway == null || _isGameOver)
+            {
+                _view?.ClearTurnDice();
+                return;
+            }
+
+            if (!_gateway.IsMyTurn)
+            {
+                _view.ClearTurnDice();
+                _view.SetTurnText("Opponent's Turn");
+                return;
+            }
+
+            _view.SpawnTurnDice(_gateway.TurnDice1, _gateway.TurnDice2);
+            _view.SetTurnText("Your Turn · Drag dice onto card slots");
+        }
+
         private void OnProfilesUpdated() => RefreshProfiles();
+
+        private void OnDecksUpdated() => RefreshDecks();
+
+        private void OnCardDiceAssignmentsChanged(CardView card)
+        {
+            if (card == null || !card.AreAllSlotsFilled())
+            {
+                return;
+            }
+
+            _view.SetStatusText($"Card ready: {card.Definition.DisplayName}");
+        }
 
         private void RefreshProfiles()
         {
@@ -112,9 +141,22 @@ namespace Bootstrap.UI.Controllers
             _view.SetOpponentName(_gateway.OpponentProfile.DisplayName);
         }
 
+        private void RefreshDecks()
+        {
+            if (_gateway == null || _view == null)
+            {
+                return;
+            }
+
+            _view.SetLocalDeck(_gateway.LocalDeck);
+            _view.SetOpponentDeck(_gateway.OpponentDeck);
+            RefreshTurnDice();
+        }
+
         private void OnGameOver(bool localPlayerWon)
         {
             _isGameOver = true;
+            _view.ClearTurnDice();
             _view.SetTurnText("Game Over");
             _view.SetStatusText(localPlayerWon ? "You Win!" : "You Lose!");
             RefreshAttackButton();

@@ -6,14 +6,14 @@ namespace Core.Networking
 {
     public interface INetworkSession
     {
-        NetworkSessionState State { get; }
+        public NetworkSessionState State { get; }
 
-        int PlayerCount { get; }
+        public int PlayerCount { get; }
 
-        event Action<int> PlayerCountChanged;
+        public event Action<int> PlayerCountChanged;
 
-        UniTask ConnectAsync(NetworkSessionRequest request, CancellationToken cancellationToken = default);
+        public UniTask ConnectAsync(NetworkSessionRequest request, CancellationToken cancellationToken = default);
 
-        UniTask DisconnectAsync(CancellationToken cancellationToken = default);
+        public UniTask DisconnectAsync(CancellationToken cancellationToken = default);
     }
 }

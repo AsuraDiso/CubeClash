@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cards;
 using Core.Battle;
 using Core.Data;
 using Core.Networking;
@@ -23,27 +24,40 @@ namespace Infrastructure.Photon.Battle
 
         public event Action TurnChanged;
         public event Action ProfilesUpdated;
+        public event Action DecksUpdated;
         public event Action<bool> GameOver;
         public event Action<int, string> AttackReceived;
 
         private readonly Dictionary<int, PlayerProfile> _pendingProfiles = new();
+        private readonly Dictionary<int, int[]> _pendingDeckPacks = new();
 
         private IBattleControllerRegistry _controllerRegistry;
+        private FusionSessionBridge _bridge;
         private ChangeDetector _changeDetector;
+        private List<PlacedCard> _localDeck = new();
+        private List<PlacedCard> _opponentDeck = new();
 
         public bool IsMyTurn => CurrentTurnPlayerId == Runner.LocalPlayer.PlayerId;
         public PlayerProfile LocalProfile => GetProfileForNetworkId(Runner.LocalPlayer.PlayerId);
         public PlayerProfile OpponentProfile => GetProfileForNetworkId(GetOpponentNetworkId());
+        public IReadOnlyList<PlacedCard> LocalDeck => _localDeck;
+        public IReadOnlyList<PlacedCard> OpponentDeck => _opponentDeck;
 
         public override void Spawned()
         {
-            var bridge = Runner.GetComponent<FusionSessionBridge>();
-            _controllerRegistry = bridge?.BattleControllerRegistry;
+            _bridge = Runner.GetComponent<FusionSessionBridge>();
+            _controllerRegistry = _bridge?.BattleControllerRegistry;
             _controllerRegistry?.Register(this);
             _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
 
-            var profile = bridge?.LocalProfile ?? PlayerProfile.CreateBattleDefault();
+            var payload = _bridge?.Payload;
+            var profile = payload?.LocalProfile ?? PlayerProfile.CreateBattleDefault();
             RPC_SubmitProfile(Runner.LocalPlayer, profile.PlayerId, profile.DisplayName);
+
+            var localDeck = payload?.LocalDeck ?? Array.Empty<PlacedCard>();
+            _localDeck = new List<PlacedCard>(localDeck);
+            DecksUpdated?.Invoke();
+            RPC_SubmitDeck(Runner.LocalPlayer, DeckRecordConverter.PackNetwork(DeckRecordConverter.FromPlacedCards(localDeck)));
 
             if (HasStateAuthority)
             {
@@ -64,6 +78,8 @@ namespace Infrastructure.Photon.Battle
                 switch (change)
                 {
                     case nameof(CurrentTurnPlayerId):
+                    case nameof(TurnDice1):
+                    case nameof(TurnDice2):
                         TurnChanged?.Invoke();
                         break;
                     case nameof(Player1Profile):
@@ -94,6 +110,52 @@ namespace Infrastructure.Photon.Battle
             TryInitializeMatch();
         }
 
+        [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+        private void RPC_SubmitDeck(PlayerRef player, int[] packedDeck)
+        {
+            _pendingDeckPacks[player.PlayerId] = packedDeck ?? Array.Empty<int>();
+            TryInitializeMatch();
+            BroadcastDecks();
+        }
+
+        private void BroadcastDecks()
+        {
+            if (!HasStateAuthority)
+            {
+                return;
+            }
+
+            foreach (var player in Runner.ActivePlayers)
+            {
+                if (_pendingDeckPacks.TryGetValue(player.PlayerId, out var packedDeck))
+                {
+                    RPC_ApplyPlayerDeck(player.PlayerId, packedDeck);
+                }
+            }
+        }
+
+        [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+        private void RPC_ApplyPlayerDeck(int networkPlayerId, int[] packedDeck)
+        {
+            var catalog = _bridge?.Payload?.CardCatalog;
+            if (catalog == null)
+            {
+                return;
+            }
+
+            var deck = DeckRecordConverter.ToPlacedCards(DeckRecordConverter.UnpackNetwork(packedDeck), catalog);
+            if (networkPlayerId == Runner.LocalPlayer.PlayerId)
+            {
+                _localDeck = deck;
+            }
+            else
+            {
+                _opponentDeck = deck;
+            }
+
+            DecksUpdated?.Invoke();
+        }
+
         private void TryInitializeMatch()
         {
             if (!HasStateAuthority)
@@ -113,6 +175,7 @@ namespace Infrastructure.Photon.Battle
             RollTurnDice();
             Player1Profile = NetworkPlayerProfile.From(ResolveProfile(players[0]));
             Player2Profile = NetworkPlayerProfile.From(ResolveProfile(players[1]));
+            BroadcastDecks();
         }
 
         private PlayerProfile ResolveProfile(PlayerRef player)

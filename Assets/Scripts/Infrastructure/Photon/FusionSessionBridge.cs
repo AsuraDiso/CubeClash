@@ -1,5 +1,4 @@
 using Core.Battle;
-using Core.Data;
 using UnityEngine;
 
 namespace Infrastructure.Photon
@@ -8,11 +7,12 @@ namespace Infrastructure.Photon
     {
         private IBattleControllerRegistry _battleControllerRegistry;
 
-        public PlayerProfile LocalProfile { get; set; }
+        public BattleSessionPayload Payload { get; private set; }
 
-        public void Initialize(IBattleControllerRegistry battleControllerRegistry)
+        public void Initialize(IBattleControllerRegistry battleControllerRegistry, BattleSessionPayload payload)
         {
             _battleControllerRegistry = battleControllerRegistry;
+            Payload = payload;
         }
 
         public IBattleControllerRegistry BattleControllerRegistry => _battleControllerRegistry;

@@ -2,15 +2,15 @@ namespace Core.Audio
 {
     public interface IAudioService
     {
-        float MusicVolume { get; set; }
-        float SfxVolume { get; set; }
-        bool MusicMuted { get; set; }
-        bool SfxMuted { get; set; }
+        public float MusicVolume { get; set; }
+        public float SfxVolume { get; set; }
+        public bool MusicMuted { get; set; }
+        public bool SfxMuted { get; set; }
 
-        MusicId CurrentMusic { get; }
+        public MusicId CurrentMusic { get; }
 
-        void PlayMusic(MusicId id, bool restartIfSame = false);
-        void StopMusic();
-        void PlaySfx(SfxId id);
+        public void PlayMusic(MusicId id, bool restartIfSame = false);
+        public void StopMusic();
+        public void PlaySfx(SfxId id);
     }
 }

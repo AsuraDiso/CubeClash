@@ -10,14 +10,14 @@ namespace Infrastructure.Data.Firestore
 {
     public sealed class FirestorePlayerRepository : IPlayerRepository
     {
-        const string UsersCollection = "users";
-        const string DefaultDisplayName = PlayerProfile.DefaultDisplayName;
-        const string SystemUpdatedBy = "system";
+        private const string UsersCollection = "users";
+        private const string DefaultDisplayName = PlayerProfile.DefaultDisplayName;
+        private const string SystemUpdatedBy = "system";
 
-        readonly IFirebaseAppService _firebaseAppService;
-        readonly IUserIdProvider _userIdProvider;
+        private readonly IFirebaseAppService _firebaseAppService;
+        private readonly IUserIdProvider _userIdProvider;
 
-        PlayerProfile _profile;
+        private PlayerProfile _profile;
 
         public FirestorePlayerRepository(IFirebaseAppService firebaseAppService, IUserIdProvider userIdProvider)
         {
@@ -56,7 +56,7 @@ namespace Infrastructure.Data.Firestore
             Debug.Log($"Player loaded: {_profile.DisplayName}");
         }
 
-        static async UniTask<FirestoreUserDocument> LoadOrCreateUserDocumentAsync(
+        private static async UniTask<FirestoreUserDocument> LoadOrCreateUserDocumentAsync(
             string userId,
             CancellationToken cancellationToken)
         {
@@ -88,7 +88,7 @@ namespace Infrastructure.Data.Firestore
             return newUser;
         }
 
-        void EnsureLoaded()
+        private void EnsureLoaded()
         {
             if (!IsLoaded)
             {

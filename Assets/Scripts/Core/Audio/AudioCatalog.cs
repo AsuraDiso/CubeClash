@@ -10,8 +10,8 @@ namespace Core.Audio
         [SerializeField] private MusicEntry[] _music = Array.Empty<MusicEntry>();
         [SerializeField] private SfxEntry[] _sfx = Array.Empty<SfxEntry>();
 
-        Dictionary<MusicId, AudioClip> _musicLookup;
-        Dictionary<SfxId, AudioClip> _sfxLookup;
+        private Dictionary<MusicId, AudioClip> _musicLookup;
+        private Dictionary<SfxId, AudioClip> _sfxLookup;
 
         public bool TryGetMusicClip(MusicId id, out AudioClip clip)
         {
@@ -25,7 +25,7 @@ namespace Core.Audio
             return _sfxLookup.TryGetValue(id, out clip);
         }
 
-        void EnsureBuilt()
+        private void EnsureBuilt()
         {
             if (_musicLookup != null)
             {
@@ -55,10 +55,10 @@ namespace Core.Audio
             }
         }
 
-        void OnEnable() => ResetLookup();
-        void OnDisable() => ResetLookup();
+        private void OnEnable() => ResetLookup();
+        private void OnDisable() => ResetLookup();
 
-        void ResetLookup()
+        private void ResetLookup()
         {
             _musicLookup = null;
             _sfxLookup = null;

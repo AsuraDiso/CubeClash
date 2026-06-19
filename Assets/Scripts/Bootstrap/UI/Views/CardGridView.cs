@@ -29,8 +29,11 @@ namespace Bootstrap.UI.Views
         public int Rows => Mathf.Max(1, _rows);
 
         private Canvas _dragCanvas;
+        private bool _cardDragEnabled = true;
 
         public void SetDragCanvas(Canvas dragCanvas) => _dragCanvas = dragCanvas;
+
+        public void SetCardDragEnabled(bool enabled) => _cardDragEnabled = enabled;
 
         private void OnEnable()
         {
@@ -59,6 +62,24 @@ namespace Bootstrap.UI.Views
             ClearSpawnedCards();
             ScheduleRefresh(true);
         }
+
+        public void ForEachCard(Action<CardView> action)
+        {
+            if (action == null)
+            {
+                return;
+            }
+
+            foreach (var card in _spawnedCards)
+            {
+                if (card != null)
+                {
+                    action(card);
+                }
+            }
+        }
+
+        public void ClearAllDiceAssignments() => ForEachCard(card => card.ClearDiceAssignments());
 
         private void ScheduleRefresh(bool forceRestart)
         {
@@ -130,7 +151,7 @@ namespace Bootstrap.UI.Views
 
                 var view = Instantiate(_cardPrefab, _container);
 
-                view.Initialize(this, _dragCanvas);
+                view.Initialize(this, _dragCanvas, _cardDragEnabled);
                 view.Bind(placed.Definition, placed.CatalogIndex);
                 view.DragEnded += HandleCardDragEnded;
 
@@ -207,16 +228,10 @@ namespace Bootstrap.UI.Views
         private Vector2 ComputeCellSize()
         {
             var rect = _container.rect;
-
             var columns = Columns;
             var rows = Rows;
-
-            var cellWidth =
-                (rect.width - _spacing.x * (columns - 1)) / columns;
-
-            var cellHeight =
-                (rect.height - _spacing.y * (rows - 1)) / rows;
-
+            var cellWidth = (rect.width - _spacing.x * (columns - 1)) / columns;
+            var cellHeight = (rect.height - _spacing.y * (rows - 1)) / rows;
             return new Vector2(cellWidth, cellHeight);
         }
 
@@ -259,13 +274,8 @@ namespace Bootstrap.UI.Views
             var x = origin.x * (cellSize.x + _spacing.x);
             var y = -origin.y * (cellSize.y + _spacing.y);
 
-            var width =
-                footprint.Columns * cellSize.x +
-                (footprint.Columns - 1) * _spacing.x;
-
-            var height =
-                footprint.Rows * cellSize.y +
-                (footprint.Rows - 1) * _spacing.y;
+            var width = footprint.Columns * cellSize.x + (footprint.Columns - 1) * _spacing.x;
+            var height = footprint.Rows * cellSize.y + (footprint.Rows - 1) * _spacing.y;
 
             rectTransform.anchoredPosition = new Vector2(x, y);
             rectTransform.sizeDelta = new Vector2(width, height);

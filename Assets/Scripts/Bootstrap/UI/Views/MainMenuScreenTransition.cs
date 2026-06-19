@@ -63,14 +63,10 @@ namespace Bootstrap.UI.Views
             _activeSequence.Join(incoming.DOLocalRotate(Vector3.zero, _duration));
 
             _activeSequence.OnComplete(() =>
-
             {
                 outgoing.gameObject.SetActive(false);
-
                 PrepareScreen(outgoing, Vector2.zero, Vector3.zero);
-
                 CurrentTab = tab;
-
                 _isTransitioning = false;
             });
         }
@@ -80,7 +76,6 @@ namespace Bootstrap.UI.Views
             var tabIndex = (int)tab;
 
             return tabIndex switch
-
             {
                 < 0 => MainMenuTab.Events,
                 > (int)MainMenuTab.Settings => MainMenuTab.Settings,

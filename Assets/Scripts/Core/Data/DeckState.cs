@@ -5,25 +5,39 @@ using UnityEngine;
 
 namespace Core.Data
 {
-    public sealed class InMemoryDeckService : IDeckService
+    public sealed class DeckState
     {
         private readonly List<PlacedCard>[] _decks;
 
-        public int MaxDecks { get; } = DeckLayout.MaxDecks;
-
-        public event Action<int> OnDeckChanged;
-
-        public InMemoryDeckService()
+        public DeckState(int maxDecks)
         {
-            _decks = new List<PlacedCard>[MaxDecks];
-            for (var i = 0; i < MaxDecks; i++)
+            _decks = new List<PlacedCard>[maxDecks];
+            for (var i = 0; i < maxDecks; i++)
             {
                 _decks[i] = new List<PlacedCard>();
             }
         }
 
+        public int MaxDecks => _decks.Length;
+
+        public int SelectedDeckIndex { get; set; }
+
         public IReadOnlyList<PlacedCard> GetDeck(int deckIndex) =>
             IsValidIndex(deckIndex) ? _decks[deckIndex] : Array.Empty<PlacedCard>();
+
+        public void SetDeck(int deckIndex, IReadOnlyList<PlacedCard> cards)
+        {
+            if (!TryGetDeck(deckIndex, out var deck))
+            {
+                return;
+            }
+
+            deck.Clear();
+            if (cards != null)
+            {
+                deck.AddRange(cards);
+            }
+        }
 
         public bool TryPlaceCard(int deckIndex, CardDefinition card, Vector2Int origin, int catalogIndex)
         {
@@ -47,7 +61,6 @@ namespace Core.Data
             }
 
             deck.Add(new PlacedCard(card, origin, catalogIndex));
-            NotifyChanged(deckIndex);
             return true;
         }
 
@@ -58,24 +71,15 @@ namespace Core.Data
                 return false;
             }
 
-            if (deck.RemoveAll(placed => placed.CatalogIndex == catalogIndex) == 0)
-            {
-                return false;
-            }
-
-            NotifyChanged(deckIndex);
-            return true;
+            return deck.RemoveAll(placed => placed.CatalogIndex == catalogIndex) > 0;
         }
 
         public void ClearDeck(int deckIndex)
         {
-            if (!TryGetDeck(deckIndex, out var deck) || deck.Count == 0)
+            if (TryGetDeck(deckIndex, out var deck))
             {
-                return;
+                deck.Clear();
             }
-
-            deck.Clear();
-            NotifyChanged(deckIndex);
         }
 
         private bool IsValidIndex(int deckIndex) =>
@@ -110,7 +114,5 @@ namespace Core.Data
             deck.RemoveAt(existingIndex);
             return removed;
         }
-
-        private void NotifyChanged(int deckIndex) => OnDeckChanged?.Invoke(deckIndex);
     }
 }

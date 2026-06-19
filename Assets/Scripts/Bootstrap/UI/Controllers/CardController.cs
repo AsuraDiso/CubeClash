@@ -34,7 +34,7 @@ namespace Bootstrap.UI.Controllers
             _view.OnDeckSelected += SelectDeck;
             _view.OnCardDropped += HandleCardDropped;
             _view.OnCardDragEnded += HandleCardDragEnded;
-            SelectDeck(0);
+            SelectDeck(_deckService.SelectedDeckIndex);
         }
 
         public void Dispose()
@@ -97,6 +97,7 @@ namespace Bootstrap.UI.Controllers
         private void SelectDeck(int index)
         {
             _currentDeckIndex = index;
+            _deckService.SetSelectedDeckIndex(index);
             _view?.SetActiveDeckIndex(index);
             Refresh();
         }

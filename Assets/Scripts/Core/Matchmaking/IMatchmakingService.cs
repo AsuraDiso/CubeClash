@@ -6,15 +6,15 @@ namespace Core.Matchmaking
 {
     public interface IMatchmakingService
     {
-        MatchmakingState State { get; }
+        public MatchmakingState State { get; }
 
-        string StatusMessage { get; }
+        public string StatusMessage { get; }
 
-        event Action<MatchmakingState> StateChanged;
-        event Action<string> StatusMessageChanged;
+        public event Action<MatchmakingState> StateChanged;
+        public event Action<string> StatusMessageChanged;
 
-        event Action MatchReady;
+        public event Action MatchReady;
 
-        UniTask StartQuickMatchAsync(CancellationToken cancellationToken = default);
+        public UniTask StartQuickMatchAsync(CancellationToken cancellationToken = default);
     }
 }

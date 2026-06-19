@@ -1,4 +1,3 @@
-using System.Threading;
 using Bootstrap.Common;
 using Core.Data;
 using Core.Scenes;
@@ -10,13 +9,16 @@ namespace Bootstrap.EntryPoints
     public sealed class LoadingSceneEntryPoint : IStartable
     {
         private readonly IPlayerRepository _playerRepository;
+        private readonly IDeckService _deckService;
         private readonly ISceneLoaderService _sceneLoaderService;
 
         public LoadingSceneEntryPoint(
             IPlayerRepository playerRepository,
+            IDeckService deckService,
             ISceneLoaderService sceneLoaderService)
         {
             _playerRepository = playerRepository;
+            _deckService = deckService;
             _sceneLoaderService = sceneLoaderService;
         }
 
@@ -25,6 +27,7 @@ namespace Bootstrap.EntryPoints
         private async UniTask RunAsync()
         {
             await _playerRepository.LoadAsync();
+            await _deckService.LoadAsync();
             await _sceneLoaderService.LoadSceneAsync(GameSceneId.MainMenu);
         }
     }
