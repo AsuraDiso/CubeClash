@@ -9,7 +9,10 @@ namespace Infrastructure.Photon
         [SerializeField] private NetworkObject _battleSessionPrefab;
         [SerializeField] private NetworkRunner _networkRunnerPrefab;
 
-        public NetworkRunner NetworkRunnerPrefab => _networkRunnerPrefab;
-        public NetworkObject BattleSessionPrefab => _battleSessionPrefab;
+        public NetworkRunner NetworkRunnerPrefab =>
+            _networkRunnerPrefab != null ? _networkRunnerPrefab.GetComponent<NetworkRunner>() : null;
+
+        public NetworkObject BattleSessionPrefab =>
+            _battleSessionPrefab != null ? _battleSessionPrefab.GetComponent<NetworkObject>() : null;
     }
 }

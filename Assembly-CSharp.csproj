@@ -55,6 +55,8 @@
     <Compile Include="Assets\Scripts\Infrastructure\Photon\Battle\FusionBattleSessionSpawner.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\MainMenuTabButton.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\IUiViewFactory.cs" />
+    <Compile Include="Assets\Scripts\Core\Audio\AudioCatalog.cs" />
+    <Compile Include="Assets\Scripts\Core\Audio\MusicId.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionGameModeMapper.cs" />
     <Compile Include="Assets\Scripts\Core\Data\IUserIdProvider.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\CardController.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Assets\Scripts\Core\Matchmaking\IMatchmakingService.cs" />
     <Compile Include="Assets\Scripts\Cards\CardCatalog.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\MainMenuLifetimeScope.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\Audio\SceneMusicStarter.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionNetworkRunnerFactory.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DiceSlotView.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Data\Firestore\FirestorePlayerRepository.cs" />
@@ -88,8 +91,10 @@
     <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\BattleLifetimeScope.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\UiPrefabCatalog.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\SettingsView.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\Audio\AudioService.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\CardView.cs" />
     <Compile Include="Assets\Scripts\Core\Networking\NetworkSessionRequest.cs" />
+    <Compile Include="Assets\Scripts\Core\Audio\IAudioService.cs" />
     <Compile Include="Assets\Scripts\Core\Scenes\SceneLoadMode.cs" />
     <Compile Include="Assets\Scripts\Core\Firebase\IFirebaseAppService.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Data\LocalUserIdProvider.cs" />
@@ -103,6 +108,7 @@
     <Compile Include="Assets\Scripts\Core\Battle\BattleConstants.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\MatchmakingOverlayView.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\TabGroup.cs" />
+    <Compile Include="Assets\Scripts\Core\Audio\SfxId.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\Battle\NetworkPlayerProfile.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\IFusionRunnerAccessor.cs" />
     <Compile Include="Assets\Scripts\Cards\DeckLayout.cs" />
@@ -116,6 +122,7 @@
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\ResponsiveGridLayout.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionBattleSceneLoader.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\EntryPoints\LoadingSceneEntryPoint.cs" />
+    <Compile Include="Assets\Scripts\Core\Audio\IAudioCatalog.cs" />
     <Compile Include="Assets\Scripts\Cards\CardFootprintSize.cs" />
     <Compile Include="Assets\Scripts\Core\Data\IPlayerRepository.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\Battle\FusionBattleControllerRegistry.cs" />

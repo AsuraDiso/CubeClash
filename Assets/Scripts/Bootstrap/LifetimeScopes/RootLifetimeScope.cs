@@ -1,8 +1,10 @@
+using Bootstrap.Audio;
 using Bootstrap.EntryPoints;
 using Bootstrap.Flow;
 using Bootstrap.Scenes;
 using Bootstrap.UI;
 using Cards;
+using Core.Audio;
 using Core.Battle;
 using Core.Data;
 using Core.Firebase;
@@ -27,6 +29,7 @@ namespace Bootstrap.LifetimeScopes
         [FormerlySerializedAs("_cardcatalog")]
         [SerializeField] private CardCatalog _cardCatalog;
         [SerializeField] private UiPrefabCatalog _uiPrefabCatalog;
+        [SerializeField] private AudioCatalog _audioCatalog;
 
         protected override void Awake()
         {
@@ -39,6 +42,9 @@ namespace Bootstrap.LifetimeScopes
             builder.RegisterInstance(_prefabCatalog);
             builder.RegisterInstance(_uiPrefabCatalog);
             builder.RegisterInstance(_cardCatalog);
+            builder.RegisterInstance(_audioCatalog).As<IAudioCatalog>();
+            builder.Register<AudioService>(Lifetime.Singleton)
+                .As<IAudioService>();
             builder.Register<SceneLoaderService>(Lifetime.Singleton)
                 .As<ISceneLoaderService>();
 

@@ -22,10 +22,7 @@ namespace Infrastructure.Photon.Battle
 
         public void Unregister(IBattleAttackGateway gateway)
         {
-            if (Current == gateway)
-            {
-                Current = null;
-            }
+            if (Current == gateway) Current = null;
         }
     }
 }

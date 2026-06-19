@@ -290,9 +290,9 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _prefabCatalog: {fileID: 11400000, guid: d5a4af5c7424a5d4dbcc8954896ce0c9, type: 2}
-  _cardcatalog: {fileID: 11400000, guid: d8ea668b38a8b76418a7af592c0c3226, type: 2}
-  _starterDeck: {fileID: 11400000, guid: f3a4b5c6d7e84901b2cdef3456789012, type: 2}
+  _cardCatalog: {fileID: 11400000, guid: d8ea668b38a8b76418a7af592c0c3226, type: 2}
   _uiPrefabCatalog: {fileID: 11400000, guid: c3d4e5f6789012345678abcdef012345, type: 2}
+  _audioCatalog: {fileID: 11400000, guid: 345678901234abcdef0123456789abcd, type: 2}
 --- !u!4 &677956064
 Transform:
   m_ObjectHideFlags: 0
