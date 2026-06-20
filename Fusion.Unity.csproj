@@ -494,11 +494,20 @@
     <Reference Include="Unity.VisualScripting.YamlDotNet">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.visualscripting@8bed5ad90189\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
     </Reference>
+    <Reference Include="Google.IOSResolver">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\ExternalDependencyManager\Editor\1.2.187\Google.IOSResolver.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.collections@5b6ebd78ccc0\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.ext.nunit@d8c07649098d\net40\unity-custom\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.VersionHandler">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\ExternalDependencyManager\Editor\Google.VersionHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.App">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Lib\Editor\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
@@ -515,6 +524,9 @@
     <Reference Include="NanoSockets">
       <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\Fusion\Plugins\NanoSockets\NanoSockets\Dynamic\NanoSockets.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.Firestore">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.Firestore.dll</HintPath>
+    </Reference>
     <Reference Include="DOTweenEditor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
     </Reference>
@@ -526,6 +538,12 @@
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Lib\Editor\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.VersionHandlerImpl">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\ExternalDependencyManager\Editor\1.2.187\Google.VersionHandlerImpl.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Lib\Editor\log4netPlastic.dll</HintPath>
@@ -551,6 +569,9 @@
     <Reference Include="Photon3Unity3D">
       <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
     </Reference>
+    <Reference Include="Google.PackageManagerResolver">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\ExternalDependencyManager\Editor\1.2.187\Google.PackageManagerResolver.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -563,41 +584,20 @@
     <Reference Include="Fusion.Realtime">
       <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\Fusion\Assemblies\Fusion.Realtime.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.Platform">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.collections@5b6ebd78ccc0\Unity.Collections.Tests\System.Runtime.CompilerServices.Unsafe\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.VersionHandler">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\ExternalDependencyManager\Editor\Google.VersionHandler.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.PackageManagerResolver">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\ExternalDependencyManager\Editor\1.2.187\Google.PackageManagerResolver.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.IOSResolver">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\ExternalDependencyManager\Editor\1.2.187\Google.IOSResolver.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.VersionHandlerImpl">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\ExternalDependencyManager\Editor\1.2.187\Google.VersionHandlerImpl.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.App">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Editor\Firebase.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.Firestore">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.Firestore.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.TaskExtension">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
     </Reference>
     <Reference Include="Google.MiniJson">
       <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
     </Reference>
-    <Reference Include="Firebase.Platform">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
-    </Reference>
     <Reference Include="Google.JarResolver">
       <HintPath>C:\Users\asura\Repos\CubeClash\Assets\ExternalDependencyManager\Editor\1.2.187\Google.JarResolver.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Editor">
+      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Editor\Firebase.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
