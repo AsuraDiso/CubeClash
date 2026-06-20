@@ -11,15 +11,18 @@ namespace Bootstrap.EntryPoints
         private readonly IPlayerRepository _playerRepository;
         private readonly IDeckService _deckService;
         private readonly ISceneLoaderService _sceneLoaderService;
+        private readonly ILoadingProgress _loadingProgress;
 
         public LoadingSceneEntryPoint(
             IPlayerRepository playerRepository,
             IDeckService deckService,
-            ISceneLoaderService sceneLoaderService)
+            ISceneLoaderService sceneLoaderService,
+            ILoadingProgress loadingProgress)
         {
             _playerRepository = playerRepository;
             _deckService = deckService;
             _sceneLoaderService = sceneLoaderService;
+            _loadingProgress = loadingProgress;
         }
 
         public void Start() => FireAndForget.Run(RunAsync);
@@ -27,7 +30,9 @@ namespace Bootstrap.EntryPoints
         private async UniTask RunAsync()
         {
             await _playerRepository.LoadAsync();
+            _loadingProgress.SetPercent(.5f);
             await _deckService.LoadAsync();
+            _loadingProgress.SetPercent(1f);
             await _sceneLoaderService.LoadSceneAsync(GameSceneId.MainMenu);
         }
     }

@@ -18,8 +18,9 @@ MonoBehaviour:
     _columns: 1
     _rows: 1
   <Layout>k__BackingField: 0
-  DiceSlots:
+  <DiceSlots>k__BackingField:
   - Requirements:
     - <Kind>k__BackingField: 0
-      <Value>k__BackingField: 3
+      <Value>k__BackingField: 6
+  - Requirements: []
   <ValueFormula>k__BackingField: 0

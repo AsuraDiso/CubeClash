@@ -1254,7 +1254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3054106384557488030, guid: a579e638cf8d74649b43c0e7516e9b65, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 3054106384557488030, guid: a579e638cf8d74649b43c0e7516e9b65, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1294,7 +1294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3054106384557488030, guid: a579e638cf8d74649b43c0e7516e9b65, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 3054106384557488030, guid: a579e638cf8d74649b43c0e7516e9b65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1310,7 +1310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8110267561993281387, guid: a579e638cf8d74649b43c0e7516e9b65, type: 3}
       propertyPath: m_Name
-      value: CardDeck (1)
+      value: EnemyDeck
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1367,7 +1367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3054106384557488030, guid: a579e638cf8d74649b43c0e7516e9b65, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 3054106384557488030, guid: a579e638cf8d74649b43c0e7516e9b65, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1407,7 +1407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3054106384557488030, guid: a579e638cf8d74649b43c0e7516e9b65, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3054106384557488030, guid: a579e638cf8d74649b43c0e7516e9b65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

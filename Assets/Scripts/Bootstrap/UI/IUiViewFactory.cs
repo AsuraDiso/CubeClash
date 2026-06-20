@@ -13,6 +13,8 @@ namespace Bootstrap.UI
 
         public BattleView CreateBattleView();
 
+        public LoadingView CreateLoadingView();
+
         public void Destroy(Component view);
     }
 }

@@ -1,5 +1,5 @@
 using Bootstrap.Audio;
-using Bootstrap.Installers;
+using Bootstrap.UI;
 using Bootstrap.UI.Controllers;
 using Core.Audio;
 using VContainer;
@@ -11,7 +11,7 @@ namespace Bootstrap.LifetimeScopes
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterUi();
+            builder.Register<UiViewFactory>(Lifetime.Scoped).As<IUiViewFactory>();
             builder.RegisterInstance(new SceneMusicBinding(MusicId.Battle));
             builder.RegisterEntryPoint<SceneMusicStarter>();
             builder.RegisterEntryPoint<BattleController>();

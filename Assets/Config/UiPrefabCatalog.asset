@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 8651387506917290995, guid: efa85b3ea013ea448a0bc2fa0c670275, type: 3}
   _matchmakingOverlayViewPrefab: {fileID: 356006660603142929, guid: e16d579b47ab8124ca01b9e9110137ea, type: 3}
   _battleViewPrefab: {fileID: 1880401162969986473, guid: 24b76888d67906d4988158ce118e1fc3, type: 3}
+  _loadingViewPrefab: {fileID: 9048148184389670956, guid: 8169b9ce2246a3e4f82ba6bb04d2bfed, type: 3}

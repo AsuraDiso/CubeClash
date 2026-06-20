@@ -96,7 +96,6 @@ namespace Bootstrap.UI.Views
                     continue;
                 }
 
-                slot.AssignedDice.ReturnHome();
                 slot.ReleaseDice();
             }
 

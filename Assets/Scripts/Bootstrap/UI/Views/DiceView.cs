@@ -27,12 +27,6 @@ namespace Bootstrap.UI.Views
         private void Awake()
         {
             _rectTransform = transform as RectTransform;
-            if (_canvasGroup == null)
-            {
-                _canvasGroup = gameObject.AddComponent<CanvasGroup>();
-            }
-
-            StripNestedCanvas();
         }
 
         public void Initialize(Canvas dragCanvas, int diceIndex, Vector2 homeAnchoredPosition)
@@ -52,11 +46,6 @@ namespace Bootstrap.UI.Views
         public void SetValue(int value)
         {
             Value = Mathf.Clamp(value, 1, 6);
-            if (_value == null || _sprites == null || _sprites.Count == 0)
-            {
-                return;
-            }
-
             var spriteIndex = Mathf.Clamp(Value - 1, 0, _sprites.Count - 1);
             _value.sprite = _sprites[spriteIndex];
         }
@@ -72,18 +61,6 @@ namespace Bootstrap.UI.Views
             _rectTransform.localScale = Vector3.one;
         }
 
-        public void ReturnHome()
-        {
-            _assignedSlot = null;
-            transform.SetParent(_homeParent, false);
-            _rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-            _rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-            _rectTransform.pivot = new Vector2(0.5f, 0.5f);
-            _rectTransform.anchoredPosition = _homeAnchoredPosition;
-            _rectTransform.sizeDelta = new Vector2(72f, 72f);
-            _rectTransform.localScale = Vector3.one;
-        }
-
         public void OnBeginDrag(PointerEventData eventData)
         {
             _canvasGroup.blocksRaycasts = false;
@@ -95,11 +72,9 @@ namespace Bootstrap.UI.Views
                 _assignedSlot = null;
             }
 
-            if (_dragCanvas != null)
-            {
-                transform.SetParent(_dragCanvas.transform, true);
-                transform.SetAsLastSibling();
-            }
+            if (_dragCanvas == null) return;
+            transform.SetParent(_dragCanvas.transform, true);
+            transform.SetAsLastSibling();
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -119,34 +94,7 @@ namespace Bootstrap.UI.Views
             _canvasGroup.blocksRaycasts = true;
             _canvasGroup.alpha = 1f;
 
-            if (!IsAssigned)
-            {
-                ReturnHome();
-            }
-
             DragEnded?.Invoke(this);
-        }
-
-        private void StripNestedCanvas()
-        {
-            var nestedCanvas = GetComponent<Canvas>();
-            if (nestedCanvas == null)
-            {
-                return;
-            }
-
-            Destroy(nestedCanvas);
-            var scaler = GetComponent<UnityEngine.UI.CanvasScaler>();
-            if (scaler != null)
-            {
-                Destroy(scaler);
-            }
-
-            var raycaster = GetComponent<GraphicRaycaster>();
-            if (raycaster != null)
-            {
-                Destroy(raycaster);
-            }
         }
     }
 }

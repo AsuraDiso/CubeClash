@@ -59,6 +59,7 @@ namespace Bootstrap.UI
             InstantiateView(_catalog.MatchmakingOverlayViewPrefab);
 
         public BattleView CreateBattleView() => InstantiateView(_catalog.BattleViewPrefab);
+        public LoadingView CreateLoadingView() => InstantiateView(_catalog.LoadingViewPrefab);
 
         public void Destroy(Component view)
         {

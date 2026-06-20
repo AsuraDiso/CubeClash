@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Infrastructure\Data\Firestore\FirestorePlayerRepository.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\LoadingLifetimeScope.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Data\Firestore\FirestoreDeckSlotDocument.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\Scenes\LoadingProgress.cs" />
     <Compile Include="Assets\Scripts\Core\Matchmaking\MatchmakingState.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Data\Firestore\FirestoreDeckRepository.cs" />
     <Compile Include="Assets\Scripts\Core\Data\IDeckService.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Assets\Scripts\Bootstrap\Scenes\SceneLoaderService.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\SafeAreaLayoutRefresher.cs" />
     <Compile Include="Assets\Scripts\Core\Networking\INetworkSession.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\LoadingView.cs" />
     <Compile Include="Assets\Scripts\Core\Battle\BattleConstants.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\MatchmakingOverlayView.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\TabGroup.cs" />
@@ -132,7 +134,7 @@
     <Compile Include="Assets\Scripts\Cards\DeckLayout.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\Common\FireAndForget.cs" />
     <Compile Include="Assets\Scripts\Cards\CardEnums.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\Installers\ContainerBuilderExtensions.cs" />
+    <Compile Include="Assets\Scripts\Core\Scenes\ILoadingProgress.cs" />
     <Compile Include="Assets\Scripts\Core\Data\DeckCardRecord.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\MainMenuView.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DeckDropZone.cs" />
@@ -152,6 +154,7 @@
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DeckView.cs" />
     <Compile Include="Assets\Scripts\Core\Settings\LegalLinks.cs" />
     <Compile Include="Assets\Scripts\Core\Networking\NetworkGameMode.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\LoadingController.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\HomeController.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\RootLifetimeScope.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\BootstrapPrefabCatalog.cs" />
