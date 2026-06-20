@@ -52,6 +52,7 @@
     <Compile Include="Assets\Scripts\Core\Data\DeckState.cs" />
     <Compile Include="Assets\Scripts\Core\Settings\IGameSettingsService.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\CardGridView.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\UI\UiCameraRoot.cs" />
     <Compile Include="Assets\Scripts\Core\Battle\IBattleAttackGateway.cs" />
     <Compile Include="Assets\Scripts\Core\Scenes\ISceneLoaderService.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\EntryPoints\GameBootstrapEntryPoint.cs" />
@@ -147,11 +148,13 @@
     <Compile Include="Assets\Scripts\Infrastructure\Photon\Battle\FusionBattleControllerRegistry.cs" />
     <Compile Include="Assets\CrystalFramework\Utility\SafeArea.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\MatchmakingOverlayController.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\Audio\AudioSystem.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DeckView.cs" />
     <Compile Include="Assets\Scripts\Core\Settings\LegalLinks.cs" />
     <Compile Include="Assets\Scripts\Core\Networking\NetworkGameMode.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\HomeController.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\RootLifetimeScope.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\BootstrapPrefabCatalog.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\HomeView.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionNetworkSessionService.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\BattleView.cs" />

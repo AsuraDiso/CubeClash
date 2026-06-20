@@ -165,3 +165,4 @@ namespace Bootstrap.UI.Controllers
         private void RefreshAttackButton() => _view?.SetAttackEnabled(_gateway is { IsMyTurn: true } && !_isGameOver);
     }
 }
+

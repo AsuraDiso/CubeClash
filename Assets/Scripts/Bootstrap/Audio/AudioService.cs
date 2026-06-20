@@ -1,3 +1,4 @@
+using Bootstrap;
 using Core.Audio;
 using UnityEngine;
 
@@ -14,15 +15,15 @@ namespace Bootstrap.Audio
         private bool _musicMuted;
         private bool _sfxMuted;
 
-        public AudioService(IAudioCatalog catalog)
+        public AudioService(IAudioCatalog catalog, BootstrapPrefabCatalog bootstrapPrefabs)
         {
             _catalog = catalog;
 
-            var root = new GameObject(nameof(AudioService));
-            Object.DontDestroyOnLoad(root);
+            var audioSystem = Object.Instantiate(bootstrapPrefabs.AudioSystemPrefab);
+            Object.DontDestroyOnLoad(audioSystem.gameObject);
 
-            _musicSource = CreateSource(root, loop: true);
-            _sfxSource = CreateSource(root, loop: false);
+            _musicSource = audioSystem.MusicSource;
+            _sfxSource = audioSystem.SfxSource;
             ApplyMusicSettings();
         }
 
@@ -101,14 +102,6 @@ namespace Bootstrap.Audio
         }
 
         private float EffectiveSfxVolume => _sfxMuted ? 0f : _sfxVolume;
-
-        private static AudioSource CreateSource(GameObject host, bool loop)
-        {
-            var source = host.AddComponent<AudioSource>();
-            source.loop = loop;
-            source.playOnAwake = false;
-            return source;
-        }
 
         private void ApplyMusicSettings()
         {

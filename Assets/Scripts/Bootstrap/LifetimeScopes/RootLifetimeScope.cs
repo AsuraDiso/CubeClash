@@ -1,5 +1,6 @@
 using Bootstrap.Audio;
 using Bootstrap.Settings;
+using Bootstrap;
 using Core.Settings;
 using Bootstrap.EntryPoints;
 using Bootstrap.Flow;
@@ -28,6 +29,7 @@ namespace Bootstrap.LifetimeScopes
     public sealed class RootLifetimeScope : LifetimeScope
     {
         [SerializeField] private GamePrefabCatalog _prefabCatalog;
+        [SerializeField] private BootstrapPrefabCatalog _bootstrapPrefabCatalog;
         [FormerlySerializedAs("_cardcatalog")]
         [SerializeField] private CardCatalog _cardCatalog;
         [SerializeField] private UiPrefabCatalog _uiPrefabCatalog;
@@ -42,11 +44,16 @@ namespace Bootstrap.LifetimeScopes
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterInstance(_prefabCatalog);
+            builder.RegisterInstance(_bootstrapPrefabCatalog);
             builder.RegisterInstance(_uiPrefabCatalog);
             builder.RegisterInstance(_cardCatalog);
             builder.RegisterInstance(_audioCatalog).As<IAudioCatalog>();
             builder.Register<AudioService>(Lifetime.Singleton)
                 .As<IAudioService>();
+
+            var uiCameraRoot = Instantiate(_bootstrapPrefabCatalog.UiCameraPrefab);
+            builder.RegisterComponent(uiCameraRoot);
+
             builder.Register<GameSettingsService>(Lifetime.Singleton)
                 .As<IGameSettingsService>();
             builder.Register<HapticsService>(Lifetime.Singleton)
