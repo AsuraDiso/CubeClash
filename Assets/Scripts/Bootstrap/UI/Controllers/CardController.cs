@@ -1,5 +1,4 @@
 using System;
-using Bootstrap.Common;
 using Bootstrap.UI.Views;
 using Cards;
 using Core.Data;
@@ -27,9 +26,7 @@ namespace Bootstrap.UI.Controllers
             _view = view;
 
             if (_view == null)
-            {
                 return;
-            }
 
             _view.OnDeckSelected += SelectDeck;
             _view.OnCardDropped += HandleCardDropped;
@@ -43,57 +40,48 @@ namespace Bootstrap.UI.Controllers
             _deckService.OnDeckChanged -= HandleDeckChanged;
         }
 
-        private void UnbindView() =>
-            ViewBinding.Unbind(ref _view, view =>
-            {
-                view.OnDeckSelected -= SelectDeck;
-                view.OnCardDropped -= HandleCardDropped;
-                view.OnCardDragEnded -= HandleCardDragEnded;
-            });
+        private void UnbindView()
+        {
+            if (_view == null)
+                return;
+
+            _view.OnDeckSelected -= SelectDeck;
+            _view.OnCardDropped -= HandleCardDropped;
+            _view.OnCardDragEnded -= HandleCardDragEnded;
+            _view = null;
+        }
 
         private void HandleCardDragEnded(CardView cardView, UnityEngine.EventSystems.PointerEventData eventData)
         {
             if (_view == null || cardView == null)
-            {
                 return;
-            }
 
             if (_view.ConsumeDeckDrop())
-            {
                 return;
-            }
 
             if (_view.IsInActiveDeck(cardView))
-            {
                 _deckService.TryRemoveCard(_currentDeckIndex, cardView.CatalogIndex);
-            }
         }
 
         private void HandleCardDropped(CardView cardView, UnityEngine.EventSystems.PointerEventData eventData)
         {
             if (_view == null || cardView == null)
-            {
                 return;
-            }
 
             if (_view.TryGetActiveGridOrigin(eventData.position, eventData.pressEventCamera, out var origin))
-            {
-                _deckService.TryPlaceCard(
-                    _currentDeckIndex,
-                    cardView.Definition,
-                    origin,
-                    cardView.CatalogIndex);
-            }
+                _deckService.TryPlaceCard(_currentDeckIndex, cardView.Definition, origin, cardView.CatalogIndex);
         }
 
         private void HandleDeckChanged(int index)
         {
             if (index == _currentDeckIndex)
-            {
                 Refresh();
-            }
         }
 
+        private void HandleBackButtonClicked()
+        {
+
+        }
         private void SelectDeck(int index)
         {
             _currentDeckIndex = index;
@@ -105,16 +93,11 @@ namespace Bootstrap.UI.Controllers
         private void Refresh()
         {
             if (_view == null)
-            {
                 return;
-            }
 
             var deck = _deckService.GetDeck(_currentDeckIndex);
             _view.SetActiveDeckCards(deck);
-            _view.SetInventoryCards(_cardCatalog.PackInventoryNotInDeck(
-                deck,
-                _view.InventoryColumns,
-                DeckLayout.InventoryRows));
+            _view.SetInventoryCards(_cardCatalog.PackInventoryNotInDeck(deck, _view.InventoryColumns, DeckLayout.InventoryRows));
         }
     }
 }

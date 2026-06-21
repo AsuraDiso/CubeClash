@@ -12,13 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c2a1b3d4e5f6789012345678abcdef, type: 3}
   m_Name: UiPrefabCatalog
   m_EditorClassIdentifier: Assembly-CSharp::Bootstrap.UI.UiPrefabCatalog
-  _mainMenuViewPrefab: {fileID: 31416876641693109, guid: 4506fc6e8bd5abc46a30c91e2f7d3455, type: 3}
-  _mainMenuScreenPrefabs:
-  - {fileID: 6036781494354821615, guid: 6f18ac482fbfb344c9c4ab2465aa06ab, type: 3}
-  - {fileID: 58740940458057955, guid: 25128a43fedc761438f85e5936c11557, type: 3}
-  - {fileID: 8268311665700252395, guid: ff87b2f721fd82f488026a2428bd207e, type: 3}
-  - {fileID: 3258375315169562711, guid: 87319a1d1bcf7b64daeb9a26f759a302, type: 3}
-  - {fileID: 8651387506917290995, guid: efa85b3ea013ea448a0bc2fa0c670275, type: 3}
+  _homeViewPrefab: {fileID: 2826879472478229631, guid: ff87b2f721fd82f488026a2428bd207e, type: 3}
+  _settingsViewPrefab: {fileID: 2286309671207842727, guid: efa85b3ea013ea448a0bc2fa0c670275, type: 3}
+  _deckViewPrefab: {fileID: 2915311541293797839, guid: 25128a43fedc761438f85e5936c11557, type: 3}
+  _shopViewPrefab: {fileID: 7847261538493726151, guid: 87319a1d1bcf7b64daeb9a26f759a302, type: 3}
+  _eventsViewPrefab: {fileID: 8847261538493726150, guid: 6f18ac482fbfb344c9c4ab2465aa06ab, type: 3}
   _matchmakingOverlayViewPrefab: {fileID: 356006660603142929, guid: e16d579b47ab8124ca01b9e9110137ea, type: 3}
   _battleViewPrefab: {fileID: 1880401162969986473, guid: 24b76888d67906d4988158ce118e1fc3, type: 3}
   _loadingViewPrefab: {fileID: 9048148184389670956, guid: 8169b9ce2246a3e4f82ba6bb04d2bfed, type: 3}

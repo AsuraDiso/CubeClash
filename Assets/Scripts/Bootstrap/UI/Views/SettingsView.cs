@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 namespace Bootstrap.UI.Views
 {
-    public sealed class SettingsView : MonoBehaviour
+    public sealed class SettingsView : MonoBehaviour, INavigableView
     {
-        [SerializeField] private RectTransform _contentRoot;
-
         [SerializeField] private TMP_InputField _usernameInput;
         [SerializeField] private Slider _musicVolumeSlider;
         [SerializeField] private Slider _sfxVolumeSlider;
@@ -20,6 +18,7 @@ namespace Bootstrap.UI.Views
         public event Action<string> UsernameSubmitRequested;
         public event Action PrivacyPolicyClicked;
         public event Action TermsOfServiceClicked;
+        public event Action BackClicked;
 
         public void SetUsername(string displayName) => _usernameInput.SetTextWithoutNotify(displayName ?? string.Empty);
 
@@ -40,5 +39,7 @@ namespace Bootstrap.UI.Views
         public void OnPrivacyPolicyClicked() => PrivacyPolicyClicked?.Invoke();
 
         public void OnTermsOfServiceClicked() => TermsOfServiceClicked?.Invoke();
+
+        public void OnBackButtonClicked() => BackClicked?.Invoke();
     }
 }

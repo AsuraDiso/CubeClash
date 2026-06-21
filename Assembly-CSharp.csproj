@@ -47,6 +47,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\ShopView.cs" />
     <Compile Include="Assets\Scripts\Core\Battle\IBattleLoadoutProvider.cs" />
     <Compile Include="Assets\Scripts\Core\Data\DeckService.cs" />
     <Compile Include="Assets\Scripts\Core\Data\DeckState.cs" />
@@ -58,8 +59,8 @@
     <Compile Include="Assets\Scripts\Bootstrap\EntryPoints\GameBootstrapEntryPoint.cs" />
     <Compile Include="Assets\Scripts\Core\Data\DeckRecordConverter.cs" />
     <Compile Include="Assets\Scripts\Core\Battle\IBattleSessionSpawner.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\EventsView.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\Battle\FusionBattleSessionSpawner.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\MainMenuTabButton.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\IUiViewFactory.cs" />
     <Compile Include="Assets\Scripts\Core\Audio\AudioCatalog.cs" />
     <Compile Include="Assets\Scripts\Core\Audio\MusicId.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Assets\Scripts\Core\Matchmaking\IMatchmakingService.cs" />
     <Compile Include="Assets\Scripts\Cards\CardCatalog.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\MainMenuLifetimeScope.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\INavigableView.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\Audio\SceneMusicStarter.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionNetworkRunnerFactory.cs" />
     <Compile Include="Assets\Scripts\Core\Data\DeckBattleLoadoutProvider.cs" />
@@ -89,14 +91,10 @@
     <Compile Include="Assets\Scripts\Infrastructure\Data\Firestore\FirestoreDeckRepository.cs" />
     <Compile Include="Assets\Scripts\Core\Data\IDeckService.cs" />
     <Compile Include="Assets\Scripts\Core\Scenes\GameSceneId.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\Common\ViewBinding.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\MainMenuTab.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionSessionBridge.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\MainMenuScreenTransition.cs" />
     <Compile Include="Assets\Scripts\Core\Networking\ProfileConnectionToken.cs" />
     <Compile Include="Assets\Scripts\Cards\DiceAssignmentContext.cs" />
     <Compile Include="Assets\Scripts\Cards\CardGridPlacement.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionMatchmakingService.cs" />
     <Compile Include="Assets\Scripts\Core\Data\PlayerProfile.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\Flow\MatchFlowCoordinator.cs" />
@@ -121,7 +119,6 @@
     <Compile Include="Assets\Scripts\Core\Networking\NetworkSessionException.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Firebase\FirebaseAppService.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\Scenes\SceneLoaderService.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\SafeAreaLayoutRefresher.cs" />
     <Compile Include="Assets\Scripts\Core\Networking\INetworkSession.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\LoadingView.cs" />
     <Compile Include="Assets\Scripts\Core\Battle\BattleConstants.cs" />
@@ -136,7 +133,6 @@
     <Compile Include="Assets\Scripts\Cards\CardEnums.cs" />
     <Compile Include="Assets\Scripts\Core\Scenes\ILoadingProgress.cs" />
     <Compile Include="Assets\Scripts\Core\Data\DeckCardRecord.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\MainMenuView.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DeckDropZone.cs" />
     <Compile Include="Assets\Scripts\Bootstrap\Settings\HapticsService.cs" />
     <Compile Include="Assets\Scripts\Cards\CardDefinition.cs" />

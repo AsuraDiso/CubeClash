@@ -16,10 +16,7 @@ namespace Bootstrap.Audio
 
         public void Start()
         {
-            if (_binding.MusicId != MusicId.None)
-            {
-                _audioService.PlayMusic(_binding.MusicId);
-            }
+            if (_binding.MusicId != MusicId.None) _audioService.PlayMusic(_binding.MusicId);
         }
     }
 

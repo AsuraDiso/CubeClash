@@ -1,5 +1,4 @@
 using System;
-using Bootstrap.Common;
 using Bootstrap.UI.Views;
 using Core.Battle;
 using Core.Networking;
@@ -18,10 +17,7 @@ namespace Bootstrap.UI.Controllers
         private IBattleAttackGateway _gateway;
         private bool _isGameOver;
 
-        public BattleController(
-            IUiViewFactory viewFactory,
-            IBattleControllerRegistry controllerRegistry,
-            INetworkSession networkSession)
+        public BattleController(IUiViewFactory viewFactory, IBattleControllerRegistry controllerRegistry, INetworkSession networkSession)
         {
             _viewFactory = viewFactory;
             _controllerRegistry = controllerRegistry;
@@ -58,10 +54,18 @@ namespace Bootstrap.UI.Controllers
 
         private void BindGateway(IBattleAttackGateway gateway)
         {
-            ViewBinding.Switch(ref _gateway, gateway, SubscribeGateway, UnsubscribeGateway);
+            if (_gateway == gateway)
+                return;
+
+            if (_gateway != null)
+                UnsubscribeGateway(_gateway);
+
+            _gateway = gateway;
+
             if (_gateway == null)
                 return;
 
+            SubscribeGateway(_gateway);
             RefreshProfiles();
             RefreshDecks();
             OnTurnChanged();
@@ -69,7 +73,11 @@ namespace Bootstrap.UI.Controllers
 
         private void UnbindGateway()
         {
-            ViewBinding.Unbind(ref _gateway, UnsubscribeGateway);
+            if (_gateway == null)
+                return;
+
+            UnsubscribeGateway(_gateway);
+            _gateway = null;
             RefreshAttackButton();
         }
 
@@ -111,7 +119,7 @@ namespace Bootstrap.UI.Controllers
             }
 
             _view.SpawnTurnDice(_gateway.TurnDice1, _gateway.TurnDice2);
-            _view.SetTurnText("Your Turn · Drag dice onto card slots");
+            _view.SetTurnText("Your Turn");
         }
 
         private void OnProfilesUpdated() => RefreshProfiles();
@@ -121,19 +129,15 @@ namespace Bootstrap.UI.Controllers
         private void OnCardDiceAssignmentsChanged(CardView card)
         {
             if (card == null || !card.AreAllSlotsFilled())
-            {
                 return;
-            }
 
-            _view.SetStatusText($"Card ready: {card.Definition.DisplayName}");
+            Debug.Log("Card assignments are filled");
         }
 
         private void RefreshProfiles()
         {
             if (_gateway == null)
-            {
                 return;
-            }
 
             _view.SetLocalHp(_gateway.LocalProfile.Hp);
             _view.SetOpponentHp(_gateway.OpponentProfile.Hp);
@@ -144,9 +148,7 @@ namespace Bootstrap.UI.Controllers
         private void RefreshDecks()
         {
             if (_gateway == null || _view == null)
-            {
                 return;
-            }
 
             _view.SetLocalDeck(_gateway.LocalDeck);
             _view.SetOpponentDeck(_gateway.OpponentDeck);
@@ -165,5 +167,11 @@ namespace Bootstrap.UI.Controllers
         private void RefreshAttackButton() => _view?.SetAttackEnabled(_gateway is { IsMyTurn: true } && !_isGameOver);
     }
 }
+
+
+
+
+
+
 
 

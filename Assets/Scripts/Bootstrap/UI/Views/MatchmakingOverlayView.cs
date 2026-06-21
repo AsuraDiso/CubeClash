@@ -9,7 +9,6 @@ namespace Bootstrap.UI.Views
         [SerializeField] private TMP_Text _statusText;
 
         public void SetVisible(bool isVisible) => _root.SetActive(isVisible);
-
         public void SetStatusText(string message) => _statusText.text = message;
     }
 }

@@ -14,8 +14,6 @@ namespace Bootstrap.UI.Views
 
         private RectTransform _rectTransform;
         private Canvas _dragCanvas;
-        private Transform _homeParent;
-        private Vector2 _homeAnchoredPosition;
         private DiceSlotView _assignedSlot;
 
         public int DiceIndex { get; private set; }
@@ -33,8 +31,6 @@ namespace Bootstrap.UI.Views
         {
             _dragCanvas = dragCanvas;
             DiceIndex = diceIndex;
-            _homeAnchoredPosition = homeAnchoredPosition;
-            _homeParent = transform.parent;
             _rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
             _rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
             _rectTransform.pivot = new Vector2(0.5f, 0.5f);

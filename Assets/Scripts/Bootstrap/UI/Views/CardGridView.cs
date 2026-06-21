@@ -5,6 +5,7 @@ using Cards;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Bootstrap.UI.Views
 {
@@ -30,13 +31,53 @@ namespace Bootstrap.UI.Views
 
         private Canvas _dragCanvas;
         private bool _cardDragEnabled = true;
+        private Vector2 _lastLayoutSize;
+        private Vector2Int _lastScreenSize;
+        private ScreenOrientation _lastOrientation;
 
         public void SetDragCanvas(Canvas dragCanvas) => _dragCanvas = dragCanvas;
 
         public void SetCardDragEnabled(bool enabled) => _cardDragEnabled = enabled;
 
+        private void Awake()
+        {
+            CacheScreenState();
+            CacheLayoutSize();
+        }
+
         private void OnEnable()
         {
+            ScheduleRefresh(true);
+        }
+
+        private void LateUpdate()
+        {
+            if (!isActiveAndEnabled || _container == null)
+            {
+                return;
+            }
+
+            var screenChanged = Screen.width != _lastScreenSize.x
+                                || Screen.height != _lastScreenSize.y
+                                || Screen.orientation != _lastOrientation;
+
+            if (!screenChanged)
+            {
+                var rect = GetLayoutRect();
+                var size = new Vector2(rect.width, rect.height);
+                if (Mathf.Approximately(size.x, _lastLayoutSize.x)
+                    && Mathf.Approximately(size.y, _lastLayoutSize.y))
+                {
+                    return;
+                }
+
+                _lastLayoutSize = size;
+                ScheduleRefresh(true);
+                return;
+            }
+
+            CacheScreenState();
+            CacheLayoutSize();
             ScheduleRefresh(true);
         }
 
@@ -52,7 +93,8 @@ namespace Bootstrap.UI.Views
 
         private void OnRectTransformDimensionsChange()
         {
-            ScheduleRefresh(false);
+            CacheLayoutSize();
+            ScheduleRefresh(true);
         }
 
         public void SetCards(IReadOnlyList<PlacedCard> placedCards)
@@ -140,6 +182,7 @@ namespace Bootstrap.UI.Views
             if (cellSize.x <= 0f || cellSize.y <= 0f)
                 return false;
 
+            ApplyScrollContentHeight(cellSize);
             RelayoutBackgroundCells(cellSize);
 
             if (_cardPrefab == null)
@@ -195,11 +238,13 @@ namespace Bootstrap.UI.Views
             if (_container == null)
                 return;
 
+            Canvas.ForceUpdateCanvases();
             var cellSize = ComputeCellSize();
 
             if (cellSize.x <= 0f || cellSize.y <= 0f)
                 return;
 
+            ApplyScrollContentHeight(cellSize);
             RelayoutBackgroundCells(cellSize);
 
             if (_spawnedCards.Count == 0 || _placedCards.Count == 0)
@@ -223,16 +268,61 @@ namespace Bootstrap.UI.Views
                     placed.Definition.Footprint,
                     cellSize);
             }
+
+            CacheLayoutSize();
         }
 
         private Vector2 ComputeCellSize()
         {
-            var rect = _container.rect;
             var columns = Columns;
             var rows = Rows;
+            var rect = GetLayoutRect();
+
             var cellWidth = (rect.width - _spacing.x * (columns - 1)) / columns;
+            if (IsScrollContent())
+            {
+                return new Vector2(cellWidth, cellWidth);
+            }
+
             var cellHeight = (rect.height - _spacing.y * (rows - 1)) / rows;
             return new Vector2(cellWidth, cellHeight);
+        }
+
+        private Rect GetLayoutRect()
+        {
+            if (!IsScrollContent())
+            {
+                return _container.rect;
+            }
+
+            var scrollRect = GetComponentInParent<ScrollRect>();
+            var viewport = scrollRect.viewport != null
+                ? scrollRect.viewport
+                : scrollRect.GetComponent<RectTransform>();
+
+            return viewport.rect;
+        }
+
+        private bool IsScrollContent()
+        {
+            if (_container == null)
+            {
+                return false;
+            }
+
+            var scrollRect = GetComponentInParent<ScrollRect>();
+            return scrollRect != null && scrollRect.content == _container;
+        }
+
+        private void ApplyScrollContentHeight(Vector2 cellSize)
+        {
+            if (!IsScrollContent() || cellSize.y <= 0f)
+            {
+                return;
+            }
+
+            var height = Rows * cellSize.y + (Rows - 1) * _spacing.y;
+            _container.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
         }
 
         public bool TryGetGridOriginFromScreenPoint(Vector2 screenPoint, Camera eventCamera, out Vector2Int origin)
@@ -309,6 +399,23 @@ namespace Bootstrap.UI.Views
             _refreshCts.Cancel();
             _refreshCts.Dispose();
             _refreshCts = null;
+        }
+
+        private void CacheScreenState()
+        {
+            _lastScreenSize = new Vector2Int(Screen.width, Screen.height);
+            _lastOrientation = Screen.orientation;
+        }
+
+        private void CacheLayoutSize()
+        {
+            if (_container == null)
+            {
+                return;
+            }
+
+            var rect = GetLayoutRect();
+            _lastLayoutSize = new Vector2(rect.width, rect.height);
         }
     }
 }

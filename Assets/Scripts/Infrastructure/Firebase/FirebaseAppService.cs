@@ -16,9 +16,7 @@ namespace Infrastructure.Firebase
         public UniTask EnsureInitializedAsync(CancellationToken cancellationToken = default)
         {
             if (IsInitialized)
-            {
                 return UniTask.CompletedTask;
-            }
 
             return (_initializationTask ??= InitializeInternalAsync(cancellationToken))
                 .AttachExternalCancellation(cancellationToken);
@@ -32,9 +30,7 @@ namespace Infrastructure.Firebase
                 .AttachExternalCancellation(cancellationToken);
 
             if (status != DependencyStatus.Available)
-            {
                 throw new InvalidOperationException($"Firebase dependencies are unavailable: {status}");
-            }
 
             IsInitialized = true;
             Debug.Log("Firebase ready.");

@@ -14,10 +14,9 @@ namespace Bootstrap.LifetimeScopes
             builder.Register<UiViewFactory>(Lifetime.Scoped).As<IUiViewFactory>();
             builder.RegisterInstance(new SceneMusicBinding(MusicId.MainMenu));
             builder.RegisterEntryPoint<SceneMusicStarter>();
-            builder.Register<HomeController>(Lifetime.Scoped);
+            builder.RegisterEntryPoint<HomeController>(Lifetime.Scoped);
             builder.Register<CardController>(Lifetime.Scoped);
             builder.Register<SettingsController>(Lifetime.Scoped);
-            builder.RegisterEntryPoint<MainMenuController>();
             builder.RegisterEntryPoint<MatchmakingOverlayController>();
         }
     }

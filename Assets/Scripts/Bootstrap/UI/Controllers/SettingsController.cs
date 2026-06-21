@@ -52,9 +52,7 @@ namespace Bootstrap.UI.Controllers
         private void UnbindView()
         {
             if (_view == null)
-            {
                 return;
-            }
 
             _view.MusicVolumeChanged -= OnMusicVolumeChanged;
             _view.SfxVolumeChanged -= OnSfxVolumeChanged;
@@ -107,14 +105,8 @@ namespace Bootstrap.UI.Controllers
         private void OnUsernameSubmitRequested(string displayName) =>
             FireAndForget.Run(() => _playerRepository.UpdateDisplayNameAsync(displayName));
 
-        private void OnPrivacyPolicyClicked()
-        {
-            Debug.Log("privacy");
-        }
-        private void OnTermsOfServiceClicked()
-        {
-            Debug.Log("terms");
-        }
-    }
+        private void OnPrivacyPolicyClicked() => Debug.Log("privacy");
 
+        private void OnTermsOfServiceClicked() => Debug.Log("terms");
+    }
 }
