@@ -47,29 +47,29 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Photon\Fusion\Runtime\Statistics\FusionStatistics.cs" />
-    <Compile Include="Assets\Photon\Fusion\Runtime\FusionBootstrap.cs" />
-    <Compile Include="Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerLagCompensationGizmos.cs" />
-    <Compile Include="Assets\Photon\Fusion\Runtime\NetworkCharacterController.cs" />
-    <Compile Include="Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerEnableVisibility.cs" />
-    <Compile Include="Assets\Photon\Fusion\Runtime\Fusion.Unity.AssemblyAttributes.cs" />
-    <Compile Include="Assets\Photon\Fusion\Runtime\Statistics\FusionStatsGraphDefault.cs" />
-    <Compile Include="Assets\Photon\Fusion\Runtime\FusionBootstrapDebugGUI.cs" />
-    <Compile Include="Assets\Photon\Fusion\Runtime\FusionBasicBillboard.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\Statistics\FusionStatsConfig.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\Statistics\FusionNetworkObjectStatsGraphCombine.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerVisibilityLinksRoot.cs" />
+    <Compile Include="Assets\Photon\Fusion\Runtime\Statistics\FusionStatistics.cs" />
+    <Compile Include="Assets\Photon\Fusion\Runtime\FusionBootstrap.cs" />
+    <Compile Include="Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerLagCompensationGizmos.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\Statistics\FusionStatsWorldAnchor.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\NetworkObjectProviderDefault.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerAOIGizmos.cs" />
+    <Compile Include="Assets\Photon\Fusion\Runtime\NetworkCharacterController.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\EnableOnSingleRunner.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerVisibilityLink.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\Statistics\FusionStatsPanelHeader.cs" />
+    <Compile Include="Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerEnableVisibility.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\FusionAddressablePrefabsPreloader.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\Fusion.Unity.cs" />
+    <Compile Include="Assets\Photon\Fusion\Runtime\Fusion.Unity.AssemblyAttributes.cs" />
+    <Compile Include="Assets\Photon\Fusion\Runtime\Statistics\FusionStatsGraphDefault.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\Statistics\FusionNetworkObjectStatistics.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\NetworkSceneManagerDefault.cs" />
+    <Compile Include="Assets\Photon\Fusion\Runtime\FusionBootstrapDebugGUI.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\Statistics\FusionStatsCanvas.cs" />
+    <Compile Include="Assets\Photon\Fusion\Runtime\FusionBasicBillboard.cs" />
     <Compile Include="Assets\Photon\Fusion\Runtime\Statistics\FusionNetworkObjectStatsGraph.cs" />
     <None Include="Assets\Photon\Fusion\Runtime\RuntimeAssets\JetBrainsMono OFL.txt" />
     <None Include="Assets\Photon\Fusion\Runtime\Statistics\FusionStatsGraphShader.shader" />
@@ -491,9 +491,6 @@
     <Reference Include="TextMateSharpPlastic.Grammars">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Lib\Editor\TextMateSharp\TextMateSharpPlastic.Grammars.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.YamlDotNet">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.visualscripting@8bed5ad90189\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
-    </Reference>
     <Reference Include="Google.IOSResolver">
       <HintPath>C:\Users\asura\Repos\CubeClash\Assets\ExternalDependencyManager\Editor\1.2.187\Google.IOSResolver.dll</HintPath>
     </Reference>
@@ -548,9 +545,6 @@
     <Reference Include="log4netPlastic">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Lib\Editor\log4netPlastic.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.IonicZip">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.visualscripting@8bed5ad90189\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
-    </Reference>
     <Reference Include="System.IO.Hashing">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.collections@5b6ebd78ccc0\Unity.Collections.Tests\System.IO.Hashing\System.IO.Hashing.dll</HintPath>
     </Reference>
@@ -563,9 +557,6 @@
     <Reference Include="DOTween">
       <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.visualscripting@8bed5ad90189\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Photon3Unity3D">
       <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
     </Reference>
@@ -574,9 +565,6 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.TextureAssets">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.visualscripting@8bed5ad90189\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff\Mono.Cecil.dll</HintPath>

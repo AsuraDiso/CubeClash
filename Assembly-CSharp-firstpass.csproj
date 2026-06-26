@@ -47,13 +47,13 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUIToolkit.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <None Include="Assets\Plugins\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -522,9 +522,6 @@
     <Reference Include="DOTween">
       <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.visualscripting@8bed5ad90189\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Photon3Unity3D">
       <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
     </Reference>
@@ -948,9 +945,6 @@
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.2D.Editor.Overrides">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Editor.Overrides.dll</HintPath>
     </Reference>
@@ -975,9 +969,6 @@
     <Reference Include="Unity.RenderPipelines.Universal.2D.Runtime">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Searcher.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
     </Reference>
@@ -986,9 +977,6 @@
     </Reference>
     <Reference Include="Unity.Burst.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
@@ -1014,14 +1002,8 @@
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UniTask.TextMeshPro">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UniTask.TextMeshPro.dll</HintPath>
@@ -1047,9 +1029,6 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.State.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
     </Reference>
@@ -1065,9 +1044,6 @@
     <Reference Include="Unity.Burst">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.004">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.004.dll</HintPath>
     </Reference>
@@ -1079,9 +1055,6 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>

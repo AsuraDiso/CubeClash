@@ -48,8 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Firebase\FirebaseApp\Internal\AssemblyInfo.cs" />
-    <Compile Include="Assets\Firebase\FirebaseApp\Internal\HttpHelpers.cs" />
     <Compile Include="Assets\Firebase\FirebaseApp\Internal\FirebaseInterops.cs" />
+    <Compile Include="Assets\Firebase\FirebaseApp\Internal\HttpHelpers.cs" />
     <None Include="Assets\Firebase\FirebaseApp\Internal\link.xml" />
     <None Include="Assets\Firebase\FirebaseApp\Internal\Firebase.App.Internal.asmdef" />
     <Reference Include="UnityEngine">

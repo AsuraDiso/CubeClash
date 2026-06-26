@@ -47,117 +47,141 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\ShopView.cs" />
-    <Compile Include="Assets\Scripts\Core\Battle\IBattleLoadoutProvider.cs" />
-    <Compile Include="Assets\Scripts\Core\Data\DeckService.cs" />
-    <Compile Include="Assets\Scripts\Core\Data\DeckState.cs" />
-    <Compile Include="Assets\Scripts\Core\Settings\IGameSettingsService.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\CardGridView.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\UiCameraRoot.cs" />
-    <Compile Include="Assets\Scripts\Core\Battle\IBattleAttackGateway.cs" />
-    <Compile Include="Assets\Scripts\Core\Scenes\ISceneLoaderService.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\EntryPoints\GameBootstrapEntryPoint.cs" />
-    <Compile Include="Assets\Scripts\Core\Data\DeckRecordConverter.cs" />
-    <Compile Include="Assets\Scripts\Core\Battle\IBattleSessionSpawner.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\EventsView.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Photon\Battle\FusionBattleSessionSpawner.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\IUiViewFactory.cs" />
-    <Compile Include="Assets\Scripts\Core\Audio\AudioCatalog.cs" />
-    <Compile Include="Assets\Scripts\Core\Audio\MusicId.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionGameModeMapper.cs" />
-    <Compile Include="Assets\Scripts\Core\Data\IUserIdProvider.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\CardController.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\UiViewFactory.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Photon\GamePrefabCatalog.cs" />
-    <Compile Include="Assets\Scripts\Cards\DiceSlotDefinition.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Photon\Battle\BattleNetworkController.cs" />
-    <Compile Include="Assets\Scripts\Core\Matchmaking\MatchmakingConstants.cs" />
-    <Compile Include="Assets\Scripts\Core\Battle\IBattleControllerRegistry.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Photon\BattleSessionPayload.cs" />
-    <Compile Include="Assets\Scripts\Core\Matchmaking\IMatchmakingService.cs" />
-    <Compile Include="Assets\Scripts\Cards\CardCatalog.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\MainMenuLifetimeScope.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\INavigableView.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\Audio\SceneMusicStarter.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionNetworkRunnerFactory.cs" />
-    <Compile Include="Assets\Scripts\Core\Data\DeckBattleLoadoutProvider.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\Settings\GameSettingsService.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DiceSlotView.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Data\Firestore\FirestorePlayerRepository.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\LoadingLifetimeScope.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Data\Firestore\FirestoreDeckSlotDocument.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\Scenes\LoadingProgress.cs" />
-    <Compile Include="Assets\Scripts\Core\Matchmaking\MatchmakingState.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Data\Firestore\FirestoreDeckRepository.cs" />
-    <Compile Include="Assets\Scripts\Core\Data\IDeckService.cs" />
-    <Compile Include="Assets\Scripts\Core\Scenes\GameSceneId.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionSessionBridge.cs" />
-    <Compile Include="Assets\Scripts\Core\Networking\ProfileConnectionToken.cs" />
-    <Compile Include="Assets\Scripts\Cards\DiceAssignmentContext.cs" />
-    <Compile Include="Assets\Scripts\Cards\CardGridPlacement.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionMatchmakingService.cs" />
-    <Compile Include="Assets\Scripts\Core\Data\PlayerProfile.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\Flow\MatchFlowCoordinator.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\BattleLifetimeScope.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\UiPrefabCatalog.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Data\Firestore\FirestorePlacedCardDocument.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\SettingsView.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\Audio\AudioService.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\CardView.cs" />
-    <Compile Include="Assets\Scripts\Core\Data\IDeckRepository.cs" />
-    <Compile Include="Assets\Scripts\Core\Networking\NetworkSessionRequest.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DiceView.cs" />
-    <Compile Include="Assets\Scripts\Core\Audio\IAudioService.cs" />
-    <Compile Include="Assets\Scripts\Core\Scenes\SceneLoadMode.cs" />
-    <Compile Include="Assets\Scripts\Core\Firebase\IFirebaseAppService.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Data\LocalUserIdProvider.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\SettingsController.cs" />
-    <Compile Include="Assets\Scripts\Core\Networking\NetworkSessionState.cs" />
-    <Compile Include="Assets\Scripts\Core\Settings\IHapticsService.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Data\Firestore\FirestoreUserDocument.cs" />
-    <Compile Include="Assets\Scripts\Core\Data\DeckPersistenceData.cs" />
-    <Compile Include="Assets\Scripts\Core\Networking\NetworkSessionException.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Firebase\FirebaseAppService.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\Scenes\SceneLoaderService.cs" />
-    <Compile Include="Assets\Scripts\Core\Networking\INetworkSession.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\LoadingView.cs" />
-    <Compile Include="Assets\Scripts\Core\Battle\BattleConstants.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\MatchmakingOverlayView.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\TabGroup.cs" />
-    <Compile Include="Assets\Scripts\Core\Audio\SfxId.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Photon\Battle\NetworkPlayerProfile.cs" />
-    <Compile Include="Assets\Scripts\Cards\DiceAssignmentRules.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Photon\IFusionRunnerAccessor.cs" />
-    <Compile Include="Assets\Scripts\Cards\DeckLayout.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\Common\FireAndForget.cs" />
-    <Compile Include="Assets\Scripts\Cards\CardEnums.cs" />
-    <Compile Include="Assets\Scripts\Core\Scenes\ILoadingProgress.cs" />
-    <Compile Include="Assets\Scripts\Core\Data\DeckCardRecord.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DeckDropZone.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\Settings\HapticsService.cs" />
-    <Compile Include="Assets\Scripts\Cards\CardDefinition.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\BattleController.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\ResponsiveGridLayout.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionBattleSceneLoader.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\EntryPoints\LoadingSceneEntryPoint.cs" />
-    <Compile Include="Assets\Scripts\Core\Audio\IAudioCatalog.cs" />
-    <Compile Include="Assets\Scripts\Cards\CardFootprintSize.cs" />
-    <Compile Include="Assets\Scripts\Core\Data\IPlayerRepository.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Photon\Battle\FusionBattleControllerRegistry.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\Cards\CardCatalog.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Actions\BattleActionResult.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\Cards\DeckLayout.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Networking\FusionNetworkRunnerSetup.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Scenes\SceneLoadMode.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Data\Firestore\FirestoreExceptionHelper.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Settings\IHapticsService.cs" />
+    <Compile Include="Assets\Game\Features\Matchmaking\Scripts\MatchmakingView.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\IDeckRepository.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\Settings\GameSettingsService.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\Cards\CardFootprintSize.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Networking\NetworkSessionRequest.cs" />
+    <Compile Include="Assets\Game\Shared\Scripts\UI\Theme\UiTypographyRole.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Networking\INetworkSession.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\EntryPoints\GameBootstrapEntryPoint.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Firebase\FirebaseAppService.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Actions\BattleActionCodec.cs" />
+    <Compile Include="Assets\Game\Features\Deck\Scripts\DeckView.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\Cards\CardGridPlacement.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\PlayerProfile.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Matchmaking\MatchmakingConstants.cs" />
+    <Compile Include="Assets\Game\Shared\Scripts\UI\UiDragHelper.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\Cards\DiceSlotDefinition.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\IUserIdProvider.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Actions\Card\CardBattleActionResult.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Data\Firestore\FirestorePlayerRepository.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\BattleModeConfig.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\UI\Views\NavigableScreenView.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Actions\BattleActionPipeline.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Actions\BattleActionTypes.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Battle\Network\BattlePlayerSlots.cs" />
+    <Compile Include="Assets\Game\Features\Matchmaking\Scripts\MatchmakingController.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\Cards\CardDefinition.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Actions\IBattleActionHandler.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Simulation\BattleState.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Audio\AudioCatalog.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Networking\FusionNetworkSessionService.cs" />
+    <Compile Include="Assets\Game\Features\Battle\Scripts\Presentation\CardBattlePresentationHandler.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Scenes\GameSceneId.cs" />
+    <Compile Include="Assets\Game\Features\Deck\Scripts\CardGridView.cs" />
+    <Compile Include="Assets\Game\Features\Settings\Scripts\SettingsView.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Data\Firestore\FirestoreUserDocument.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\BattleModeConfigAsset.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\UI\Views\ScreenView.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\IBattleGateway.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\Navigation\IScreenHandlers.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Simulation\DiceAssignmentValidator.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\IPlayerRepository.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Networking\FusionSceneRefs.cs" />
+    <Compile Include="Assets\Game\Features\Network\Scripts\GamePrefabCatalog.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Data\LocalUserIdProvider.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Simulation\BattleTurnService.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Battle\Network\BattleDeckStore.cs" />
+    <Compile Include="Assets\Game\Features\AppBootstrap\Scripts\UiCameraRoot.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Matchmaking\IMatchmakingService.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Simulation\CardDamageCalculator.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Networking\NetworkSessionException.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Networking\FusionMatchmakingService.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Battle\Network\BattleNetworkStateSync.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\EntryPoints\LoadingSceneEntryPoint.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Firebase\IFirebaseAppService.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Simulation\BattleEngine.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\LifetimeScopes\LoadingLifetimeScope.cs" />
+    <Compile Include="Assets\Game\Features\Battle\Scripts\BattleView.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\DeckService.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\DeckRecordConverter.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Audio\MusicId.cs" />
+    <Compile Include="Assets\Game\Shared\Scripts\UI\DiceView.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Settings\IGameSettingsService.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Actions\IBattleAction.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Actions\Card\CardBattleActionHandler.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Audio\SfxId.cs" />
+    <Compile Include="Assets\Game\Shared\Scripts\UI\Components\UiText.cs" />
+    <Compile Include="Assets\Game\Features\Home\Scripts\HomeView.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Data\Firestore\FirestoreDeckRepository.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Simulation\BattleActionHandlers.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Networking\FusionGameModeMapper.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Battle\Network\BattleNetworkController.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\Cards\CardEnums.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\Navigation\ScreenRegistry.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Data\Firestore\FirestoreUserDocumentStore.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Actions\Card\CardBattleAction.cs" />
+    <Compile Include="Assets\Game\Features\Battle\Scripts\BattleController.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Matchmaking\MatchmakingState.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\IDeckService.cs" />
+    <Compile Include="Assets\Game\Features\Battle\Scripts\Presentation\BattlePresentationRouter.cs" />
+    <Compile Include="Assets\Game\Features\Settings\Scripts\SettingsController.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\IBattleControllerRegistry.cs" />
+    <Compile Include="Assets\Game\Shared\Scripts\UI\Components\UiSlider.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Battle\FusionBattleControllerRegistry.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\DeckCardRecord.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Data\Firestore\FirestoreDeckDocumentMapper.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Scenes\ISceneLoaderService.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Data\Firestore\FirestorePlacedCardDocument.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Networking\NetworkGameMode.cs" />
+    <Compile Include="Assets\Game\Shared\Scripts\UI\TabGroup.cs" />
+    <Compile Include="Assets\Game\Shared\Scripts\UI\Theme\UiThemeAccess.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Battle\Network\NetworkPlayerProfile.cs" />
+    <Compile Include="Assets\Game\Features\Deck\Scripts\DeckController.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\LifetimeScopes\RootLifetimeScope.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Networking\NetworkSessionState.cs" />
+    <Compile Include="Assets\Game\Features\Battle\Scripts\Presentation\BattlePresentationContext.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\EntryPoints\BattleSceneEntryPoint.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Battle\Network\BattlePresentationSnapshot.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\DeckState.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Battle\Session\BattleSessionPayload.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Networking\ProfileConnectionToken.cs" />
     <Compile Include="Assets\CrystalFramework\Utility\SafeArea.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\MatchmakingOverlayController.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\Audio\AudioSystem.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\DeckView.cs" />
-    <Compile Include="Assets\Scripts\Core\Settings\LegalLinks.cs" />
-    <Compile Include="Assets\Scripts\Core\Networking\NetworkGameMode.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\LoadingController.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Controllers\HomeController.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\LifetimeScopes\RootLifetimeScope.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\BootstrapPrefabCatalog.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\HomeView.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Photon\FusionNetworkSessionService.cs" />
-    <Compile Include="Assets\Scripts\Bootstrap\UI\Views\BattleView.cs" />
-    <Compile Include="Assets\Scripts\Core\Scenes\IBattleSceneLoader.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Simulation\IBattleRandom.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Audio\IAudioService.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\Audio\AudioService.cs" />
+    <Compile Include="Assets\Game\Features\AppBootstrap\Scripts\AudioSystem.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\Navigation\ScreenNavigator.cs" />
+    <Compile Include="Assets\Game\Shared\Scripts\UI\INavigableView.cs" />
+    <Compile Include="Assets\Game\Features\Deck\Scripts\CardView.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\LifetimeScopes\BattleLifetimeScope.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\LifetimeScopes\MainMenuLifetimeScope.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Battle\UnityBattleRandom.cs" />
+    <Compile Include="Assets\Game\Features\Home\Scripts\HomeController.cs" />
+    <Compile Include="Assets\Game\Features\Battle\Scripts\Presentation\IBattleActionPresentationHandler.cs" />
+    <Compile Include="Assets\Game\Shared\Scripts\UI\Theme\UiTheme.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\Scenes\SceneLoaderService.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\EntryPoints\MainMenuSceneEntryPoint.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\DeckPersistenceData.cs" />
+    <Compile Include="Assets\Game\Features\Deck\Scripts\CardGridLayout.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Battle\Network\BattleMatchInitializer.cs" />
+    <Compile Include="Assets\Game\Features\Deck\Scripts\DiceSlotView.cs" />
+    <Compile Include="Assets\Game\Features\Deck\Scripts\DeckDropZone.cs" />
+    <Compile Include="Assets\Game\Features\Loading\Scripts\LoadingView.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Networking\FusionSessionBridge.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\BattleActionResolvedEventArgs.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\EntryPoints\SceneMusicEntryPoint.cs" />
+    <Compile Include="Assets\Game\Features\Battle\Scripts\HealthBarView.cs" />
+    <Compile Include="Assets\Game\Scripts\Infrastructure\Data\Firestore\FirestoreDeckSlotDocument.cs" />
+    <Compile Include="Assets\Game\Scripts\Bootstrap\Settings\HapticsService.cs" />
     <None Include="Assets\Photon\Fusion\Plugins\NanoSockets\libnanosockets_LICENSE.txt" />
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
     <None Include="Assets\Photon\Fusion\Assemblies\Fusion.Sockets.xml" />
@@ -611,9 +635,6 @@
     <Reference Include="DOTween">
       <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.visualscripting@8bed5ad90189\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Photon3Unity3D">
       <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
     </Reference>
@@ -1037,9 +1058,6 @@
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.2D.Editor.Overrides">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Editor.Overrides.dll</HintPath>
     </Reference>
@@ -1064,9 +1082,6 @@
     <Reference Include="Unity.RenderPipelines.Universal.2D.Runtime">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Searcher.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
     </Reference>
@@ -1075,9 +1090,6 @@
     </Reference>
     <Reference Include="Unity.Burst.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
@@ -1103,14 +1115,8 @@
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UniTask.TextMeshPro">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UniTask.TextMeshPro.dll</HintPath>
@@ -1136,9 +1142,6 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.State.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
     </Reference>
@@ -1154,9 +1157,6 @@
     <Reference Include="Unity.Burst">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.004">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.004.dll</HintPath>
     </Reference>
@@ -1168,9 +1168,6 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
       <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>

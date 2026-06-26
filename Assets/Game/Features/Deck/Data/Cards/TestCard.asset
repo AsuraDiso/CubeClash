@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7f30e85b144d99b97e996fc049d847, type: 3}
+  m_Name: TestCard
+  m_EditorClassIdentifier: Assembly-CSharp::Cards.CardDefinition
+  <DisplayName>k__BackingField: TestCard
+  <Rarity>k__BackingField: 0
+  <Footprint>k__BackingField:
+    _columns: 1
+    _rows: 1
+  <Layout>k__BackingField: 0
+  <DiceSlots>k__BackingField:
+  - <Requirements>k__BackingField:
+    - <Kind>k__BackingField: 1
+      <Value>k__BackingField: 0
+  - <Requirements>k__BackingField: []
+  <ValueFormula>k__BackingField: 0
