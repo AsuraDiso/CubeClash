@@ -9,6 +9,7 @@ namespace Game.Features.Battle.Scripts.Presentation
         public IBattleGateway Gateway { get; }
         public bool ResolveInFlight { get; set; }
         public bool IsGameOver { get; set; }
+        public bool IntroComplete { get; set; }
 
         public BattlePresentationContext(BattleView view, IBattleGateway gateway)
         {
@@ -19,6 +20,6 @@ namespace Game.Features.Battle.Scripts.Presentation
         public void SubmitAction(IBattleAction action) => Gateway.SubmitAction(action);
 
         public bool CanSubmitAction =>
-            !IsGameOver && !ResolveInFlight && Gateway.IsMatchReady && Gateway.IsMyTurn;
+            IntroComplete && !IsGameOver && !ResolveInFlight && Gateway.IsMatchReady && Gateway.IsMyTurn;
     }
 }

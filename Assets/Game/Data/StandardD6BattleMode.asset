@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StandardD6BattleMode
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Battle.BattleModeConfigAsset
   _modeId: 0
-  _maxHp: 3
+  _maxHp: 1000
   _diceCount: 2
   _diceMin: 1
   _diceMax: 6

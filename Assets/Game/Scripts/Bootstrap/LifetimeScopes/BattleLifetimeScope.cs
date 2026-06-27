@@ -22,6 +22,7 @@ namespace Game.Scripts.Bootstrap.LifetimeScopes
             builder.RegisterEntryPoint<SceneMusicEntryPoint>();
             builder.Register<CardBattlePresentationHandler>(Lifetime.Scoped).As<IBattleActionPresentationHandler>();
             builder.Register<BattlePresentationRouter>(Lifetime.Scoped);
+            builder.Register<BattleMatchIntroPresenter>(Lifetime.Scoped);
             builder.Register<BattleController>(Lifetime.Scoped);
             builder.RegisterEntryPoint<BattleSceneEntryPoint>();
         }

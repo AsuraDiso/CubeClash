@@ -29,8 +29,18 @@ namespace Game.Features.Deck.Scripts
         public int Columns => _layout.Columns;
         public int Rows => _layout.Rows;
 
-        private void Awake()
+        private void Awake() => EnsurePool();
+
+        private void EnsurePool()
         {
+            _layout ??= GetComponent<CardGridLayout>();
+
+            if (_cardPool != null)
+                return;
+
+            if (_cardPrefab == null || _layout == null)
+                return;
+
             _cardPool = new ObjectPool<CardView>(
                 createFunc: () => Instantiate(_cardPrefab, _layout.Container),
                 actionOnGet: card => card.gameObject.SetActive(true),
@@ -41,10 +51,19 @@ namespace Game.Features.Deck.Scripts
                 maxSize: CardPoolMaxSize);
         }
 
-        private void OnDestroy() => _cardPool.Dispose();
+        private void OnDestroy()
+        {
+            _cardPool?.Dispose();
+            _cardPool = null;
+        }
 
         public void SetCards(IReadOnlyList<PlacedCard> placedCards)
         {
+            EnsurePool();
+
+            if (_cardPool == null || _layout == null)
+                return;
+
             _placedCards = placedCards ?? Array.Empty<PlacedCard>();
             ClearSpawnedCards();
             SpawnCards();

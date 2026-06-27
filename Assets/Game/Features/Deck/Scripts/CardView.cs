@@ -16,6 +16,7 @@ namespace Game.Features.Deck.Scripts
         [field: SerializeField] public RectTransform RectTransform { get; private set; }
         [SerializeField] private TMP_Text _titleLabel;
         [SerializeField] private TMP_Text _descriptionLabel;
+        [SerializeField] private TMP_Text _requirementLabel;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private DiceSlotView _diceSlotPrefab;
         [SerializeField] private RectTransform _diceSlotsGrid;
@@ -67,12 +68,6 @@ namespace Game.Features.Deck.Scripts
 
             ConfigureDiceGrid(definition);
             _diceSlotsGrid.SetAsLastSibling();
-
-            if (_descriptionLabel != null)
-            {
-                _descriptionLabel.raycastTarget = false;
-                _descriptionLabel.gameObject.SetActive(false);
-            }
         }
 
         public bool TryAssignDice(DiceView dice, DiceSlotView slot)

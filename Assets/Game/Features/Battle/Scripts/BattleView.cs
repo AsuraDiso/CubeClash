@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Game.Features.AppBootstrap.Scripts;
 using Game.Features.Deck.Scripts;
 using Game.Scripts.Core.Battle;
 using Game.Scripts.Core.Data.Cards;
@@ -8,6 +9,7 @@ using Game.Shared.Scripts.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Pool;
+using VContainer;
 
 namespace Game.Features.Battle.Scripts
 {
@@ -26,14 +28,22 @@ namespace Game.Features.Battle.Scripts
         [SerializeField] private RectTransform _diceTray;
         [SerializeField] private DiceView _dicePrefab;
         [SerializeField] private Canvas _dragCanvas;
+        [SerializeField] private BattleMatchIntroView _matchIntro;
 
         private readonly List<DiceView> _spawnedDice = new();
         private ObjectPool<DiceView> _dicePool;
 
         public CardGridView LocalDeckGrid => _localDeckGrid;
 
+        public BattleMatchIntroView MatchIntro => _matchIntro;
+
         private void Awake()
         {
+            if (transform.localScale == Vector3.zero)
+                transform.localScale = Vector3.one;
+
+            ConfigureMatchIntro();
+
             _dicePool = new ObjectPool<DiceView>(
                 createFunc: () => Instantiate(_dicePrefab, _diceTray),
                 actionOnGet: die => die.gameObject.SetActive(true),
@@ -50,13 +60,44 @@ namespace Game.Features.Battle.Scripts
             die.gameObject.SetActive(false);
         }
 
-        private void OnDestroy() => _dicePool.Dispose();
+        private void OnDestroy()
+        {
+            _dicePool.Dispose();
+        }
 
-        public void SetLocalHp(int hp, int maxHp) =>
+        private void ConfigureMatchIntro()
+        {
+            if (_matchIntro == null)
+                return;
+
+            _matchIntro.PrepareHidden();
+            _matchIntro.transform.SetAsLastSibling();
+
+            var introCanvas = _matchIntro.GetComponent<Canvas>();
+            if (introCanvas != null)
+            {
+                introCanvas.overrideSorting = true;
+                introCanvas.sortingOrder = 100;
+            }
+        }
+
+        [Inject]
+        public void BindMatchIntroCamera(UiCameraRoot uiCameraRoot)
+        {
+            _matchIntro?.BindUiCamera(uiCameraRoot);
+        }
+
+        public void SetLocalHp(int hp, int maxHp)
+        {
             _localHp.SetFillAmount(maxHp > 0 ? (float)hp / maxHp : 0f);
+            _localHp.SetHPText($"{hp}/{maxHp}");
+        }
 
-        public void SetOpponentHp(int hp, int maxHp) =>
+        public void SetOpponentHp(int hp, int maxHp)
+        {
             _opponentHp.SetFillAmount(maxHp > 0 ? (float)hp / maxHp : 0f);
+            _opponentHp.SetHPText($"{hp}/{maxHp}");
+        }
 
         public void SetTurnText(string text) => _turnText.text = text;
 
@@ -99,7 +140,7 @@ namespace Game.Features.Battle.Scripts
             _dicePool.Release(die);
         }
 
-        public void RefreshTurnDiceFromGateway(IBattleGateway gateway)
+        public void RefreshTurnDiceFromGateway(IBattleGateway gateway, bool allowInteraction = true)
         {
             if (gateway == null)
                 return;
@@ -110,7 +151,7 @@ namespace Game.Features.Battle.Scripts
                 gateway.IsTurnDiceConsumed,
                 gateway.DiceMin,
                 gateway.DiceMax,
-                interactable: gateway.IsMyTurn);
+                interactable: allowInteraction && gateway.IsMyTurn);
         }
 
         public void RefreshDiceTray(int diceCount, Func<int, int> getValue, Func<int, bool> isConsumed,

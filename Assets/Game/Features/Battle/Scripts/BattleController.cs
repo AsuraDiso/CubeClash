@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Game.Features.Battle.Scripts.Presentation;
 using Game.Scripts.Core.Battle;
@@ -15,18 +16,21 @@ namespace Game.Features.Battle.Scripts
         private readonly IBattleGateway _gateway;
         private readonly BattlePresentationRouter _presentation;
         private readonly BattlePresentationContext _context;
+        private readonly BattleMatchIntroPresenter _matchIntroPresenter;
         private readonly IMatchmakingService _matchmakingService;
         private readonly ISceneLoaderService _sceneLoaderService;
         private bool _wasMyTurn;
         private bool _isReturningToMenu;
+        private bool _introStarted;
 
         public BattleController(BattleView view, IBattleControllerRegistry registry,
-            BattlePresentationRouter presentation, IMatchmakingService matchmakingService,
-            ISceneLoaderService sceneLoaderService)
+            BattlePresentationRouter presentation, BattleMatchIntroPresenter matchIntroPresenter,
+            IMatchmakingService matchmakingService, ISceneLoaderService sceneLoaderService)
         {
             _view = view;
             _gateway = registry.Current;
             _presentation = presentation;
+            _matchIntroPresenter = matchIntroPresenter;
             _matchmakingService = matchmakingService;
             _sceneLoaderService = sceneLoaderService;
             _context = new BattlePresentationContext(_view, _gateway);
@@ -41,6 +45,7 @@ namespace Game.Features.Battle.Scripts
             RefreshProfiles();
             RefreshDecks();
             HandleTurnChanged();
+            TryStartMatchIntro();
         }
 
         public void Dispose()
@@ -86,7 +91,7 @@ namespace Game.Features.Battle.Scripts
             RefreshProfiles();
 
             if (_gateway.IsMatchReady)
-                RefreshDecks();
+                TryStartMatchIntro();
         }
 
         private void HandleDecksUpdated() => RefreshDecks();
@@ -106,7 +111,7 @@ namespace Game.Features.Battle.Scripts
                 return;
             }
 
-            _view.RefreshTurnDiceFromGateway(_gateway);
+            _view.RefreshTurnDiceFromGateway(_gateway, _context.CanSubmitAction);
         }
 
         private void RefreshTurnText()
@@ -120,7 +125,44 @@ namespace Game.Features.Battle.Scripts
                 return;
             }
 
+            if (!_context.IntroComplete)
+            {
+                _view.SetTurnText(string.Empty);
+                return;
+            }
+
             _view.SetTurnText(_gateway.IsMyTurn ? "Your Turn" : "Opponent's Turn");
+        }
+
+        private void TryStartMatchIntro()
+        {
+            if (_introStarted || _context.IntroComplete || _view.MatchIntro == null || !_gateway.IsMatchReady)
+            {
+                if (_view.MatchIntro == null)
+                    _context.IntroComplete = true;
+
+                return;
+            }
+
+            _introStarted = true;
+            PlayMatchIntroAsync().Forget(Debug.LogException);
+        }
+
+        private async UniTask PlayMatchIntroAsync()
+        {
+            RefreshTurnText();
+
+            try
+            {
+                await _matchIntroPresenter.PlayAsync(_view.MatchIntro, _gateway, CancellationToken.None);
+            }
+            catch (OperationCanceledException)
+            {
+                return;
+            }
+
+            _context.IntroComplete = true;
+            RefreshTurnPresentation();
         }
 
         private void RefreshProfiles()

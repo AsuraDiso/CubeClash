@@ -57,6 +57,7 @@
     <Compile Include="Assets\Game\Features\Matchmaking\Scripts\MatchmakingView.cs" />
     <Compile Include="Assets\Game\Scripts\Core\Data\IDeckRepository.cs" />
     <Compile Include="Assets\Game\Scripts\Bootstrap\Settings\GameSettingsService.cs" />
+    <Compile Include="Assets\Game\Features\Battle\Scripts\BattleMatchIntroView.cs" />
     <Compile Include="Assets\Game\Scripts\Core\Data\Cards\CardFootprintSize.cs" />
     <Compile Include="Assets\Game\Scripts\Core\Networking\NetworkSessionRequest.cs" />
     <Compile Include="Assets\Game\Shared\Scripts\UI\Theme\UiTypographyRole.cs" />
@@ -73,10 +74,10 @@
     <Compile Include="Assets\Game\Scripts\Core\Data\IUserIdProvider.cs" />
     <Compile Include="Assets\Game\Scripts\Core\Battle\Actions\Card\CardBattleActionResult.cs" />
     <Compile Include="Assets\Game\Scripts\Infrastructure\Data\Firestore\FirestorePlayerRepository.cs" />
-    <Compile Include="Assets\Game\Scripts\Core\Battle\BattleModeConfig.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\Actions\BattleActionTypes.cs" />
     <Compile Include="Assets\Game\Scripts\Bootstrap\UI\Views\NavigableScreenView.cs" />
     <Compile Include="Assets\Game\Scripts\Core\Battle\Actions\BattleActionPipeline.cs" />
-    <Compile Include="Assets\Game\Scripts\Core\Battle\Actions\BattleActionTypes.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Battle\BattleModeConfig.cs" />
     <Compile Include="Assets\Game\Scripts\Infrastructure\Battle\Network\BattlePlayerSlots.cs" />
     <Compile Include="Assets\Game\Features\Matchmaking\Scripts\MatchmakingController.cs" />
     <Compile Include="Assets\Game\Scripts\Core\Data\Cards\CardDefinition.cs" />
@@ -94,9 +95,9 @@
     <Compile Include="Assets\Game\Scripts\Core\Battle\IBattleGateway.cs" />
     <Compile Include="Assets\Game\Scripts\Bootstrap\Navigation\IScreenHandlers.cs" />
     <Compile Include="Assets\Game\Scripts\Core\Battle\Simulation\DiceAssignmentValidator.cs" />
-    <Compile Include="Assets\Game\Scripts\Core\Data\IPlayerRepository.cs" />
     <Compile Include="Assets\Game\Scripts\Infrastructure\Networking\FusionSceneRefs.cs" />
     <Compile Include="Assets\Game\Features\Network\Scripts\GamePrefabCatalog.cs" />
+    <Compile Include="Assets\Game\Scripts\Core\Data\IPlayerRepository.cs" />
     <Compile Include="Assets\Game\Scripts\Infrastructure\Data\LocalUserIdProvider.cs" />
     <Compile Include="Assets\Game\Scripts\Core\Battle\Simulation\BattleTurnService.cs" />
     <Compile Include="Assets\Game\Scripts\Infrastructure\Battle\Network\BattleDeckStore.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Assets\Game\Scripts\Bootstrap\EntryPoints\LoadingSceneEntryPoint.cs" />
     <Compile Include="Assets\Game\Scripts\Core\Firebase\IFirebaseAppService.cs" />
     <Compile Include="Assets\Game\Scripts\Core\Battle\Simulation\BattleEngine.cs" />
+    <Compile Include="Assets\Game\Features\Battle\Scripts\BattleMatchIntroPresenter.cs" />
     <Compile Include="Assets\Game\Scripts\Bootstrap\LifetimeScopes\LoadingLifetimeScope.cs" />
     <Compile Include="Assets\Game\Features\Battle\Scripts\BattleView.cs" />
     <Compile Include="Assets\Game\Scripts\Core\Data\DeckService.cs" />
@@ -185,18 +187,18 @@
     <None Include="Assets\Photon\Fusion\Plugins\NanoSockets\libnanosockets_LICENSE.txt" />
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
     <None Include="Assets\Photon\Fusion\Assemblies\Fusion.Sockets.xml" />
+    <None Include="Assets\StreamingAssets\google-services-desktop.json" />
     <None Include="Assets\Photon\Fusion\package.json" />
     <None Include="Assets\Photon\Fusion\Assemblies\Fusion.Realtime.xml" />
     <None Include="Assets\Photon\Fusion\Assemblies\Fusion.Common.xml" />
-    <None Include="Assets\StreamingAssets\google-services-desktop.json" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-firestore-unity\maven-metadata.xml" />
     <None Include="Assets\Photon\Fusion\Assemblies\Fusion.Runtime.xml" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
     <None Include="Assets\Photon\Fusion\release_history.txt" />
-    <None Include="Assets\google-services.json" />
     <None Include="Assets\Photon\PhotonLibs\changes-library.txt" />
     <None Include="Assets\Photon\Fusion\build_info.txt" />
     <None Include="Assets\Photon\Fusion\Assemblies\Fusion.Log.xml" />
+    <None Include="Assets\google-services.json" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -597,64 +599,64 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\Managed\UnityEngine\UnityEditor.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.collections@5b6ebd78ccc0\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\PackageCache\com.unity.collections@5b6ebd78ccc0\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.ext.nunit@d8c07649098d\net40\unity-custom\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.App">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\PackageCache\com.unity.ext.nunit@d8c07649098d\net40\unity-custom\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Fusion.Log">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\Fusion\Assemblies\Fusion.Log.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Photon\Fusion\Assemblies\Fusion.Log.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\PhotonLibs\WebSocket\websocket-sharp.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Photon\PhotonLibs\WebSocket\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="Fusion.Common">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\Fusion\Assemblies\Fusion.Common.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Photon\Fusion\Assemblies\Fusion.Common.dll</HintPath>
     </Reference>
     <Reference Include="NanoSockets">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\Fusion\Plugins\NanoSockets\NanoSockets\Dynamic\NanoSockets.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.Firestore">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.Firestore.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Photon\Fusion\Plugins\NanoSockets\NanoSockets\Dynamic\NanoSockets.dll</HintPath>
     </Reference>
     <Reference Include="Fusion.Sockets">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\Fusion\Assemblies\Fusion.Sockets.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.TaskExtension">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Photon\Fusion\Assemblies\Fusion.Sockets.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Hashing">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.collections@5b6ebd78ccc0\Unity.Collections.Tests\System.IO.Hashing\System.IO.Hashing.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\PackageCache\com.unity.collections@5b6ebd78ccc0\Unity.Collections.Tests\System.IO.Hashing\System.IO.Hashing.dll</HintPath>
     </Reference>
     <Reference Include="Fusion.Runtime">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\Fusion\Assemblies\Fusion.Runtime.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Photon\Fusion\Assemblies\Fusion.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
     <Reference Include="Photon3Unity3D">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff\Mono.Cecil.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Fusion.Realtime">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Photon\Fusion\Assemblies\Fusion.Realtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.Platform">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Photon\Fusion\Assemblies\Fusion.Realtime.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\PackageCache\com.unity.collections@5b6ebd78ccc0\Unity.Collections.Tests\System.Runtime.CompilerServices.Unsafe\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\PackageCache\com.unity.collections@5b6ebd78ccc0\Unity.Collections.Tests\System.Runtime.CompilerServices.Unsafe\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.App">
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Firestore">
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.Firestore.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
     </Reference>
     <Reference Include="Google.MiniJson">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Platform">
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -1038,172 +1040,172 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI.Analytics">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UnityEditor.UI.Analytics.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\UnityEditor.UI.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rendering.LightTransport.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Rendering.LightTransport.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.Rendering.LightTransport.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AI.Navigation">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.AI.Navigation.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.AI.Navigation.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.2D.Editor.Overrides">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Editor.Overrides.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Editor.Overrides.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AI.Navigation.Updater">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.AI.Navigation.Updater.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.AI.Navigation.Updater.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AI.Navigation.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PathTracing.Runtime">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.PathTracing.Runtime.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.PathTracing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime.Shared">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.2D.Runtime">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Runtime.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Searcher.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="VContainer.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\VContainer.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\VContainer.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.UnifiedRayTracing.Runtime">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.UnifiedRayTracing.Runtime.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.UnifiedRayTracing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEditorBridge.ShaderGraph.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.ShaderGraph.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.ShaderGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UniTask.TextMeshPro">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UniTask.TextMeshPro.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\UniTask.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UniTask.DOTween">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UniTask.DOTween.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\UniTask.DOTween.dll</HintPath>
     </Reference>
     <Reference Include="Unity.SurfaceCache.Runtime">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.SurfaceCache.Runtime.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.SurfaceCache.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Collections">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InputSystem.ForUI">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Multiplayer.Center.Common">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Multiplayer.Center.Common.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.Multiplayer.Center.Common.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.004">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.004.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.004.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Multiplayer.Center.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Multiplayer.Center.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.Multiplayer.Center.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PathTracing.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.PathTracing.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.PathTracing.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UniTask.Linq">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UniTask.Linq.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\UniTask.Linq.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.RenderPipelines.Core.Runtime.Shared">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Collections.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.Collections.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.Collections.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UniTask.Addressables">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UniTask.Addressables.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\UniTask.Addressables.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="VContainer">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\VContainer.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\VContainer.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor.Shared">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.Shared.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InputSystem">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UniTask">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UniTask.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\UniTask.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

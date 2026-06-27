@@ -49,7 +49,13 @@ namespace Game.Scripts.Infrastructure.Battle.Network
         private FusionSessionBridge _bridge;
         private BattleEngine _engine;
         private BattleModeConfig _modeConfig;
+        private CardCatalog _cardCatalog;
         private bool _gameOverNotified;
+        private bool _decksDirty;
+        private bool _turnDirty;
+        private bool _profilesDirty;
+        private BattleActionResolvedEventArgs _pendingActionResolved;
+        private bool _actionFailedPending;
         private bool _hasPresentationSnapshot;
         private bool _hasSeenRequiredPlayersBeforeInit;
         private BattlePresentationSnapshot _previousPresentation;
@@ -110,13 +116,14 @@ namespace Game.Scripts.Infrastructure.Battle.Network
             _bridge = Runner.GetComponent<FusionSessionBridge>();
             _controllerRegistry = _bridge.BattleControllerRegistry;
             _modeConfig = _bridge.Payload.BattleModeConfig;
+            _cardCatalog = _bridge.Payload.CardCatalog;
 
             if (HasStateAuthority)
                 _engine = new BattleEngine(_modeConfig, _battleRandom);
 
             var localDeck = _bridge.Payload.LocalDeck;
             _deckStore.SetLocalPreview(localDeck);
-            DecksUpdated?.Invoke();
+            _decksDirty = true;
 
             var packedDeck = DeckRecordConverter.PackNetwork(DeckRecordConverter.FromPlacedCards(localDeck));
             if (HasStateAuthority)
@@ -140,34 +147,73 @@ namespace Game.Scripts.Infrastructure.Battle.Network
         public override void Render()
         {
             var current = CapturePresentationSnapshot();
-            if (_hasPresentationSnapshot && current.Equals(_previousPresentation))
-                return;
+            var snapshotChanged = !_hasPresentationSnapshot || !current.Equals(_previousPresentation);
 
-            var matchReadyChanged = !_hasPresentationSnapshot
-                || _previousPresentation.MatchInitialized != current.MatchInitialized;
-            var turnChanged = !_hasPresentationSnapshot || _previousPresentation.TurnChangedFrom(current);
-            var profilesChanged = !_hasPresentationSnapshot
-                || matchReadyChanged
-                || _previousPresentation.ProfilesChangedFrom(current);
-            var gameOverChanged = !_hasPresentationSnapshot
-                || _previousPresentation.GameOverChangedFrom(current);
+            if (snapshotChanged)
+            {
+                var matchReadyChanged = !_hasPresentationSnapshot
+                    || _previousPresentation.MatchInitialized != current.MatchInitialized;
+                var turnChanged = !_hasPresentationSnapshot || _previousPresentation.TurnChangedFrom(current);
+                var profilesChanged = !_hasPresentationSnapshot
+                    || matchReadyChanged
+                    || _previousPresentation.ProfilesChangedFrom(current);
+                var gameOverChanged = !_hasPresentationSnapshot
+                    || _previousPresentation.GameOverChangedFrom(current);
 
-            CopyPresentationSnapshot(current, _previousPlayerNetworkIds, _previousTurnDiceValues, _previousPlayerProfiles);
-            _previousPresentation = CreatePresentationSnapshot(
-                current,
-                _previousPlayerNetworkIds,
-                _previousTurnDiceValues,
-                _previousPlayerProfiles);
-            _hasPresentationSnapshot = true;
+                CopyPresentationSnapshot(current, _previousPlayerNetworkIds, _previousTurnDiceValues,
+                    _previousPlayerProfiles);
+                _previousPresentation = CreatePresentationSnapshot(
+                    current,
+                    _previousPlayerNetworkIds,
+                    _previousTurnDiceValues,
+                    _previousPlayerProfiles);
+                _hasPresentationSnapshot = true;
 
-            if (turnChanged || matchReadyChanged)
+                if (turnChanged || matchReadyChanged)
+                    _turnDirty = true;
+
+                if (profilesChanged || matchReadyChanged)
+                    _profilesDirty = true;
+
+                if (gameOverChanged || profilesChanged)
+                    CheckGameOver();
+            }
+
+            FlushPresentationEvents();
+        }
+
+        private void FlushPresentationEvents()
+        {
+            if (_turnDirty)
+            {
+                _turnDirty = false;
                 TurnChanged?.Invoke();
+            }
 
-            if (profilesChanged || matchReadyChanged)
+            if (_profilesDirty)
+            {
+                _profilesDirty = false;
                 ProfilesUpdated?.Invoke();
+            }
 
-            if (gameOverChanged || profilesChanged)
-                CheckGameOver();
+            if (_decksDirty)
+            {
+                _decksDirty = false;
+                DecksUpdated?.Invoke();
+            }
+
+            if (_pendingActionResolved != null)
+            {
+                var resolved = _pendingActionResolved;
+                _pendingActionResolved = null;
+                ActionResolved?.Invoke(resolved);
+            }
+
+            if (_actionFailedPending)
+            {
+                _actionFailedPending = false;
+                ActionFailed?.Invoke();
+            }
         }
 
         public int GetTurnDiceValue(int dieIndex) =>
@@ -228,13 +274,12 @@ namespace Game.Scripts.Infrastructure.Battle.Network
         [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
         private void RPC_ApplyPlayerDeck(int networkPlayerId, int[] packedDeck)
         {
-            var catalog = _bridge.Payload.CardCatalog;
-            if (packedDeck == null)
+            if (packedDeck == null || _cardCatalog == null || Runner == null)
                 return;
 
-            var deck = DeckRecordConverter.ToPlacedCardsFromNetworkPack(packedDeck, catalog);
+            var deck = DeckRecordConverter.ToPlacedCardsFromNetworkPack(packedDeck, _cardCatalog);
             _deckStore.ApplyDeck(networkPlayerId, Runner.LocalPlayer.PlayerId, deck);
-            DecksUpdated?.Invoke();
+            _decksDirty = true;
         }
 
         [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
@@ -266,7 +311,7 @@ namespace Game.Scripts.Infrastructure.Battle.Network
         }
 
         [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-        private void RPC_NotifyActionFailed([RpcTarget] PlayerRef player) => ActionFailed?.Invoke();
+        private void RPC_NotifyActionFailed([RpcTarget] PlayerRef player) => _actionFailedPending = true;
 
         [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
         private void RPC_NotifyActionResolved(string actionTypeId, int actorId, string actorLabel, int[] resultPayload,
@@ -288,8 +333,8 @@ namespace Game.Scripts.Infrastructure.Battle.Network
             if (action == null || !result.Success)
                 return;
 
-            ActionResolved?.Invoke(new BattleActionResolvedEventArgs(action, result,
-                Runner.LocalPlayer.PlayerId == actorId));
+            _pendingActionResolved = new BattleActionResolvedEventArgs(action, result,
+                Runner.LocalPlayer.PlayerId == actorId);
         }
 
         private bool ValidateCardActionClient(CardBattleAction card)
@@ -325,15 +370,15 @@ namespace Game.Scripts.Infrastructure.Battle.Network
             if (!_matchInitializer.TryInitialize(
                     Runner,
                     _modeConfig,
-                    _bridge.Payload.CardCatalog,
+                    _cardCatalog,
                     _engine,
                     MatchInitialized,
                     ApplySimulationToNetwork,
                     BroadcastDecks))
                 return;
 
-            ProfilesUpdated?.Invoke();
-            TurnChanged?.Invoke();
+            _profilesDirty = true;
+            _turnDirty = true;
         }
 
         private void BroadcastDecks()

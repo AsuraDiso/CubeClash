@@ -37,7 +37,7 @@ namespace Game.Features.Battle.Scripts.Presentation
         public void OnActionFailed(BattlePresentationContext context)
         {
             context.View.ClearTurnDice();
-            context.View.RefreshTurnDiceFromGateway(context.Gateway);
+            context.View.RefreshTurnDiceFromGateway(context.Gateway, context.CanSubmitAction);
         }
 
         private void WireCard(BattlePresentationContext context, CardView card)

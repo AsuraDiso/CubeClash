@@ -67,7 +67,10 @@ namespace Game.Scripts.Infrastructure.Battle.Network
         private static PlayerProfile ResolveProfile(NetworkRunner runner, PlayerRef player, int maxHp)
         {
             var tokenProfile = ProfileConnectionToken.TryDecode(runner.GetPlayerConnectionToken(player));
-            return tokenProfile ?? PlayerProfile.CreateBattleDefault(maxHp: maxHp);
+            if (tokenProfile != null)
+                return tokenProfile.WithHp(maxHp, maxHp);
+
+            return PlayerProfile.CreateBattleDefault(maxHp: maxHp);
         }
     }
 }

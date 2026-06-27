@@ -464,10 +464,10 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.App">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Platform">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -851,10 +851,10 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.4.10f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:\Users\asura\Repos\CubeClash\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <HintPath>C:\Users\asura\Documents\Repos\CubeClash\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
